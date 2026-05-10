@@ -3,7 +3,7 @@ package modelo;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Animal {
+public class Animal implements Comparable<Animal>{
 
 	private String nombre, tipo, raza, descripcion;
 	private int codChip;	//el codigo del chip es simplemente para poder diferenciar entre un animal y otro
@@ -38,12 +38,22 @@ public class Animal {
 		Animal other = (Animal) obj;
 		return codChip == other.codChip;
 	}
+	
+	@Override
+	public int compareTo(Animal animal) {
+		
+		return this.codChip - animal.codChip;	//orden
+	}
 
 	@Override
 	public String toString() {
 		
-		return codChip + ": " + tipo + " " + raza + " de " + edad + (edad == 1? " año" : " años")
-				+ "\n\tDescripcion: " + descripcion;
+		return toStringSimple() + "\n\tDescripcion: " + descripcion;
+	}
+	
+	public String toStringSimple() {
+		
+		return "(" + codChip + ") " + tipo + " " + raza + " de " + edad + (edad == 1? " año" : " años");
 	}
 	
 	public int getCodChip() {

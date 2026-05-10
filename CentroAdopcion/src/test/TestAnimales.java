@@ -12,7 +12,7 @@ public class TestAnimales {
 		
 		System.out.println(animal1);
 		System.out.println(animal2);
-		System.out.println(animal3);
+		System.out.println(animal3.toStringSimple());
 		
 		System.out.println(animal1.equals(animal2));
 		System.out.println(animal2.equals(animal3));
