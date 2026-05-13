@@ -5,12 +5,13 @@ import java.util.*;
 public class CentroAdopcion {
 
 	private String nombre, direccion;
-	private int codigoPostal, codigoCentro;
+	private int codigo, codigoPostal, codigoCentro;
 	private short capacidadMaxima;
 	private SortedSet<Animal> animalesAlojados;
 	
-	public CentroAdopcion(String nombre, String direccion, int codigoCentro, int codPostal, short capacidadMaxima, TreeSet<Animal> animalesAlojados) {
+	public CentroAdopcion(int cod, String nombre, String direccion, int codigoCentro, int codPostal, short capacidadMaxima, TreeSet<Animal> animalesAlojados) {
 
+		this.codigo = cod;
 		this.nombre = nombre;
 		this.direccion = direccion;
 		this.codigoCentro = codigoCentro;
@@ -19,9 +20,9 @@ public class CentroAdopcion {
 		this.animalesAlojados = animalesAlojados;
 	}
 	
-	public CentroAdopcion(String nombre, String direccion, int codigoCentro, int codPostal, short capacidadMaxima) {
+	public CentroAdopcion(int cod, String nombre, String direccion, int codigoCentro, int codPostal, short capacidadMaxima) {
 
-		this(nombre, direccion, codigoCentro, codPostal, capacidadMaxima, new TreeSet<Animal>());
+		this(cod, nombre, direccion, codigoCentro, codPostal, capacidadMaxima, new TreeSet<Animal>());
 	}
 	
 	/**
@@ -60,6 +61,11 @@ public class CentroAdopcion {
 		return this.codigoCentro + ": " + this.nombre + ", " + this.direccion + " (" + this.codigoPostal + ")";
 	}
 	
+	public String toStringSinNombre() {
+		
+		return this.codigoCentro + ": " + this.direccion + ", " + this.codigoPostal + " | " + this.animalesAlojados.size() + "/" + this.capacidadMaxima + " animales alojados";
+	}
+	
 	@Override
 	public String toString() {
 		
@@ -85,6 +91,34 @@ public class CentroAdopcion {
 		} else cadena += "\n\tAún no hay alojado ningun animal";
 		
 		return cadena;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public String getDireccion() {
+		return direccion;
+	}
+
+	public int getCodigo() {
+		return codigo;
+	}
+
+	public int getCodigoPostal() {
+		return codigoPostal;
+	}
+
+	public int getCodigoCentro() {
+		return codigoCentro;
+	}
+
+	public short getCapacidadMaxima() {
+		return capacidadMaxima;
+	}
+
+	public SortedSet<Animal> getAnimalesAlojados() {
+		return animalesAlojados;
 	}
 
 }

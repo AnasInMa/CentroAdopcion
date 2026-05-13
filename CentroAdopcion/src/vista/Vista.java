@@ -1,6 +1,6 @@
 package vista;
 
-import java.awt.CardLayout;
+import java.awt.*;
 
 import javax.swing.*;
 
@@ -15,13 +15,16 @@ public class Vista extends JPanel{
 						multiplicadorAnchoComponente,	//⬇️
 						multiplicadorAltoComponente;	//y estos para el tamaño de los componetes
 	
+	public static final Color MARRON_CLARO1, MARRON_CLARO2, MARRON_CLARO3, MARRON_CLARO4,
+							 MARRON_OSCURO1, MARRON_OSCURO2, MARRON_OSCURO3, MARRON_OSCURO4;
+	
 	static {
 		
 		BASE_HORIZONTAL = 16;
 		BASE_VERTICAL = 9;
 
 		multiplicadorPanel = 60;
-		multiplicadorAnchoComponente = 0.2f;
+		multiplicadorAnchoComponente = 0.3f;
 		multiplicadorAltoComponente = 0.1f;
 		
 		ANCHO_PANEL = (short) (BASE_HORIZONTAL * multiplicadorPanel);
@@ -29,6 +32,17 @@ public class Vista extends JPanel{
 		
 		ANCHO_COMPONENTE = (int) (ANCHO_PANEL * multiplicadorAnchoComponente);
 		ALTO_COMPONENTE = (int) (ALTO_PANEL * multiplicadorAltoComponente);
+		
+		//Colores
+		MARRON_CLARO1 = new Color(249, 248, 246);
+		MARRON_CLARO2 = new Color(239, 233, 227);
+		MARRON_CLARO3 = new Color(217, 207, 199);
+		MARRON_CLARO4 = new Color(201, 181, 156);
+		
+		MARRON_OSCURO1 = new Color(243, 238, 234);
+		MARRON_OSCURO2 = new Color(235, 227, 213);
+		MARRON_OSCURO3 = new Color(176, 166, 149);
+		MARRON_OSCURO4 = new Color(75, 64, 56);
 	}
 	
 	private CardLayout cartas;

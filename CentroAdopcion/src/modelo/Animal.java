@@ -6,13 +6,13 @@ import java.util.Objects;
 public class Animal implements Comparable<Animal>{
 
 	private String nombre, tipo, raza, descripcion;
-	private int codChip;	//el codigo del chip es simplemente para poder diferenciar entre un animal y otro
+	private int codigo;	//el codigo es el id de la tabla
 	private byte edad;
 	private LocalDate fechaAlojamiento;	//fechaAdopcion
 	
-	public Animal(int codChip, String nombre, String tipo, String raza, String descripcion, byte edad, String fechaAlojamiento) {
+	public Animal(int cod, String nombre, String tipo, String raza, String descripcion, byte edad, String fechaAlojamiento) {
 		
-		this.codChip = codChip;
+		this.codigo = cod;
 		this.nombre = nombre;
 		this.tipo = tipo;
 		this.raza = raza;
@@ -24,7 +24,7 @@ public class Animal implements Comparable<Animal>{
 	
 	@Override
 	public int hashCode() {
-		return Objects.hash(codChip);
+		return Objects.hash(codigo);
 	}
 
 	@Override
@@ -36,13 +36,13 @@ public class Animal implements Comparable<Animal>{
 		if (getClass() != obj.getClass())
 			return false;
 		Animal other = (Animal) obj;
-		return codChip == other.codChip;
+		return codigo == other.codigo;
 	}
 	
 	@Override
 	public int compareTo(Animal animal) {
 		
-		return this.codChip - animal.codChip;	//orden
+		return this.codigo - animal.codigo;	//orden
 	}
 
 	@Override
@@ -53,11 +53,11 @@ public class Animal implements Comparable<Animal>{
 	
 	public String toStringSimple() {
 		
-		return "(" + codChip + ") " + tipo + " " + raza + " de " + edad + (edad == 1? " año" : " años");
+		return "(" + codigo + ") " + tipo + " " + raza + " de " + edad + (edad == 1? " año" : " años");
 	}
 	
 	public int getCodChip() {
-		return codChip;
+		return codigo;
 	}
 
 	public String getNombre() {

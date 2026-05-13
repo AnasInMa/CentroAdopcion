@@ -7,7 +7,7 @@ public class TestCentroAdopciones {
 
 	public static void main(String[] args) {
 		
-		CentroAdopcion centro1 = new CentroAdopcion("Arca del Torcal", "Avenida José María Fernández", 213456, 29200, (short) 20);
+		CentroAdopcion centro1 = new CentroAdopcion(0, "Arca del Torcal", "Avenida José María Fernández", 213456, 29200, (short) 20);
 		
 		System.out.println(centro1.toStringSimple());
 		System.out.println(centro1.toString());

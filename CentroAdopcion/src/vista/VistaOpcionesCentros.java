@@ -17,9 +17,11 @@ public class VistaOpcionesCentros extends JPanel{
 	public VistaOpcionesCentros() {
 		
 		this.setLayout(new BorderLayout());
+		this.setBackground(Vista.MARRON_CLARO3);
 		
 		JLabel texto = new JLabel("⬇️ELIJA UNO DE ESTOS CENTROS PARA VER LOS ANIMALES DISPONIBLES⬇️");
 		texto.setFont(new Font(Font.SERIF, Font.BOLD, 20));
+		texto.setForeground(Vista.MARRON_OSCURO4);
 		texto.setHorizontalAlignment(JLabel.CENTER);
 		texto.setBorder(new EmptyBorder(0, 0, 100, 0));
 		
@@ -27,14 +29,17 @@ public class VistaOpcionesCentros extends JPanel{
 		
 		JPanel panelPrincipal = new JPanel(new GridLayout(1, 4));
 		panelPrincipal.setBorder(new EmptyBorder(0, 0, 200, 0));
-		panelPrincipal.add(añadePanelesCentros("centro1", bEntrarCentro1));
-		panelPrincipal.add(añadePanelesCentros("centro2", bEntrarCentro2));
-		panelPrincipal.add(añadePanelesCentros("centro3", bEntrarCentro3));
-		panelPrincipal.add(añadePanelesCentros("centro4", bEntrarCentro4));
+		panelPrincipal.setBackground(Vista.MARRON_CLARO3);
+		
+		panelPrincipal.add(añadePanelesCentros("ARCA DEL TORCAL", bEntrarCentro1, new ImageIcon("./imgs/arcaDelTorcal.jpg")));
+		panelPrincipal.add(añadePanelesCentros("S.P.A.P.M.", bEntrarCentro2, new ImageIcon("./imgs/SPAPM.png")));
+		panelPrincipal.add(añadePanelesCentros("REFUGIO DEL BURRITO", bEntrarCentro3, new ImageIcon("./imgs/refugioDelBurrito.jpg")));
+		panelPrincipal.add(añadePanelesCentros("P.A.D.", bEntrarCentro4, new ImageIcon("./imgs/PAD.png")));
 		
 		menu = new JLabel(" ≡");
 		menu.setFocusable(true);
 		menu.setFont(new Font(Font.SERIF, Font.BOLD, 40));
+		menu.setBackground(Vista.MARRON_CLARO3);
 		
 		this.add(menu, BorderLayout.NORTH);
 		this.add(texto, BorderLayout.CENTER);
@@ -48,10 +53,10 @@ public class VistaOpcionesCentros extends JPanel{
 	
 	private void instanciarBotones() {
 		
-		bEntrarCentro1 = new JButton("Entrar");
-		bEntrarCentro2 = new JButton("Entrar");
-		bEntrarCentro3 = new JButton("Entrar");
-		bEntrarCentro4 = new JButton("Entrar");
+		bEntrarCentro1 = new JButton("ENTRAR");
+		bEntrarCentro2 = new JButton("ENTRAR");
+		bEntrarCentro3 = new JButton("ENTRAR");
+		bEntrarCentro4 = new JButton("ENTRAR");
 	}
 	
 	private void editarBotones() {
@@ -64,20 +69,36 @@ public class VistaOpcionesCentros extends JPanel{
 
 			boton.setFocusable(false);
 			boton.setAlignmentX(JButton.CENTER_ALIGNMENT);
+			
+			boton.setForeground(Vista.MARRON_OSCURO4);
+			boton.setBackground(Vista.MARRON_CLARO4);
 		}
 	}
 	
-	private JPanel añadePanelesCentros(String nombreCentro, JButton boton) {
+	private JPanel añadePanelesCentros(String nombreCentro, JButton boton, ImageIcon imagen) {
 		
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		panel.setBackground(Vista.MARRON_CLARO3);
 		
 		JLabel texto = new JLabel(nombreCentro);
-
+		texto.setForeground(Vista.MARRON_OSCURO4);
+		texto.setBorder(new EmptyBorder(0,0,10,0));
 		texto.setAlignmentX(JLabel.CENTER_ALIGNMENT);
-		    
+		
+		Image imagenNueva = imagen.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
+		
+		JLabel img = new JLabel();
+		img.setIcon(new ImageIcon(imagenNueva));
+		img.setBorder(new LineBorder(Vista.MARRON_OSCURO4, 3));
+		img.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+		
+		JLabel espacio = new JLabel();
+		espacio.setBorder(new EmptyBorder(10,0,0,0));
+		
 		panel.add(texto);
-		//panel.add(); 	//imagen
+		panel.add(img);
+		panel.add(espacio);		//Preguntar si es malo o esta bien
 		panel.add(boton);
 		
 		return panel;

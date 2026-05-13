@@ -6,10 +6,12 @@ public class Persona {
 
 	private SortedSet<Animal> animalesAdoptados;	//Va a ser un SortedSet, ya que se ordenaran por la fecha de adopcion y ademas no habran repetidos
 	private String nombre, nif, primerApellido, segundoApellido;
+	private int codigo;
 	private byte edad;
 	
-	public Persona(TreeSet<Animal> animales, String nombre, String nif, String apellido1, String apellido2, byte edad) {
+	public Persona(int cod, TreeSet<Animal> animales, String nombre, String nif, String apellido1, String apellido2, byte edad) {
 		
+		this.codigo = cod;
 		animalesAdoptados = animales;
 		this.nombre = nombre;
 		this.nif = nif;
@@ -18,9 +20,9 @@ public class Persona {
 		this.edad = edad;
 	}
 	
-	public Persona(String nombre, String nif, String apellido1, String apellido2, byte edad) {
+	public Persona(int cod, String nombre, String nif, String apellido1, String apellido2, byte edad) {
 		
-		this(new TreeSet<Animal>(), nombre, nif, apellido1, apellido2, edad);
+		this(cod, new TreeSet<Animal>(), nombre, nif, apellido1, apellido2, edad);
 	}
 	
 	/**
