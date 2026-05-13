@@ -2,6 +2,7 @@ package test;
 
 import javax.swing.*;
 
+import controlador.Controlador;
 import vista.Vista;
 
 public class Main {
@@ -9,18 +10,18 @@ public class Main {
 	public static void main(String[] args) {
 		
 		Vista v = new Vista();
-		//new Controlador(v);
+		new Controlador(v);
 		
 		JFrame f = new JFrame("CEADOP");
 		f.setContentPane(v);
 		
 		f.setIconImage(new ImageIcon("./imgs/logo.png").getImage());
 		
-		f.setUndecorated(true);
+		//f.setUndecorated(true);
 		f.pack();
 		f.setLocationRelativeTo(null);
 		f.setResizable(false);
-		f.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		//f.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setVisible(true);
 		
