@@ -53,7 +53,12 @@ public class Animal implements Comparable<Animal>{
 	
 	public String toStringSimple() {
 		
-		return "(" + codigo + ") " + tipo + " " + raza + " de " + edad + (edad == 1? " año" : " años");
+		return "(" + codigo + ") " + toStringSinCodigo() + " de " + edad + (edad == 1? " año" : " años");
+	}
+	
+	public String toStringSinCodigo() {
+		
+		return tipo + " " + raza;
 	}
 	
 	public int getCodChip() {
