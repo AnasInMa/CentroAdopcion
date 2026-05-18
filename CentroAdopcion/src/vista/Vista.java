@@ -17,6 +17,7 @@ public class Vista extends JPanel{
 	
 	public static final Color MARRON_CLARO1, MARRON_CLARO2, MARRON_CLARO3, MARRON_CLARO4,
 							 MARRON_OSCURO1, MARRON_OSCURO2, MARRON_OSCURO3, MARRON_OSCURO4;
+	public static final Font FUENTE_BOTONES;
 	
 	static {
 		
@@ -43,25 +44,35 @@ public class Vista extends JPanel{
 		MARRON_OSCURO2 = new Color(235, 227, 213);
 		MARRON_OSCURO3 = new Color(176, 166, 149);
 		MARRON_OSCURO4 = new Color(75, 64, 56);
+		
+		//Fuentes
+		FUENTE_BOTONES = new Font(Font.SANS_SERIF, Font.BOLD, 25);
 	}
 	
 	private CardLayout cartas;
 	
 	private VistaMenu vMenu;
 	private VistaOpcionesCentros vOpcionesCentros;
+	private VistaSalir vSalir;
 	
 	public Vista() {
 		
 		cartas = new CardLayout();
 		this.setLayout(cartas);
 		
-		this.add(vMenu = new VistaMenu(), 0);
-		this.add(vOpcionesCentros = new VistaOpcionesCentros(), 1);
+		this.add(vMenu = new VistaMenu(), "menu");
+		this.add(vOpcionesCentros = new VistaOpcionesCentros(), "opciones");
+		this.add(vSalir = new VistaSalir(), "salir");
 	}
 	
 	public void siguientePanel() {
 		
 		cartas.next(this);
+	}
+
+	public void muestraPanelSalir() {
+		
+		cartas.show(this, "salir");
 	}
 	
 	public void anteriorPanel() {
@@ -75,5 +86,9 @@ public class Vista extends JPanel{
 
 	public VistaOpcionesCentros getvOpcionesCentros() {
 		return vOpcionesCentros;
+	}
+	
+	public VistaSalir getvSalir() {
+		return vSalir;
 	}
 }

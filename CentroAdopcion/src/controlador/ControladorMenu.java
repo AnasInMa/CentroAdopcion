@@ -2,8 +2,6 @@ package controlador;
 
 import java.awt.event.*;
 
-import javax.swing.JOptionPane;
-
 import vista.*;
 
 public class ControladorMenu implements ActionListener{
@@ -34,13 +32,16 @@ public class ControladorMenu implements ActionListener{
 			
 		} else {
 			
+			vista.muestraPanelSalir();
+			
+			/*
 			int opcion = JOptionPane.showConfirmDialog(vMenu, "¿Esta seguro que desea salir?", "Confirmacion", JOptionPane.YES_NO_OPTION);
 			
 			if(opcion == JOptionPane.YES_OPTION) {
 				
 				System.exit(0);				
 			}
-			
+			*/
 		}
 		
 	}

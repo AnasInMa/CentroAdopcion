@@ -6,7 +6,7 @@ public class Persona {
 
 	private SortedSet<Animal> animalesAdoptados;	//Va a ser un SortedSet, ya que se ordenaran por la fecha de adopcion y ademas no habran repetidos
 	private String nombre, nif, primerApellido, segundoApellido;
-	private int codigo;
+	private int codigo; //TODO
 	private byte edad;
 	
 	public Persona(int cod, TreeSet<Animal> animales, String nombre, String nif, String apellido1, String apellido2, byte edad) {
@@ -105,5 +105,17 @@ public class Persona {
 
 	public byte getEdad() {
 		return edad;
+	}
+
+	public String getPrimerApellido() {
+		return primerApellido;
+	}
+
+	public String getSegundoApellido() {
+		return segundoApellido;
+	}
+
+	public int getCodigo() {
+		return codigo;
 	}
 }

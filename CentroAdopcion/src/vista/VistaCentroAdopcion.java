@@ -3,8 +3,6 @@ package vista;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.*;
-
-import modelo.Animal;
 import modelo.CentroAdopcion;
 
 public class VistaCentroAdopcion extends JPanel {
@@ -55,9 +53,17 @@ public class VistaCentroAdopcion extends JPanel {
 		datosCentro = new JLabel(" " + centroAdopcion.toStringSinNombre() + " ");
 
 		bPrimero = new JButton("<<");
+		bPrimero.setToolTipText("Primero");
+		
 		bAnterior = new JButton("<");
+		bAnterior.setToolTipText("Anterior");
+		
 		bSiguiente = new JButton(">");
+		bSiguiente.setToolTipText("Siguiente");
+		
 		bUltimo = new JButton(">>");
+		bUltimo.setToolTipText("Ultimo");
+		
 		bAgendarCita = new JButton("PEDIR CITA");
 		bAdoptar = new JButton("ADOPTAR");
 
@@ -100,7 +106,7 @@ public class VistaCentroAdopcion extends JPanel {
 	 * 
 	 * @return
 	 */
-	private JPanel[][] panelesAnimalesCuatro(JPanel[] panelesVisibles) {
+	/*private JPanel[][] panelesAnimalesCuatro(JPanel[] panelesVisibles) {
 
 		byte filas = (byte) (centroAdopcion.getAnimalesAlojados().size() / 4); // si tiene 6 animales habran 2 filas, si
 																				// hay 13 animales habran 4 filas, si
@@ -117,7 +123,7 @@ public class VistaCentroAdopcion extends JPanel {
 
 		return null;
 
-	}
+	}*/
 
 	private JPanel panelBotones() {
 
