@@ -1,10 +1,11 @@
 package vista;
 
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 
 import javax.swing.*;
+
+import controlador.ControladorSalir;
 
 public class VistaSalir extends JPanel{
 
@@ -25,15 +26,21 @@ public class VistaSalir extends JPanel{
 		this.add(Box.createVerticalGlue());
 	}
 	
+	public void control(ControladorSalir c) {
+		
+		this.bConfirmarSalida.addActionListener(c);
+		this.bCancelarSalida.addActionListener(c);
+	}
+	
 	private void iniciaComponentes() {
 		
-		bConfirmarSalida = new JButton("CONFIRMAR");
-		bConfirmarSalida.setFont(new Font(Font.SERIF, Font.BOLD, 20));
+		bConfirmarSalida = new JButton("Confirmar");
+		bConfirmarSalida.setFont(Vista.FUENTE_BOTONES);
 		bConfirmarSalida.setForeground(Vista.MARRON_OSCURO4);
 		bConfirmarSalida.setBackground(Vista.MARRON_CLARO4);
 		
-		bCancelarSalida = new JButton("CANCELAR");
-		bCancelarSalida.setFont(new Font(Font.SERIF, Font.BOLD, 20));
+		bCancelarSalida = new JButton("Cancelar");
+		bCancelarSalida.setFont(Vista.FUENTE_BOTONES);
 		bCancelarSalida.setForeground(Vista.MARRON_OSCURO4);
 		bCancelarSalida.setBackground(Vista.MARRON_CLARO4);
 	}
@@ -44,7 +51,7 @@ public class VistaSalir extends JPanel{
 		panel.setBackground(Vista.MARRON_CLARO3);
 		
 		JLabel texto = new JLabel("¿Esta seguro que desea salir?");
-		texto.setFont(Vista.FUENTE_BOTONES);
+		texto.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
 		texto.setForeground(Vista.MARRON_OSCURO4);
 		
 		panel.add(texto);
@@ -63,6 +70,14 @@ public class VistaSalir extends JPanel{
 		panel.add(bCancelarSalida);
 		
 		return panel;
+	}
+
+	public JButton getbConfirmarSalida() {
+		return bConfirmarSalida;
+	}
+
+	public JButton getbCancelarSalida() {
+		return bCancelarSalida;
 	}
 	
 }

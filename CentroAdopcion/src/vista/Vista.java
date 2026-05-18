@@ -65,7 +65,12 @@ public class Vista extends JPanel{
 		this.add(vSalir = new VistaSalir(), "salir");
 	}
 	
-	public void siguientePanel() {
+	public void muestraPrimerPanel() {
+		
+		cartas.first(this);
+	}
+	
+	public void muestraSiguientePanel() {
 		
 		cartas.next(this);
 	}
@@ -75,7 +80,7 @@ public class Vista extends JPanel{
 		cartas.show(this, "salir");
 	}
 	
-	public void anteriorPanel() {
+	public void muestraAnteriorPanel() {
 		
 		cartas.previous(this);
 	}

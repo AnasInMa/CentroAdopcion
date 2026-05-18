@@ -24,7 +24,7 @@ public class ControladorOpcionesCentros implements MouseListener{
 		if(e.getSource() == vOpcionesCentros.getMenu()) {
 			
 			//System.out.println("menu");
-			vista.anteriorPanel();
+			vista.muestraAnteriorPanel();
 		}
 		
 	}

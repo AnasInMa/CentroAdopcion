@@ -24,7 +24,7 @@ public class ControladorMenu implements ActionListener{
 			
 			//System.out.println("comenzar");
 			
-			vista.siguientePanel();
+			vista.muestraSiguientePanel();
 			
 		} else if(e.getSource() == vMenu.getbOpciones()) {
 			
