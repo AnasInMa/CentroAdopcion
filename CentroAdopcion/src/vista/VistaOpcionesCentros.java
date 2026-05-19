@@ -49,6 +49,11 @@ public class VistaOpcionesCentros extends JPanel{
 	public void control(ControladorOpcionesCentros c) {
 		
 		this.menu.addMouseListener(c);
+		
+		this.bEntrarCentro1.addActionListener(c);
+		this.bEntrarCentro2.addActionListener(c);
+		this.bEntrarCentro3.addActionListener(c);
+		this.bEntrarCentro4.addActionListener(c);
 	}
 	
 	private void instanciarBotones() {

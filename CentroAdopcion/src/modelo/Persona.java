@@ -1,9 +1,12 @@
 package modelo;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Persona {
+public class Persona implements Serializable{
 
+	private static final long serialVersionUID = -4039320836185613290L;
+	
 	private SortedSet<Animal> animalesAdoptados;	//Va a ser un SortedSet, ya que se ordenaran por la fecha de adopcion y ademas no habran repetidos
 	private String nombre, nif, primerApellido, segundoApellido;
 	private int codigo; //TODO

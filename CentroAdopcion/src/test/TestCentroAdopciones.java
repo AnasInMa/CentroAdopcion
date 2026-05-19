@@ -12,7 +12,12 @@ public class TestCentroAdopciones {
 		System.out.println(centro1.toStringSimple());
 		System.out.println(centro1.toString());
 		
-		centro1.alojaAnimal(new Animal(234123, "Wilson", "Gato", "Dorado Sombreado", "es un gato que duerme mucho, come mucho y caga mucho", (byte) 2, "12-02-2026"));
+		try {
+			centro1.alojaAnimal(new Animal(234123, "Wilson", "Gato", "Dorado Sombreado", "es un gato que duerme mucho, come mucho y caga mucho", (byte) 2, "12-02-2026"));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		System.out.println(centro1);
 	}

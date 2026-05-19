@@ -3,14 +3,17 @@ package modelo;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import fechas.LibFechas8;
+
 public class Animal implements Comparable<Animal>{
 
-	private String nombre, tipo, raza, descripcion;
 	private int codigo;	//el codigo es el id de la tabla
+	private String nombre, tipo, raza, descripcion;
 	private byte edad;
-	private LocalDate fechaAlojamiento;	//fechaAdopcion
+	private boolean estaAdoptado;
+	private LocalDate fechaAlojamiento, fechaAdopcion;
 	
-	public Animal(int cod, String nombre, String tipo, String raza, String descripcion, byte edad, String fechaAlojamiento) {
+	public Animal(int cod, String nombre, String tipo, String raza, String descripcion, byte edad, String fechaAlojamiento) throws Exception {
 		
 		this.codigo = cod;
 		this.nombre = nombre;
@@ -19,7 +22,19 @@ public class Animal implements Comparable<Animal>{
 		this.descripcion = (nombre == null || nombre == ""? "Este " + tipo.toLowerCase() + " " : nombre + " ") + descripcion;
 		this.edad = edad;
 		
-		this.fechaAlojamiento = fechas.LibFechas8.convierteStringToLocalDate(fechaAlojamiento);
+		this.estaAdoptado = false;
+		
+		if(LibFechas8.isFechaCorrecta(fechaAlojamiento)) {
+			
+			this.fechaAlojamiento = fechas.LibFechas8.convierteStringToLocalDate(fechaAlojamiento);
+			
+		} else throw new Exception("Fecha incorrecta");
+	}
+	
+	public void esAdoptado() {
+		
+		estaAdoptado = true;
+		fechaAdopcion = LocalDate.now();
 	}
 	
 	@Override
@@ -48,7 +63,9 @@ public class Animal implements Comparable<Animal>{
 	@Override
 	public String toString() {
 		
-		return toStringSimple() + "\n\tDescripcion: " + descripcion;
+		return toStringSimple() + "\n\tDescripcion: " + descripcion +
+				"\n\tEstado: " + (this.estaAdoptado? "Adoptado (" + LibFechas8.getFechaFull(this.fechaAdopcion) + ")"
+										: "No adoptado");
 	}
 	
 	public String toStringSimple() {

@@ -4,7 +4,7 @@ import java.awt.event.*;
 
 import vista.*;
 
-public class ControladorOpcionesCentros implements MouseListener{
+public class ControladorOpcionesCentros implements MouseListener, ActionListener{
 
 	private Vista vista;
 	private VistaOpcionesCentros vOpcionesCentros;
@@ -16,6 +16,12 @@ public class ControladorOpcionesCentros implements MouseListener{
 		vOpcionesCentros = vista.getvOpcionesCentros();
 		
 		vOpcionesCentros.control(this);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	@Override
@@ -52,6 +58,7 @@ public class ControladorOpcionesCentros implements MouseListener{
 		// TODO Auto-generated method stub
 		
 	}
+
 
 
 

@@ -1,9 +1,12 @@
 package modelo;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class CentroAdopcion {
+public class CentroAdopcion implements Serializable{
 
+	private static final long serialVersionUID = 6572561929713311485L;
+	
 	private String nombre, direccion;
 	private int codigo, codigoPostal, codigoCentro;
 	private short capacidadMaxima;
