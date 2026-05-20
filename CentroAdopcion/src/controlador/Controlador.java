@@ -12,6 +12,7 @@ public class Controlador {
 		
 		new ControladorMenu(vista);
 		new ControladorOpcionesCentros(vista);
+		new ControladorOpciones(vista);
 		new ControladorSalir(vista);
 	}
 }

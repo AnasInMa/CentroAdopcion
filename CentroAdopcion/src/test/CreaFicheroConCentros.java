@@ -22,13 +22,16 @@ public class CreaFicheroConCentros {
 			oos.writeObject(spapm);
 			oos.writeObject(refugioDelBurrito);
 			oos.writeObject(pad);
+			
+			System.out.println("Fichero creado");
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
+		/*
 		try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File("./src/modelo/Centros.dat")))) {
-
+			
 			while (true) {
 
 				System.out.println(ois.readObject());
@@ -44,6 +47,7 @@ public class CreaFicheroConCentros {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		*/
 	}
 
 }

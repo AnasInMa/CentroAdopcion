@@ -28,9 +28,12 @@ public class CreaYCargaTablas {
 			statement = conexion.createStatement();
 			//System.out.println("Conexion creada");
 			
+			//crear las tablas
 			creaTablaCentros();
 			creaTablaPersonas();
 			creaTablaAnimales();
+			
+			//cargar los datos de los ficheros a la BD
 			
 		} catch (SQLException e) {
 			

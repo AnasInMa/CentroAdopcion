@@ -30,6 +30,8 @@ public class ControladorMenu implements ActionListener{
 			
 			//System.out.println("opciones");
 			
+			vista.muestraPanelOpciones();
+			
 		} else {
 			
 			vista.muestraPanelSalir();

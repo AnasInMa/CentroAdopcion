@@ -20,7 +20,7 @@ public class VistaOpcionesCentros extends JPanel{
 		this.setBackground(Vista.MARRON_CLARO3);
 		
 		JLabel texto = new JLabel("⬇️ELIJA UNO DE ESTOS CENTROS PARA VER LOS ANIMALES DISPONIBLES⬇️");
-		texto.setFont(new Font(Font.SERIF, Font.BOLD, 20));
+		texto.setFont(new Font(Font.SERIF, Font.BOLD, 25));
 		texto.setForeground(Vista.MARRON_OSCURO4);
 		texto.setHorizontalAlignment(JLabel.CENTER);
 		texto.setBorder(new EmptyBorder(0, 0, 100, 0));

@@ -8,19 +8,19 @@ public class Vista extends JPanel{
 
 	private static final long serialVersionUID = -5752211613049689258L;
 	
-	private static final byte BASE_HORIZONTAL, BASE_VERTICAL;
+/*	private static final byte BASE_HORIZONTAL, BASE_VERTICAL;
 	public static short ANCHO_PANEL, ALTO_PANEL;
 	public static int ANCHO_COMPONENTE, ALTO_COMPONENTE;
 	public static float multiplicadorPanel,		//esta variable se va a utilizar para las resoluciones de los paneles
 						multiplicadorAnchoComponente,	//⬇️
 						multiplicadorAltoComponente;	//y estos para el tamaño de los componetes
-	
+*/	
 	public static final Color MARRON_CLARO1, MARRON_CLARO2, MARRON_CLARO3, MARRON_CLARO4,
 							 MARRON_OSCURO1, MARRON_OSCURO2, MARRON_OSCURO3, MARRON_OSCURO4;
 	public static final Font FUENTE_BOTONES;
 	
 	static {
-		
+		/*
 		BASE_HORIZONTAL = 16;
 		BASE_VERTICAL = 9;
 
@@ -33,6 +33,7 @@ public class Vista extends JPanel{
 		
 		ANCHO_COMPONENTE = (int) (ANCHO_PANEL * multiplicadorAnchoComponente);
 		ALTO_COMPONENTE = (int) (ALTO_PANEL * multiplicadorAltoComponente);
+		*/
 		
 		//Colores
 		MARRON_CLARO1 = new Color(249, 248, 246);
@@ -53,6 +54,7 @@ public class Vista extends JPanel{
 	
 	private VistaMenu vMenu;
 	private VistaOpcionesCentros vOpcionesCentros;
+	private VistaOpciones vOpciones;
 	private VistaSalir vSalir;
 	
 	public Vista() {
@@ -61,7 +63,8 @@ public class Vista extends JPanel{
 		this.setLayout(cartas);
 		
 		this.add(vMenu = new VistaMenu(), "menu");
-		this.add(vOpcionesCentros = new VistaOpcionesCentros(), "opciones");
+		this.add(vOpcionesCentros = new VistaOpcionesCentros(), "opcionesCentros");
+		this.add(vOpciones = new VistaOpciones(), "opciones");
 		this.add(vSalir = new VistaSalir(), "salir");
 	}
 	
@@ -75,6 +78,11 @@ public class Vista extends JPanel{
 		cartas.next(this);
 	}
 
+	public void muestraPanelOpciones() {
+		
+		cartas.show(this, "opciones");
+	}
+	
 	public void muestraPanelSalir() {
 		
 		cartas.show(this, "salir");
@@ -93,6 +101,10 @@ public class Vista extends JPanel{
 		return vOpcionesCentros;
 	}
 	
+	public VistaOpciones getvOpciones() {
+		return vOpciones;
+	}
+
 	public VistaSalir getvSalir() {
 		return vSalir;
 	}

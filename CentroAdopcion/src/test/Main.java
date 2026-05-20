@@ -10,17 +10,18 @@ public class Main {
 	public static void main(String[] args) {
 		
 		Vista v = new Vista();
-		new Controlador(v);
 		
 		JFrame f = new JFrame("CEADOP");
 		f.setContentPane(v);
+		
+		new Controlador(v);
 		
 		f.setIconImage(new ImageIcon("./imgs/logo.png").getImage());
 		
 		//f.setUndecorated(true);
 		f.pack();
 		f.setLocationRelativeTo(null);
-		f.setResizable(false);
+		 f.setResizable(false);
 		//f.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setVisible(true);
