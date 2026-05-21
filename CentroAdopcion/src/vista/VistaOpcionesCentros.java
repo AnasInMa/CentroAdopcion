@@ -11,6 +11,7 @@ public class VistaOpcionesCentros extends JPanel{
 
 	private static final long serialVersionUID = -6104990496472019211L;
 	
+	private String nombreCentro1, nombreCentro2, nombreCentro3, nombreCentro4;
 	private JButton bEntrarCentro1, bEntrarCentro2, bEntrarCentro3, bEntrarCentro4;
 	private JLabel menu;
 	
@@ -31,10 +32,10 @@ public class VistaOpcionesCentros extends JPanel{
 		panelPrincipal.setBorder(new EmptyBorder(0, 0, 200, 0));
 		panelPrincipal.setBackground(Vista.MARRON_CLARO3);
 		
-		panelPrincipal.add(añadePanelesCentros("ARCA DEL TORCAL", bEntrarCentro1, new ImageIcon("./imgs/arcaDelTorcal.jpg")));
-		panelPrincipal.add(añadePanelesCentros("S.P.A.P.M.", bEntrarCentro2, new ImageIcon("./imgs/SPAPM.png")));
-		panelPrincipal.add(añadePanelesCentros("REFUGIO DEL BURRITO", bEntrarCentro3, new ImageIcon("./imgs/refugioDelBurrito.jpg")));
-		panelPrincipal.add(añadePanelesCentros("P.A.D.", bEntrarCentro4, new ImageIcon("./imgs/PAD.png")));
+		panelPrincipal.add(añadePanelesCentros(nombreCentro1 = "ARCA DEL TORCAL", bEntrarCentro1, new ImageIcon("./imgs/arcaDelTorcal.jpg")));
+		panelPrincipal.add(añadePanelesCentros(nombreCentro2 = "S.P.A.P.M.", bEntrarCentro2, new ImageIcon("./imgs/SPAPM.png")));
+		panelPrincipal.add(añadePanelesCentros(nombreCentro3 = "REFUGIO DEL BURRITO", bEntrarCentro3, new ImageIcon("./imgs/refugioDelBurrito.jpg")));
+		panelPrincipal.add(añadePanelesCentros(nombreCentro4 = "P.A.D.", bEntrarCentro4, new ImageIcon("./imgs/PAD.png")));
 		
 		menu = new JLabel(" ≡");
 		menu.setFocusable(true);
@@ -103,7 +104,7 @@ public class VistaOpcionesCentros extends JPanel{
 		
 		panel.add(texto);
 		panel.add(img);
-		panel.add(espacio);		//Preguntar si es malo o esta bien
+		panel.add(espacio);		//Preguntar si es una mala practica o esta bien
 		panel.add(boton);
 		
 		return panel;
@@ -127,6 +128,22 @@ public class VistaOpcionesCentros extends JPanel{
 
 	public JLabel getMenu() {
 		return menu;
+	}
+
+	public String getNombreCentro1() {
+		return nombreCentro1;
+	}
+
+	public String getNombreCentro2() {
+		return nombreCentro2;
+	}
+
+	public String getNombreCentro3() {
+		return nombreCentro3;
+	}
+
+	public String getNombreCentro4() {
+		return nombreCentro4;
 	}
 
 }

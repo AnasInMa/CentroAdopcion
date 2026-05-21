@@ -28,6 +28,11 @@ public class CentroAdopcion implements Serializable{
 		this(cod, nombre, direccion, codigoCentro, codPostal, capacidadMaxima, new TreeSet<Animal>());
 	}
 	
+	public CentroAdopcion() {
+		
+		this(0, "", "", 0, 0, (short) 0);
+	}
+	
 	/**
 	 * Metodo que aloja a un animal en el centro de adopcion, si se ha podido alojar
 	 * devuelve verdadero, si no, falso, no sin antes comprobar que no se ha llegado
@@ -41,10 +46,10 @@ public class CentroAdopcion implements Serializable{
 		return (animal == null)? false	//comprueba que el animal que se pasa exista, si no existe devuelve un nulo
 				: (this.animalesAlojados.size() < capacidadMaxima? this.animalesAlojados.add(animal) : false);	//si existe comprueba que se puede alojar el animal y lo aloja
 	}
-	
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(codigoCentro);
+		return Objects.hash(codigo, codigoCentro, nombre);
 	}
 
 	@Override
@@ -56,7 +61,8 @@ public class CentroAdopcion implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		CentroAdopcion other = (CentroAdopcion) obj;
-		return codigoCentro == other.codigoCentro;
+		//dos centros seran iguales si coinciden el codigo de la bd, el codigo del centro o el nombre
+		return codigo == other.codigo || codigoCentro == other.codigoCentro || Objects.equals(nombre, other.nombre);
 	}
 
 	public String toStringSimple() {

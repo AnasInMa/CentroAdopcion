@@ -4,27 +4,30 @@ import java.awt.*;
 
 import javax.swing.*;
 
+import modelo.CentroAdopcion;
+
 public class Vista extends JPanel{
 
 	private static final long serialVersionUID = -5752211613049689258L;
 	
-/*	private static final byte BASE_HORIZONTAL, BASE_VERTICAL;
-	public static short ANCHO_PANEL, ALTO_PANEL;
-	public static int ANCHO_COMPONENTE, ALTO_COMPONENTE;
+	private static final byte BASE_HORIZONTAL, BASE_VERTICAL;
+	public static final short ANCHO_PANEL, ALTO_PANEL;
+	public static final int ANCHO_COMPONENTE, ALTO_COMPONENTE;
+	
 	public static float multiplicadorPanel,		//esta variable se va a utilizar para las resoluciones de los paneles
 						multiplicadorAnchoComponente,	//⬇️
 						multiplicadorAltoComponente;	//y estos para el tamaño de los componetes
-*/	
+
 	public static final Color MARRON_CLARO1, MARRON_CLARO2, MARRON_CLARO3, MARRON_CLARO4,
 							 MARRON_OSCURO1, MARRON_OSCURO2, MARRON_OSCURO3, MARRON_OSCURO4;
 	public static final Font FUENTE_BOTONES;
 	
 	static {
-		/*
 		BASE_HORIZONTAL = 16;
 		BASE_VERTICAL = 9;
-
+		
 		multiplicadorPanel = 60;
+
 		multiplicadorAnchoComponente = 0.3f;
 		multiplicadorAltoComponente = 0.1f;
 		
@@ -33,7 +36,7 @@ public class Vista extends JPanel{
 		
 		ANCHO_COMPONENTE = (int) (ANCHO_PANEL * multiplicadorAnchoComponente);
 		ALTO_COMPONENTE = (int) (ALTO_PANEL * multiplicadorAltoComponente);
-		*/
+
 		
 		//Colores
 		MARRON_CLARO1 = new Color(249, 248, 246);
@@ -54,6 +57,7 @@ public class Vista extends JPanel{
 	
 	private VistaMenu vMenu;
 	private VistaOpcionesCentros vOpcionesCentros;
+	private VistaCentroAdopcion vCentroAdopcion;
 	private VistaOpciones vOpciones;
 	private VistaSalir vSalir;
 	
@@ -66,6 +70,11 @@ public class Vista extends JPanel{
 		this.add(vOpcionesCentros = new VistaOpcionesCentros(), "opcionesCentros");
 		this.add(vOpciones = new VistaOpciones(), "opciones");
 		this.add(vSalir = new VistaSalir(), "salir");
+	}
+	
+	public void añadeVistaCentroAdopcion(CentroAdopcion centro) {
+		
+		this.add(vCentroAdopcion = new VistaCentroAdopcion(centro), "centroAdopcion");
 	}
 	
 	public void muestraPrimerPanel() {
@@ -81,6 +90,16 @@ public class Vista extends JPanel{
 	public void muestraPanelOpciones() {
 		
 		cartas.show(this, "opciones");
+	}
+	
+	public void muestraPanelOpcionesCentros() {
+		
+		cartas.show(this, "opcionesCentros");
+	}
+	
+	public void muestraPanelCentro() {
+		
+		cartas.show(this, "centroAdopcion");
 	}
 	
 	public void muestraPanelSalir() {
@@ -101,6 +120,10 @@ public class Vista extends JPanel{
 		return vOpcionesCentros;
 	}
 	
+	public VistaCentroAdopcion getvCentroAdopcion() {
+		return vCentroAdopcion;
+	}
+
 	public VistaOpciones getvOpciones() {
 		return vOpciones;
 	}

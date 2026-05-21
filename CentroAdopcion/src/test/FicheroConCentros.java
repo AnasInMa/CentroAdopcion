@@ -4,9 +4,9 @@ import java.io.*;
 
 import modelo.CentroAdopcion;
 
-public class CreaFicheroConCentros {
+public class FicheroConCentros {
 
-	public static void main(String[] args) {
+	public static void creaFicheroCentros() {
 
 		CentroAdopcion arcaDelTrocal = new CentroAdopcion(0, "Arca del Torcal", "Avenida José María Fernández", 2134,
 				29200, (short) 20);
@@ -22,19 +22,31 @@ public class CreaFicheroConCentros {
 			oos.writeObject(spapm);
 			oos.writeObject(refugioDelBurrito);
 			oos.writeObject(pad);
-			
+
 			System.out.println("Fichero creado");
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
 
-		/*
+	public static CentroAdopcion buscaCentro(String nombreCentro) {
+		
+		CentroAdopcion centro = null;
+		boolean encontrado = false;
+
 		try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File("./src/modelo/Centros.dat")))) {
-			
-			while (true) {
 
-				System.out.println(ois.readObject());
+			while (!encontrado) {
+
+				//System.out.println(ois.readObject());
+				
+				centro = (CentroAdopcion) ois.readObject();
+				
+				if(centro.getNombre().equalsIgnoreCase(nombreCentro)) {
+
+					encontrado = true;
+				}
 			}
 
 		} catch (FileNotFoundException e) {
@@ -47,7 +59,8 @@ public class CreaFicheroConCentros {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		*/
+		
+		return encontrado? centro : null; 	//si se encuentra el centro lo devuelve, si no devuelve un nulo, porque si no devolveria el ultimo centro del fuichero
 	}
 
 }

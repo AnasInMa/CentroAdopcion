@@ -16,7 +16,7 @@ public class VistaMenu extends JPanel{
 	public VistaMenu() {
 		
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		this.setPreferredSize(new Dimension(960, 540));
+		this.setPreferredSize(new Dimension(Vista.ANCHO_PANEL, Vista.ALTO_PANEL));
 		this.setBorder(new EmptyBorder(60,10,10,10));
 		this.setBackground(Vista.MARRON_CLARO3);
 		
@@ -65,7 +65,7 @@ public class VistaMenu extends JPanel{
 			boton.setBackground(Vista.MARRON_CLARO4);
 			
 			this.add(boton);
-			this.add(Box.createRigidArea(new Dimension(0, 45)));
+			this.add(Box.createRigidArea(new Dimension(0, Vista.ALTO_COMPONENTE)));
 			
 		}
 	}
