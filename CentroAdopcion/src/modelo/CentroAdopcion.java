@@ -28,6 +28,11 @@ public class CentroAdopcion implements Serializable{
 		this(cod, nombre, direccion, codigoCentro, codPostal, capacidadMaxima, new TreeSet<Animal>());
 	}
 	
+	public CentroAdopcion(CentroAdopcion centro) {
+		
+		this(centro.getCodigo(), centro.getNombre(), centro.getDireccion(), centro.getCodigoCentro(), centro.getCodigoPostal(), centro.capacidadMaxima, (TreeSet<Animal>) centro.animalesAlojados);
+	}
+	
 	public CentroAdopcion() {
 		
 		this(0, "", "", 0, 0, (short) 0);
