@@ -13,12 +13,9 @@ public class VistaCentroAdopcion extends JPanel {
 
 	private CentroAdopcion centroAdopcion;
 	private JLabel nombreCentro, datosCentro, atras;
-	private JButton bPrimero, bAnterior, bSiguiente, bUltimo, bPedirCita, bAdoptar;
+	private JButton bPrimero, bAnterior, bSiguiente, bUltimo,
+					bDarEnAdopcion, /*bPedirCita,*/ bAdoptar;
 	
-	//private static JPanel panel1, panel2, panel3, panel4;	//el panel1 sera el que estara visible al principio, y ya a partir de los botones se podra navegar por los paneles
-	
-	private int numAnimalesMaximos;
-
 	private static LineBorder bordeLinea;
 	private static EmptyBorder bordeVacio;
 
@@ -27,17 +24,13 @@ public class VistaCentroAdopcion extends JPanel {
 		bordeLinea = new LineBorder(Vista.MARRON_OSCURO3, 4);
 		bordeVacio = new EmptyBorder(10, 10, 10, 10);
 		
-//		panel1 = new JPanel();
-//		panel2 = new JPanel();
-//		panel3 = new JPanel();
-//		panel4 = new JPanel();
 	}
 
 	public VistaCentroAdopcion(CentroAdopcion centro) {
 
 		centroAdopcion = centro;
 
-		numAnimalesMaximos = centroAdopcion.getCapacidadMaxima();
+		//numAnimalesMaximos = centroAdopcion.getCapacidadMaxima();
 		
 		modificaPanelPrincipal();
 	}
@@ -51,7 +44,8 @@ public class VistaCentroAdopcion extends JPanel {
 		this.bSiguiente.addActionListener(c);
 		this.bUltimo.addActionListener(c);
 		
-		this.bPedirCita.addActionListener(c);
+		this.bDarEnAdopcion.addActionListener(c);
+		//this.bPedirCita.addActionListener(c);
 		this.bAdoptar.addActionListener(c);
 	}
 
@@ -91,7 +85,8 @@ public class VistaCentroAdopcion extends JPanel {
 		bUltimo = new JButton("⏭️");
 		bUltimo.setToolTipText("Ultimo");
 		
-		bPedirCita = new JButton("PEDIR CITA");
+		bDarEnAdopcion = new JButton("DAR EN ADOPCION");
+		//bPedirCita = new JButton("PEDIR CITA");
 		bAdoptar = new JButton("ADOPTAR");
 
 	}
@@ -107,8 +102,8 @@ public class VistaCentroAdopcion extends JPanel {
 		datosCentro.setAlignmentX(JLabel.CENTER_ALIGNMENT);
 		datosCentro.setFont(new Font(Font.SERIF, Font.PLAIN, 20));
 
-		JComponent[] componentes = {atras, nombreCentro, datosCentro, bPrimero, bAnterior, bSiguiente, bUltimo, bPedirCita,
-				bAdoptar };
+		JComponent[] componentes = {atras, nombreCentro, datosCentro, bPrimero, bAnterior, bSiguiente, bUltimo,
+									bDarEnAdopcion, /*bPedirCita,*/ bAdoptar};
 
 		for (JComponent componente : componentes) {
 
@@ -146,43 +141,21 @@ public class VistaCentroAdopcion extends JPanel {
 		JPanel panelPrincipal = new JPanel();
 		panelPrincipal.setBorder(bordeLinea);
 		panelPrincipal.setBackground(Vista.MARRON_CLARO3);
+		
+		panelPrincipal.add(new VistaAnimales(this.centroAdopcion));
 
-		JPanel panelSecundario = new JPanel();
-		panelSecundario.setBorder(bordeVacio);
-		panelSecundario.setBackground(Vista.MARRON_CLARO3);
+//		JPanel panelSecundario = new JPanel();
+//		panelSecundario.setBorder(bordeVacio);
+//		panelSecundario.setBackground(Vista.MARRON_CLARO4);
 		//panelSecundario.add(panelesAnimalesCuatro(/*panelSecundario*/));
 
-		panelesAnimales();
 		
-		panelPrincipal.add(panelSecundario);
+		
+		//panelPrincipal.add(panelSecundario);
 
 		return panelPrincipal;
 	}
 	
-	private void panelesAnimales() {
-		
-		byte filas = (byte) Math.ceil(centroAdopcion.getAnimalesAlojados().size() / 4); // si tiene 6 animales habran 2 filas, si
-																						// hay 13 animales habran 4 filas, si
-																						// hay 3 animales solo habra 1 fila
-		
-		for(int i = 0; i < filas; i++) {
-			
-			
-		}
-	}
-	
-	private JPanel[] arrayPanelesAnimales() {
-		
-		JPanel[] paneles = new JPanel[numAnimalesMaximos];
-		
-		for(int i = 0; i < numAnimalesMaximos; i++) {
-			
-			paneles[i] = new JPanel();
-		}
-		
-		return paneles;
-	}
-
 	/**
 	 * Metodo que crea una matriz de 4 columnas, y las filas dependeran de los
 	 * animales que estan alojados en el centro de adopcion.
@@ -212,6 +185,8 @@ public class VistaCentroAdopcion extends JPanel {
 	}*/
 
 	private JPanel panelBotones() {
+		
+		Dimension espacio = new Dimension(10, 0);
 
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
@@ -219,15 +194,17 @@ public class VistaCentroAdopcion extends JPanel {
 		panel.setBorder(bordeLinea);
 
 		panel.add(bPrimero);
-		panel.add(Box.createRigidArea(new Dimension(10, 0)));
+		panel.add(Box.createRigidArea(espacio));
 		panel.add(bAnterior);
-		panel.add(Box.createRigidArea(new Dimension(10, 0)));
+		panel.add(Box.createRigidArea(espacio));
 		panel.add(bSiguiente);
-		panel.add(Box.createRigidArea(new Dimension(10, 0)));
+		panel.add(Box.createRigidArea(espacio));
 		panel.add(bUltimo);
 		panel.add(Box.createHorizontalGlue());
-		panel.add(bPedirCita);
-		panel.add(Box.createRigidArea(new Dimension(10, 0)));
+		panel.add(bDarEnAdopcion);
+		panel.add(Box.createRigidArea(espacio));
+		//panel.add(bPedirCita);
+		//panel.add(Box.createRigidArea(espacio));
 		panel.add(bAdoptar);
 
 		return panel;
@@ -261,8 +238,12 @@ public class VistaCentroAdopcion extends JPanel {
 		return bUltimo;
 	}
 
-	public JButton getbPedirCita() {
+	/*public JButton getbPedirCita() {
 		return bPedirCita;
+	}*/
+
+	public JButton getbDarEnAdopcion() {
+		return bDarEnAdopcion;
 	}
 
 	public JButton getbAdoptar() {

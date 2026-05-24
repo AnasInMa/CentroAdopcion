@@ -4,75 +4,143 @@ import java.awt.*;
 import java.util.*;
 
 import javax.swing.*;
+import javax.swing.JPopupMenu.Separator;
+import javax.swing.border.LineBorder;
 
 import modelo.Animal;
 import modelo.CentroAdopcion;
 
-public class VistaAnimales extends JPanel{
+public class VistaAnimales extends JPanel {
 	
 	private static final long serialVersionUID = 3726098725460425172L;
 	
 	private CentroAdopcion centroAdopcion;
 	private JPanel[][] matrizPaneles;
+	private JPanel[] arrayPaneles; 	//panel en el que habran metidos los 4 paneles con los animales
 	private static int contFilas;
+	private static final float COLUMNAS;
 	private CardLayout cartas;
+	private int filas;
+	private JRadioButton rbAnimal1, rbAnimal2, rbAnimal3, rbAnimal4; 		//como siempre van a haber 4 paneles de animales visibles, entonces puedo acceder al animal q se quira adoptar siempre que este el animal visible
 	
 	static {
 		
 		contFilas = 0;
+		
+		COLUMNAS = 4;
 	}
 
 	public VistaAnimales(CentroAdopcion centro) {
 		
 		this.setLayout(cartas = new CardLayout());
+		this.setBackground(Vista.MARRON_CLARO3);
 		
 		centroAdopcion = centro;
 		
-		matrizPaneles = matrizPanelesAnimales();
+		//matrizPaneles = matrizPanelesAnimales();
+		if(centro.getAnimalesAlojados().size() > 0) matrizPanelesAnimales();
 	}
 	
-	private JPanel[][] matrizPanelesAnimales() {
+	private void iniciaRBotones() {
 		
-		int filas = (int) Math.ceil(centroAdopcion.getAnimalesAlojados().size() / 4);	// si tiene 6 animales habran 2 filas, si
+		
+		this.rbAnimal1 = new JRadioButton("Elegir animal");
+		this.rbAnimal2 = new JRadioButton("Elegir animal");
+		this.rbAnimal3 = new JRadioButton("Elegir animal");
+		this.rbAnimal4 = new JRadioButton("Elegir animal");
+		
+		ButtonGroup grupoRB = new ButtonGroup();
+		
+		JRadioButton[] rBotones = {rbAnimal1, rbAnimal2, rbAnimal3, rbAnimal4};
+		
+		for (JRadioButton rboton : rBotones) {
+			
+			rboton.setBackground(Vista.MARRON_CLARO3);
+			grupoRB.add(rboton);
+		}
+	}
+	
+	private void matrizPanelesAnimales() {
+		
+		filas = (int) Math.ceil(centroAdopcion.getAnimalesAlojados().size() / COLUMNAS);	// si tiene 6 animales habran 2 filas, si
 																						// hay 13 animales habran 4 filas, si
 																						// hay 3 animales solo habra 1 fila
-		int columnas = filas / centroAdopcion.getCapacidadMaxima();
+		int columnas = (int) COLUMNAS;
 		
-		JPanel[][] matrizPaneles = new JPanel[filas][columnas];
+		iniciaRBotones();
+		
+		this.matrizPaneles = new JPanel[filas][columnas];
+		this.arrayPaneles = new JPanel[filas];
 		JPanel panel;
 		Animal animal;
 		
-		for (int i = 0, j = 0; i < filas; i++) {
+		LineBorder bordeLinea = new LineBorder(Vista.MARRON_OSCURO3, 4);
+		
+		Iterator<Animal> iterador = centroAdopcion.getAnimalesAlojados().iterator();
+		
+		for (int i = 0; i < filas; i++) {
 			
-			for (Iterator<Animal> iterador = centroAdopcion.getAnimalesAlojados().iterator() ; j < columnas; j++) {
+			arrayPaneles[i] = new JPanel();
+			
+			for (int j = 0; j < columnas && iterador.hasNext(); j++) {
 				
-				panel = (matrizPaneles[i][j] = new JPanel());
 				animal = iterador.next();
 				
-				panel.add(new JLabel(animal.getNombre()));
+				panel = (matrizPaneles[i][j] = new JPanel());
+				panel.setBackground(Vista.MARRON_CLARO3);
+				panel.setBorder(bordeLinea);
+				panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 				
-				this.add(panel, j); 	//le pongo el contador para que despues pueda acceder a las cartas del cardLayout
+				panel.add(new JLabel(animal.getNombre()));
+				panel.add(new Separator());
+				//aqui va a ir la imagen
+				//if(i != 0) panel.add(new JRadioButton());	//le pongo como condicion que no sea la primera fila porque en la primera me interesa poner los jrdaiobuttons de antes para poder acceder a ellos en el controlador
+				panel.add(new JLabel(animal.toStringSinCodigo()));
+				panel.add(new Separator());
+				panel.add(new JLabel(animal.getDescripcion()));	//preguntarle a Rosi como puedo hacer para que cuando llegue a una determinada longuitud se escriba en una nueva linea
+				
+				arrayPaneles[i].add(panel);
 			}
+			
+			
+			this.add(arrayPaneles[i], "panel" + i); 	//le pongo el contador para que despues pueda acceder a las cartas del cardLayout
 		}
 		
-		return matrizPaneles;
+		mueveRBotonesAlSiguientePanel(contFilas);
+	}
+	
+	public void anteriorFila() {
+		
+		if(--contFilas < 0) contFilas = 0;
+		muestraFilaPanelesAnimales();
 	}
 	
 	public void siguienteFila() {
 		
-		//if()
-		contFilas++;
+		if(++contFilas > filas - 1) contFilas = filas - 1; 	//le resto uno a filas porque el contFilas empieza por 0
+		muestraFilaPanelesAnimales();
 	}
 	
-	public JPanel[] muestraFilaPanelesAnimales() {
+	private void muestraFilaPanelesAnimales() {
 		
-		JPanel[] arrayPaneles = new JPanel[contFilas];
+		System.out.println(contFilas);
 		
-		for (int i = 0; i < arrayPaneles.length; i++) {
-			
-		}
+		mueveRBotonesAlSiguientePanel(contFilas);
 		
-		return arrayPaneles;
+		this.cartas.show(this, ("panel" + contFilas));
+	}
+	
+	private void mueveRBotonesAlSiguientePanel(int fila) {
+		
+		rbAnimal1.setSelected(false);
+		rbAnimal2.setSelected(false);
+		rbAnimal3.setSelected(false);
+		rbAnimal4.setSelected(false);
+		
+		if(matrizPaneles[fila][0] != null) matrizPaneles[fila][0].add(rbAnimal1);
+		if(matrizPaneles[fila][1] != null) matrizPaneles[fila][1].add(rbAnimal2);
+		if(matrizPaneles[fila][2] != null) matrizPaneles[fila][2].add(rbAnimal3);
+		if(matrizPaneles[fila][3] != null) matrizPaneles[fila][3].add(rbAnimal4);
 	}
 
 }

@@ -27,7 +27,7 @@ public class ControladorCentroAdopcion implements MouseListener, ActionListener{
 			
 			
 			
-		} else if (e.getSource() == vCentroAdopcion.getbPedirCita()) {
+		} else if (e.getSource() == vCentroAdopcion.getbDarEnAdopcion()) {
 			
 			
 			

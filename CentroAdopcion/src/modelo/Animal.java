@@ -16,10 +16,10 @@ public class Animal implements Comparable<Animal>{
 	public Animal(int cod, String nombre, String tipo, String raza, String descripcion, byte edad, String fechaAlojamiento) throws Exception {
 		
 		this.codigo = cod;
-		this.nombre = nombre;
+		this.nombre = (nombre.isEmpty() || nombre == null)? "Sin Nombre" : nombre;
 		this.tipo = tipo;
 		this.raza = raza;
-		this.descripcion = (nombre == null || nombre == ""? "Este " + tipo.toLowerCase() + " " : nombre + " ") + descripcion;
+		this.descripcion = (nombre == null || nombre == ""? "Este " + raza.toLowerCase() + " " : nombre + " ") + descripcion;
 		this.edad = edad;
 		
 		this.estaAdoptado = false;
