@@ -16,12 +16,12 @@ public class VistaAnimales extends JPanel {
 	
 	private CentroAdopcion centroAdopcion;
 	private JPanel[][] matrizPaneles;
-	private JPanel[] arrayPaneles; 	//panel en el que habran metidos los 4 paneles con los animales
+	private JPanel[] arrayPaneles; 	//array de paneles en los que en cada uno habran metidos los 4 paneles con los animales
 	private static int contFilas;
 	private static final float COLUMNAS;
 	private CardLayout cartas;
 	private int filas;
-	private JRadioButton rbAnimal1, rbAnimal2, rbAnimal3, rbAnimal4; 		//como siempre van a haber 4 paneles de animales visibles, entonces puedo acceder al animal q se quira adoptar siempre que este el animal visible
+	private JRadioButton rbAnimal1, rbAnimal2, rbAnimal3, rbAnimal4; 	//como siempre van a haber 4 paneles de animales visibles, entonces puedo acceder al animal q se quiera adoptar siempre que este el animal visible
 	
 	static {
 		
@@ -55,6 +55,8 @@ public class VistaAnimales extends JPanel {
 		
 		for (JRadioButton rboton : rBotones) {
 			
+			rboton.setFocusable(false);
+			rboton.setAlignmentX(JRadioButton.LEFT_ALIGNMENT);
 			rboton.setBackground(Vista.MARRON_CLARO3);
 			grupoRB.add(rboton);
 		}
@@ -63,8 +65,8 @@ public class VistaAnimales extends JPanel {
 	private void matrizPanelesAnimales() {
 		
 		filas = (int) Math.ceil(centroAdopcion.getAnimalesAlojados().size() / COLUMNAS);	// si tiene 6 animales habran 2 filas, si
-																						// hay 13 animales habran 4 filas, si
-																						// hay 3 animales solo habra 1 fila
+																							// hay 13 animales habran 4 filas, si
+																							// hay 3 animales solo habra 1 fila
 		int columnas = (int) COLUMNAS;
 		
 		iniciaRBotones();
@@ -78,9 +80,17 @@ public class VistaAnimales extends JPanel {
 		
 		Iterator<Animal> iterador = centroAdopcion.getAnimalesAlojados().iterator();
 		
+		JScrollPane spDescripcion;
+		JTextArea taDescripcion;
+		
+		Dimension tamanio = new Dimension(160, 300);
+		
+		JLabel lNombre;
+		JLabel lDatos;
+		
 		for (int i = 0; i < filas; i++) {
 			
-			arrayPaneles[i] = new JPanel();
+			arrayPaneles[i] = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 10));
 			
 			for (int j = 0; j < columnas && iterador.hasNext(); j++) {
 				
@@ -91,15 +101,41 @@ public class VistaAnimales extends JPanel {
 				panel.setBorder(bordeLinea);
 				panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 				
-				panel.add(new JLabel(animal.getNombre()));
+				//Para que ocupan todos los paneles lo mismo
+				panel.setPreferredSize(tamanio);
+				panel.setMinimumSize(tamanio);
+				panel.setMaximumSize(tamanio);
+				
+				lNombre = new JLabel(animal.getNombre());
+				lNombre.setAlignmentX(JLabel.LEFT_ALIGNMENT);
+				
+				lDatos = new JLabel(animal.toStringSinCodigo());
+				lDatos.setAlignmentX(JLabel.LEFT_ALIGNMENT);
+				
+				panel.add(lNombre);
 				panel.add(new Separator());
 				//aqui va a ir la imagen
-				//if(i != 0) panel.add(new JRadioButton());	//le pongo como condicion que no sea la primera fila porque en la primera me interesa poner los jrdaiobuttons de antes para poder acceder a ellos en el controlador
-				panel.add(new JLabel(animal.toStringSinCodigo()));
+				panel.add(lDatos);
 				panel.add(new Separator());
-				panel.add(new JLabel(animal.getDescripcion()));	//preguntarle a Rosi como puedo hacer para que cuando llegue a una determinada longuitud se escriba en una nueva linea
+				
+				taDescripcion = new JTextArea(animal.getDescripcion());				
+				taDescripcion.setEditable(false);
+				taDescripcion.setFocusable(false);
+				taDescripcion.setBackground(Vista.MARRON_CLARO3);
+				taDescripcion.setAlignmentX(JTextArea.LEFT_ALIGNMENT);
+				
+				taDescripcion.setLineWrap(true);		// salto de linea automatico
+				taDescripcion.setWrapStyleWord(true);	// corta por palabras, no por caracteres
+				
+				spDescripcion = new JScrollPane(taDescripcion);
+				spDescripcion.setBorder(null);
+				spDescripcion.setPreferredSize(new Dimension(100, 200));
+				spDescripcion.setAlignmentX(JScrollPane.LEFT_ALIGNMENT);
+				
+				panel.add(spDescripcion);
 				
 				arrayPaneles[i].add(panel);
+				arrayPaneles[i].setBackground(Vista.MARRON_CLARO3);
 			}
 			
 			

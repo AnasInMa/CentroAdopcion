@@ -4,7 +4,7 @@ import vista.Vista;
 
 public class Controlador {
 
-	public Vista vista;
+	private Vista vista;
 	
 	public Controlador(Vista v) {
 		

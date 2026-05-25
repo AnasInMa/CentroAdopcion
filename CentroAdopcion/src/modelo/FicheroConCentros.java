@@ -1,8 +1,6 @@
-package test;
+package modelo;
 
 import java.io.*;
-
-import modelo.CentroAdopcion;
 
 public class FicheroConCentros {
 
@@ -16,16 +14,17 @@ public class FicheroConCentros {
 		CentroAdopcion pad = new CentroAdopcion(3, "P.A.D.", "Urb. Cerro del Águila", 9534, 29649, (short) 25);
 
 		try (ObjectOutputStream oos = new ObjectOutputStream(
-				new FileOutputStream(new File("./src/modelo/Centros.dat"), false))) {
+				new FileOutputStream(new File("./files/Centros.dat"), false))) {
 
 			oos.writeObject(arcaDelTrocal);
 			oos.writeObject(spapm);
 			oos.writeObject(refugioDelBurrito);
 			oos.writeObject(pad);
 
-			System.out.println("Fichero creado");
+			System.out.println("Fichero centros creado");
 
 		} catch (IOException e) {
+			
 			e.printStackTrace();
 		}
 	}
@@ -35,7 +34,7 @@ public class FicheroConCentros {
 		CentroAdopcion centro = null;
 		boolean encontrado = false;
 
-		try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File("./src/modelo/Centros.dat")))) {
+		try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File("./files/Centros.dat")))) {
 
 			while (!encontrado) {
 

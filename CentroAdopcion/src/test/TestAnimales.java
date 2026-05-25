@@ -1,6 +1,7 @@
 package test;
 
 import modelo.Animal;
+import modelo.Persona;
 
 public class TestAnimales {
 
@@ -22,9 +23,10 @@ public class TestAnimales {
 			System.out.println(animal1.equals(animal2));
 			System.out.println(animal2.equals(animal3));
 
-			animal1.esAdoptado();
+			animal1.esAdoptado(new Persona(1, "Pedro", "12345678A", "Sánchez", "Castejón", (byte) 54));
 
 			System.out.println(animal1);
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

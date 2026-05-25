@@ -1,18 +1,26 @@
 package modelo;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import javax.swing.ImageIcon;
+
 import fechas.LibFechas8;
 
-public class Animal implements Comparable<Animal>{
+public class Animal implements Comparable<Animal>, Serializable{
 
-	private int codigo;	//el codigo es el id de la tabla
+	private static final long serialVersionUID = -6601920334084112132L;
+	
+	private int codigo,	//el codigo es el id de la tabla
+				codigoPersona, codigoCentro;
 	private String nombre, tipo, raza, descripcion;
 	private byte edad;
 	private boolean estaAdoptado;
 	private LocalDate fechaAlojamiento, fechaAdopcion;
 	
+	private ImageIcon imagen;
+
 	public Animal(int cod, String nombre, String tipo, String raza, String descripcion, byte edad, String fechaAlojamiento) throws Exception {
 		
 		this.codigo = cod;
@@ -31,10 +39,38 @@ public class Animal implements Comparable<Animal>{
 		} else throw new Exception("Fecha incorrecta");
 	}
 	
-	public void esAdoptado() {
+	public Animal(int cod, String nombre, String tipo, String raza, String descripcion, byte edad, String fechaAlojamiento, int codCentro) throws Exception {
 		
+		this(cod, nombre, tipo, raza, descripcion, edad, fechaAlojamiento);
+		
+		this.codigoCentro = codCentro;
+	}
+	
+	public Animal(int cod, String nombre, String tipo, String raza, String descripcion, byte edad, String fechaAlojamiento, int codCentro, int codPersona) throws Exception {
+		
+		this(cod, nombre, tipo, raza, descripcion, edad, fechaAlojamiento, codCentro);
+		
+		this.codigoPersona = codPersona;
+	}
+	
+	public Animal(Animal animal, ImageIcon imagen) throws Exception {
+		
+		this(animal.codigo, animal.nombre, animal.tipo, animal.raza, animal.descripcion, animal.edad, LibFechas8.getFechaFull(animal.fechaAlojamiento), animal.codigoCentro, animal.codigoCentro);
+		
+		this.imagen = imagen;
+		
+	}
+	
+	public void esAdoptado(int codPersona) {
+		
+		codigoPersona = codPersona;
 		estaAdoptado = true;
 		fechaAdopcion = LocalDate.now();
+	}
+	
+	public void esAdoptado(Persona persona) {
+
+		esAdoptado(persona.getCodigo());
 	}
 	
 	@Override
@@ -57,7 +93,7 @@ public class Animal implements Comparable<Animal>{
 	@Override
 	public int compareTo(Animal animal) {
 		
-		return this.codigo - animal.codigo;	//orden
+		return this.codigo - animal.codigo;	//orden 
 	}
 
 	@Override
@@ -78,7 +114,7 @@ public class Animal implements Comparable<Animal>{
 		return tipo + " " + raza;
 	}
 	
-	public int getCodChip() {
+	public int getCodigo() {
 		return codigo;
 	}
 
@@ -104,6 +140,22 @@ public class Animal implements Comparable<Animal>{
 	
 	public LocalDate getFechaAlojamiento() {
 		return fechaAlojamiento;
+	}
+
+	public int getCodigoPersona() {
+		return codigoPersona;
+	}
+
+	public int getCodigoCentro() {
+		return codigoCentro;
+	}
+
+	public LocalDate getFechaAdopcion() {
+		return fechaAdopcion;
+	}
+	
+	public ImageIcon getImagen() {
+		return imagen;
 	}
 	
 }

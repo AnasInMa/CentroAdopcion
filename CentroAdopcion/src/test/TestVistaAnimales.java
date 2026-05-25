@@ -29,7 +29,7 @@ public class TestVistaAnimales {
 				new Animal(7, "Coco", "Loro", "Yaco", "es un loro muy inteligente que imita sonidos...", (byte) 1,
 						"05/11/2025"),
 				new Animal(8, "Bella", "Conejo", "Angora", "es una coneja tranquila con un pelaje muy suave...",
-						(byte) 0, "10/01/2026") };
+						(byte) 0, "10/01/2026")};
 
 		VistaAnimales vAnimales = new VistaAnimales(new CentroAdopcion(0, "Arca del Torcal",
 				"Avenida José María Fernández", 2134, 29200, (short) 20, new TreeSet<Animal>(Arrays.asList(animales))));

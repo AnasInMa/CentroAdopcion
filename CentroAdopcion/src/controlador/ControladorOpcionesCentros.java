@@ -3,7 +3,7 @@ package controlador;
 import java.awt.event.*;
 
 import modelo.CentroAdopcion;
-import test.FicheroConCentros;
+import modelo.FicheroConCentros;
 import vista.*;
 
 public class ControladorOpcionesCentros implements MouseListener, ActionListener{
