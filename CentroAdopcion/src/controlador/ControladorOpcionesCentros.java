@@ -47,7 +47,7 @@ public class ControladorOpcionesCentros implements MouseListener, ActionListener
 			vista.muestraPanelCentro();
 			*/
 			
-			if(centroAdopcion1 == null) {	//
+			if(centroAdopcion1 == null) {
 				
 				centroAdopcion1 = new CentroAdopcion(FicheroConCentros.buscaCentro(vOpcionesCentros.getNombreCentro1()));
 				

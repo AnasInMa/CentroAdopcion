@@ -26,7 +26,6 @@ public class LibFechas8 {
 	 */
 	public static LocalDate convierteStringToLocalDate(String fechaString) {
 		
-		
 		try {
 		   String [] arrayFecha = fechaString.split("/"); // Extraigo el día, mes y año
 			
@@ -58,7 +57,6 @@ public class LibFechas8 {
 			return null;
 		}
 	}
-	
 	
 	/**
 	 * M�todo que comprueba si una fecha es correcta, consideraremos

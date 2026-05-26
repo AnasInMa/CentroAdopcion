@@ -12,8 +12,8 @@ public class Animal implements Comparable<Animal>, Serializable{
 
 	private static final long serialVersionUID = -6601920334084112132L;
 	
-	private int codigo,	//el codigo es el id de la tabla
-				codigoPersona, codigoCentro;
+	private int idAnimal,	//el codigo es el id de la tabla
+				idPersona, idCentro;
 	private String nombre, tipo, raza, descripcion;
 	private byte edad;
 	private boolean estaAdoptado;
@@ -23,11 +23,11 @@ public class Animal implements Comparable<Animal>, Serializable{
 
 	public Animal(int cod, String nombre, String tipo, String raza, String descripcion, byte edad, String fechaAlojamiento) throws Exception {
 		
-		this.codigo = cod;
+		this.idAnimal = cod;
 		this.nombre = (nombre.isEmpty() || nombre == null)? "Sin Nombre" : nombre;
 		this.tipo = tipo;
 		this.raza = raza;
-		this.descripcion = (nombre == null || nombre == ""? "Este " + raza.toLowerCase() + " " : nombre + " ") + descripcion;
+		this.descripcion = descripcion;
 		this.edad = edad;
 		
 		this.estaAdoptado = false;
@@ -43,19 +43,19 @@ public class Animal implements Comparable<Animal>, Serializable{
 		
 		this(cod, nombre, tipo, raza, descripcion, edad, fechaAlojamiento);
 		
-		this.codigoCentro = codCentro;
+		this.idCentro = codCentro;
 	}
 	
 	public Animal(int cod, String nombre, String tipo, String raza, String descripcion, byte edad, String fechaAlojamiento, int codCentro, int codPersona) throws Exception {
 		
 		this(cod, nombre, tipo, raza, descripcion, edad, fechaAlojamiento, codCentro);
 		
-		this.codigoPersona = codPersona;
+		this.idPersona = codPersona;
 	}
 	
 	public Animal(Animal animal, ImageIcon imagen) throws Exception {
 		
-		this(animal.codigo, animal.nombre, animal.tipo, animal.raza, animal.descripcion, animal.edad, LibFechas8.getFechaFull(animal.fechaAlojamiento), animal.codigoCentro, animal.codigoCentro);
+		this(animal.idAnimal, animal.nombre, animal.tipo, animal.raza, animal.descripcion, animal.edad, LibFechas8.getFechaFull(animal.fechaAlojamiento), animal.idCentro, animal.idPersona);
 		
 		this.imagen = imagen;
 		
@@ -63,19 +63,19 @@ public class Animal implements Comparable<Animal>, Serializable{
 	
 	public void esAdoptado(int codPersona) {
 		
-		codigoPersona = codPersona;
+		idPersona = codPersona;
 		estaAdoptado = true;
 		fechaAdopcion = LocalDate.now();
 	}
 	
 	public void esAdoptado(Persona persona) {
 
-		esAdoptado(persona.getCodigo());
+		esAdoptado(persona.getIDPersona());
 	}
 	
 	@Override
 	public int hashCode() {
-		return Objects.hash(codigo);
+		return Objects.hash(idAnimal);
 	}
 
 	@Override
@@ -87,13 +87,13 @@ public class Animal implements Comparable<Animal>, Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Animal other = (Animal) obj;
-		return codigo == other.codigo;
+		return idAnimal == other.idAnimal;
 	}
 	
 	@Override
 	public int compareTo(Animal animal) {
 		
-		return this.codigo - animal.codigo;	//orden 
+		return this.idAnimal - animal.idAnimal;	//orden 
 	}
 
 	@Override
@@ -106,7 +106,7 @@ public class Animal implements Comparable<Animal>, Serializable{
 	
 	public String toStringSimple() {
 		
-		return "(" + codigo + ") " + toStringSinCodigo() + " de " + edad + (edad == 1? " año" : " años");
+		return "(" + idAnimal + ") " + toStringSinCodigo() + " de " + edad + (edad == 1? " año" : " años");
 	}
 	
 	public String toStringSinCodigo() {
@@ -114,8 +114,13 @@ public class Animal implements Comparable<Animal>, Serializable{
 		return tipo + " " + raza;
 	}
 	
-	public int getCodigo() {
-		return codigo;
+	public String toStringDescripcion() {
+		
+		 return ((nombre == null || nombre.isEmpty())? "Este " + raza.toLowerCase() + " " : nombre + " ") + this.descripcion;
+	}
+	
+	public int getIDAnimal() {
+		return idAnimal;
 	}
 
 	public String getNombre() {
@@ -142,12 +147,12 @@ public class Animal implements Comparable<Animal>, Serializable{
 		return fechaAlojamiento;
 	}
 
-	public int getCodigoPersona() {
-		return codigoPersona;
+	public int getIDPersona() {
+		return idPersona;
 	}
 
-	public int getCodigoCentro() {
-		return codigoCentro;
+	public int getIDCentro() {
+		return idCentro;
 	}
 
 	public LocalDate getFechaAdopcion() {

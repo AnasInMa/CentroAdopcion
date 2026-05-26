@@ -9,12 +9,12 @@ public class Persona implements Serializable{
 	
 	private SortedSet<Animal> animalesAdoptados;	//Va a ser un SortedSet, ya que se ordenaran por la fecha de adopcion y ademas no habran repetidos
 	private String nombre, nif, primerApellido, segundoApellido;
-	private int codigo; //TODO
+	private int idPersona; //TODO
 	private byte edad;
 	
 	public Persona(int cod, TreeSet<Animal> animales, String nombre, String nif, String apellido1, String apellido2, byte edad) {
 		
-		this.codigo = cod;
+		this.idPersona = cod;
 		animalesAdoptados = animales;
 		this.nombre = nombre;
 		this.nif = nif;
@@ -97,15 +97,7 @@ public class Persona implements Serializable{
 	public String getNif() {
 		return nif;
 	}
-
-	public String getPrimer_apellido() {
-		return primerApellido;
-	}
-
-	public String getSegundo_apellido() {
-		return segundoApellido;
-	}
-
+	
 	public byte getEdad() {
 		return edad;
 	}
@@ -118,7 +110,7 @@ public class Persona implements Serializable{
 		return segundoApellido;
 	}
 
-	public int getCodigo() {
-		return codigo;
+	public int getIDPersona() {
+		return idPersona;
 	}
 }

@@ -1,33 +1,26 @@
 package controlador;
 
 import java.awt.event.*;
-import java.sql.SQLException;
 
-import modelo.DAOAnimales;
 import vista.Vista;
+import vista.VistaAnimales;
 import vista.VistaCentroAdopcion;
 
 public class ControladorCentroAdopcion implements MouseListener, ActionListener {
 
 	private Vista vista;
 	private VistaCentroAdopcion vCentroAdopcion;
-	private DAOAnimales dao;
+	private VistaAnimales vAnimales;
 
 	public ControladorCentroAdopcion(Vista v) {
 
 		vista = v;
 
 		vCentroAdopcion = vista.getvCentroAdopcion();
+		
+		vAnimales = vCentroAdopcion.getVistaAnimales();
+		
 		vCentroAdopcion.control(this);
-
-		try {
-
-			dao = new DAOAnimales();
-
-		} catch (ClassNotFoundException | SQLException e) {
-
-			e.printStackTrace();
-		}
 	}
 
 	@Override
@@ -43,50 +36,58 @@ public class ControladorCentroAdopcion implements MouseListener, ActionListener 
 
 		} else if (e.getSource() == vCentroAdopcion.getbPrimero()) {
 
-			try {
+			//System.out.println("primero");
+			
+			/*try {
 
 				dao.getCuatroPrimeros();
 
 			} catch (Exception e1) {
 
 				e1.printStackTrace();
-			}
+			}*/
 			
-			System.out.println("primero");
+			vAnimales.primeraFila();
 
 		} else if (e.getSource() == vCentroAdopcion.getbAnterior()) {
 
-			try {
+			/*try {
 
 				dao.getCuatroAnteriores();
 
 			} catch (Exception e1) {
 
 				e1.printStackTrace();
-			}
+			}*/
+			
+			vAnimales.anteriorFila();
 
 		} else if (e.getSource() == vCentroAdopcion.getbSiguiente()) {
 
-			try {
+			/*try {
 
 				dao.getCuatroSiguientes();
 
 			} catch (Exception e1) {
 
 				e1.printStackTrace();
-			}
+			}*/
+			
+			vAnimales.siguienteFila();
 
 		} else {
 
 			// System.out.println("boton ultimo");
-			try {
+			/*try {
 
 				dao.getCuatroUltimos();
 
 			} catch (Exception e1) {
 
 				e1.printStackTrace();
-			}
+			}*/
+			
+			vAnimales.ultimaFila();
 		}
 
 	}
@@ -99,6 +100,7 @@ public class ControladorCentroAdopcion implements MouseListener, ActionListener 
 			// System.out.println("atras");
 
 			vista.muestraPanelOpcionesCentros();
+			vAnimales.primeraFila();	//si no pusiese esto el contador no se resetearia, y entonces al salir del centro y el contador es 3 por ejemplo, al volver al entrar otra vez al mismo centro se muestra el primer panel de los animales, pero el contador sigue siendo 3, entonces si quisieras navegar por los botones de abajo no iria como se espera que fuese
 		}
 
 	}

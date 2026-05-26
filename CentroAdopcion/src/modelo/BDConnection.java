@@ -33,7 +33,7 @@ public class BDConnection {
 		if (instance == null) {
 			// Registrar la conexion / Levantar el JDBC (Opcional)
 			Class.forName(DRIVER_NAME);
-			System.out.println("Conexion registrada");
+			//System.out.println("Conexion registrada");
 			
 			// Establecer la conexión
 			Properties props = new Properties();

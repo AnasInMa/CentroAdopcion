@@ -21,7 +21,7 @@ public class ControladorOpciones implements ActionListener {
 		vOpciones.control(this);
 		
 		ventanaPadre = (JFrame) SwingUtilities.getWindowAncestor(vista);
-		estaSeleccionado = vOpciones.getCbPantallaCompleta().isSelected();
+		estaSeleccionado = VistaOpciones.getCbPantallaCompleta().isSelected();
 	}
 
 	@Override
@@ -31,7 +31,7 @@ public class ControladorOpciones implements ActionListener {
 
 			// System.out.println("guardar");
 
-			if (vOpciones.getCbPantallaCompleta().isSelected()) {
+			if (VistaOpciones.getCbPantallaCompleta().isSelected()) {
 
 				//System.out.println("activo");
 
@@ -48,11 +48,11 @@ public class ControladorOpciones implements ActionListener {
 				ventanaPadre.setExtendedState(JFrame.NORMAL);
 			}
 			
-			estaSeleccionado = vOpciones.getCbPantallaCompleta().isSelected();
+			estaSeleccionado = VistaOpciones.getCbPantallaCompleta().isSelected();
 			
 		} else {
 			
-			vOpciones.getCbPantallaCompleta().setSelected(estaSeleccionado);
+			VistaOpciones.getCbPantallaCompleta().setSelected(estaSeleccionado);
 		}
 
 		vista.muestraPrimerPanel();

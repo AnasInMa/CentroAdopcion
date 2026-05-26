@@ -18,6 +18,9 @@ public class VistaCentroAdopcion extends JPanel {
 	
 	private static LineBorder bordeLinea;
 	private static EmptyBorder bordeVacio;
+	
+	private JPanel panelAnimales;
+	private VistaAnimales vAnimales;
 
 	static {
 
@@ -138,22 +141,20 @@ public class VistaCentroAdopcion extends JPanel {
 
 	private JPanel panelAnimales() {
 
-		JPanel panelPrincipal = new JPanel();
-		panelPrincipal.setBorder(bordeLinea);
-		panelPrincipal.setBackground(Vista.MARRON_CLARO3);
+		panelAnimales = new JPanel();
+		panelAnimales.setBorder(bordeLinea);
+		panelAnimales.setBackground(Vista.MARRON_CLARO3);
 		
-		panelPrincipal.add(new VistaAnimales(this.centroAdopcion));
+		panelAnimales.add(this.vAnimales = new VistaAnimales(this.centroAdopcion, this));
 
 //		JPanel panelSecundario = new JPanel();
 //		panelSecundario.setBorder(bordeVacio);
 //		panelSecundario.setBackground(Vista.MARRON_CLARO4);
 		//panelSecundario.add(panelesAnimalesCuatro(/*panelSecundario*/));
 
-		
-		
 		//panelPrincipal.add(panelSecundario);
 
-		return panelPrincipal;
+		return panelAnimales;
 	}
 	
 	/**
@@ -248,6 +249,15 @@ public class VistaCentroAdopcion extends JPanel {
 
 	public JButton getbAdoptar() {
 		return bAdoptar;
+	}
+	
+	public VistaAnimales getVistaAnimales() {
+		
+		return vAnimales;
+	}
+
+	public JPanel getPanelAnimales() {
+		return panelAnimales;
 	}
 	
 	/*

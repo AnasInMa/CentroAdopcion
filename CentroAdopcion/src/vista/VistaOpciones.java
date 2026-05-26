@@ -11,7 +11,7 @@ public class VistaOpciones extends JPanel{
 
 	private static final long serialVersionUID = 4344532032686248546L;
 	
-	private JCheckBox cbPantallaCompleta;
+	private static JCheckBox cbPantallaCompleta;
 	private JButton bGuardarCambios, bCancelarCambios;
 	
 	private static final ImageIcon IMG_EQUIS, IMG_SINMARCAR;
@@ -45,9 +45,9 @@ public class VistaOpciones extends JPanel{
 	
 	private void iniciaYModificaComponentes() {
 		
-		this.cbPantallaCompleta = new JCheckBox(" Pantalla Completa");
-		this.cbPantallaCompleta.setIcon(IMG_SINMARCAR);			//la imagen que tendra por defecto (cuando no esta seleccionado)
-		this.cbPantallaCompleta.setSelectedIcon(IMG_EQUIS);		//la imagen que tendra cuando este seleccionado
+		cbPantallaCompleta = new JCheckBox(" Pantalla Completa");
+		cbPantallaCompleta.setIcon(IMG_SINMARCAR);			//la imagen que tendra por defecto (cuando no esta seleccionado)
+		cbPantallaCompleta.setSelectedIcon(IMG_EQUIS);		//la imagen que tendra cuando este seleccionado
 		
 		this.bGuardarCambios = new JButton("Guardar");
 		this.bCancelarCambios = new JButton("Cancelar");
@@ -96,7 +96,7 @@ public class VistaOpciones extends JPanel{
 		return panel;
 	}
 	
-	public JCheckBox getCbPantallaCompleta() {
+	public static JCheckBox getCbPantallaCompleta() {
 		return cbPantallaCompleta;
 	}
 

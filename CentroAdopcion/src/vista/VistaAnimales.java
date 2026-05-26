@@ -9,10 +9,13 @@ import javax.swing.border.LineBorder;
 
 import modelo.Animal;
 import modelo.CentroAdopcion;
+import modelo.DAOAnimales;
 
 public class VistaAnimales extends JPanel {
 	
 	private static final long serialVersionUID = 3726098725460425172L;
+	
+	private DAOAnimales dao;
 	
 	private CentroAdopcion centroAdopcion;
 	private JPanel[][] matrizPaneles;
@@ -21,7 +24,9 @@ public class VistaAnimales extends JPanel {
 	private static final float COLUMNAS;
 	private CardLayout cartas;
 	private int filas;
+	private ButtonGroup grupoRB;
 	private JRadioButton rbAnimal1, rbAnimal2, rbAnimal3, rbAnimal4; 	//como siempre van a haber 4 paneles de animales visibles, entonces puedo acceder al animal q se quiera adoptar siempre que este el animal visible
+	private Dimension tamañoPanelAnimal;
 	
 	static {
 		
@@ -37,7 +42,40 @@ public class VistaAnimales extends JPanel {
 		
 		centroAdopcion = centro;
 		
-		//matrizPaneles = matrizPanelesAnimales();
+		//centroAdopcion.alojaAnimales(null);
+		
+		try {
+			
+			this.dao = new DAOAnimales();
+			
+			centroAdopcion.alojaAnimales(dao.getAnimalesCentro(centroAdopcion));
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+	}
+	
+	public VistaAnimales(CentroAdopcion centro, VistaCentroAdopcion v) {
+		
+		this(centro);
+		v.getDatosCentro().setText(" " + centroAdopcion.toStringSinNombre() + " ");
+		
+		int ancho, alto;
+		
+		if (VistaOpciones.getCbPantallaCompleta().isSelected()) {
+
+			ancho = (int) (v.getPanelAnimales().getPreferredSize().getWidth() * 17.5f);
+			alto = (int) (v.getPanelAnimales().getPreferredSize().getHeight() * 30);
+
+		} else {
+			
+			ancho = (int) (v.getPanelAnimales().getPreferredSize().getWidth() * 12);
+			alto = (int) (v.getPanelAnimales().getPreferredSize().getHeight() * 22);
+		}
+		
+		tamañoPanelAnimal = new Dimension(ancho, alto);
+		
 		if(centro.getAnimalesAlojados().size() > 0) matrizPanelesAnimales();
 	}
 	
@@ -49,7 +87,7 @@ public class VistaAnimales extends JPanel {
 		this.rbAnimal3 = new JRadioButton("Elegir animal");
 		this.rbAnimal4 = new JRadioButton("Elegir animal");
 		
-		ButtonGroup grupoRB = new ButtonGroup();
+		grupoRB = new ButtonGroup();
 		
 		JRadioButton[] rBotones = {rbAnimal1, rbAnimal2, rbAnimal3, rbAnimal4};
 		
@@ -83,8 +121,6 @@ public class VistaAnimales extends JPanel {
 		JScrollPane spDescripcion;
 		JTextArea taDescripcion;
 		
-		Dimension tamanio = new Dimension(160, 300);
-		
 		JLabel lNombre;
 		JLabel lDatos;
 		
@@ -102,9 +138,9 @@ public class VistaAnimales extends JPanel {
 				panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 				
 				//Para que ocupan todos los paneles lo mismo
-				panel.setPreferredSize(tamanio);
-				panel.setMinimumSize(tamanio);
-				panel.setMaximumSize(tamanio);
+				panel.setPreferredSize(tamañoPanelAnimal);
+				panel.setMinimumSize(tamañoPanelAnimal);
+				panel.setMaximumSize(tamañoPanelAnimal);
 				
 				lNombre = new JLabel(animal.getNombre());
 				lNombre.setAlignmentX(JLabel.LEFT_ALIGNMENT);
@@ -117,8 +153,8 @@ public class VistaAnimales extends JPanel {
 				//aqui va a ir la imagen
 				panel.add(lDatos);
 				panel.add(new Separator());
-				
-				taDescripcion = new JTextArea(animal.getDescripcion());				
+
+				taDescripcion = new JTextArea(animal.toStringDescripcion());				
 				taDescripcion.setEditable(false);
 				taDescripcion.setFocusable(false);
 				taDescripcion.setBackground(Vista.MARRON_CLARO3);
@@ -145,6 +181,12 @@ public class VistaAnimales extends JPanel {
 		mueveRBotonesAlSiguientePanel(contFilas);
 	}
 	
+	public void primeraFila() {
+		
+		contFilas = 0;
+		muestraFilaPanelesAnimales();
+	}
+	
 	public void anteriorFila() {
 		
 		if(--contFilas < 0) contFilas = 0;
@@ -157,9 +199,15 @@ public class VistaAnimales extends JPanel {
 		muestraFilaPanelesAnimales();
 	}
 	
+	public void ultimaFila() {
+		
+		contFilas = filas - 1;
+		muestraFilaPanelesAnimales();
+	}
+	
 	private void muestraFilaPanelesAnimales() {
 		
-		System.out.println(contFilas);
+		//System.out.println(contFilas);
 		
 		mueveRBotonesAlSiguientePanel(contFilas);
 		
@@ -168,15 +216,21 @@ public class VistaAnimales extends JPanel {
 	
 	private void mueveRBotonesAlSiguientePanel(int fila) {
 		
-		rbAnimal1.setSelected(false);
-		rbAnimal2.setSelected(false);
-		rbAnimal3.setSelected(false);
-		rbAnimal4.setSelected(false);
+		//rbAnimal1.setSelected(false);
+		//rbAnimal2.setSelected(false);
+		//rbAnimal3.setSelected(false);
+		//rbAnimal4.setSelected(false);
+		
+		grupoRB.clearSelection();
 		
 		if(matrizPaneles[fila][0] != null) matrizPaneles[fila][0].add(rbAnimal1);
 		if(matrizPaneles[fila][1] != null) matrizPaneles[fila][1].add(rbAnimal2);
 		if(matrizPaneles[fila][2] != null) matrizPaneles[fila][2].add(rbAnimal3);
 		if(matrizPaneles[fila][3] != null) matrizPaneles[fila][3].add(rbAnimal4);
+	}
+
+	public DAOAnimales getDao() {
+		return dao;
 	}
 
 }

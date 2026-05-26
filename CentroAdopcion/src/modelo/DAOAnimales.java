@@ -23,7 +23,7 @@ public class DAOAnimales {
 	public void estableceConexion() throws ClassNotFoundException, SQLException {
 		
 		this.conexion = BDConnection.getConnection();
-		System.out.println("Conexión establecida");
+		//System.out.println("Conexión establecida");
 	}	
 	
 
@@ -50,7 +50,7 @@ public class DAOAnimales {
 	public Animal crearAnimal() throws SQLException, Exception {
 
 		return new Animal(
-					rsNavegar.getInt("codigo"),
+					rsNavegar.getInt("idAnimal"),
 					rsNavegar.getString("nombre"),
 					rsNavegar.getString("tipo"),
 					rsNavegar.getString("raza"),
@@ -58,7 +58,7 @@ public class DAOAnimales {
 					rsNavegar.getByte("edad"),
 					LibFechas8.transformaFecha(
 							rsNavegar.getDate("fechaAlojamiento").toLocalDate().toString()),
-					rsNavegar.getInt("codCentro"));
+					rsNavegar.getInt("idCentro"));
 	}
 
 	public Animal getPrimero() throws SQLException, Exception {
@@ -214,15 +214,15 @@ public class DAOAnimales {
 		PreparedStatement ps = 
 				conexion.prepareStatement("insert into centroadopcion.animales values (?,?,?,?,?,?,?,?,?)");
 
-		ps.setInt(1, animal.getCodigo());
+		ps.setInt(1, animal.getIDAnimal());
 		ps.setString(2, animal.getNombre());
 		ps.setString(3, animal.getTipo());
 		ps.setString(4, animal.getRaza());
 		ps.setString(5, animal.getDescripcion());
 		ps.setInt(6, animal.getEdad());
 		ps.setDate(7, Date.valueOf(animal.getFechaAlojamiento()));
-		ps.setInt(8, animal.getCodigoCentro());
-		ps.setInt(9, animal.getCodigoPersona());
+		ps.setInt(8, animal.getIDCentro());
+		ps.setInt(9, animal.getIDPersona());
 		
 		ps.executeUpdate();
 		ps.close();
@@ -244,9 +244,9 @@ public class DAOAnimales {
 		ps.setString(4, animal.getDescripcion());
 		ps.setInt(5, animal.getEdad());
 		ps.setDate(6, Date.valueOf(animal.getFechaAlojamiento()));
-		ps.setInt(7, animal.getCodigoCentro());
-		ps.setInt(8, animal.getCodigoPersona());
-		ps.setInt(9, animal.getCodigo());
+		ps.setInt(7, animal.getIDCentro());
+		ps.setInt(8, animal.getIDPersona());
+		ps.setInt(9, animal.getIDAnimal());
 		
 		ps.executeUpdate();
 		ps.close();
@@ -265,12 +265,31 @@ public class DAOAnimales {
 
 		this.crearConsulta();
 	}
+	
+	public SortedSet<Animal> getAnimalesCentro(CentroAdopcion centro) throws SQLException, Exception {
+		
+		rsNavegar.beforeFirst(); // Para posicionar la consulta al principio
+		
+		SortedSet<Animal> listaAnimales = new TreeSet<>();
 
-	public List<Animal> getAll() throws SQLException, Exception {
+		while (rsNavegar.next()) {
+			
+			if(rsNavegar.getInt("idCentro") == centro.getIDCentro()) {
+				
+				listaAnimales.add(crearAnimal());	
+			}
+		}
+
+		rsNavegar.beforeFirst();
+		
+		return listaAnimales;
+	}
+
+	public SortedSet<Animal> getAll() throws SQLException, Exception {
 	
 		rsNavegar.beforeFirst(); // Para posicionar la consulta al principio
 		
-		List<Animal> listaAnimales = new ArrayList<>();
+		SortedSet<Animal> listaAnimales = new TreeSet<>();
 
 		while (rsNavegar.next()) {
 			listaAnimales.add(crearAnimal());

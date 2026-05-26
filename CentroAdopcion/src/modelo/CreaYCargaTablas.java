@@ -19,7 +19,17 @@ public class CreaYCargaTablas {
 		creaConexion("jdbc:mysql://localhost:3306/" + NOMBREBD, "anas", "1234");
 	}
 	
-	private static void eliminaTablas() throws SQLException {
+	/**
+	 * Metodo que elimina las tres tablas de la base de datos,
+	 * (esta en comentarios en el metodo creaConexion) y 
+	 * se utiliza basicamente para no tener que estar yendo a
+	 * phpMyAdmin y estar todo el rato eliminadolas manualmente
+	 * 
+	 * Y lo he puesto protected para que no este el warning
+	 * 
+	 * @throws SQLException
+	 */
+	protected static void eliminaTablas() throws SQLException {
 		
 		PreparedStatement borrar;
 		
@@ -43,7 +53,7 @@ public class CreaYCargaTablas {
 			statement = conexion.createStatement();
 			//System.out.println("Conexion creada");			
 			
-			eliminaTablas();
+			//eliminaTablas();
 			
 			//crear las tablas
 			creaTablaCentros();
@@ -80,11 +90,11 @@ public class CreaYCargaTablas {
 		}
 	}
 	
-	//
+	//Tabla Centros
 	private static void creaTablaCentros() throws SQLException {
 		
 		String crearTablaCentro = "create table " + NOMBREBD.toUpperCase() + ".CENTROS " +
-										"(codigo INT NOT NULL PRIMARY KEY, " +
+										"(idCentro INT NOT NULL PRIMARY KEY, " +
 										"codigoCentro INT(4) NOT NULL," +
 										"nombre varchar(40) NOT NULL, " +
 										"direccion varchar(80) NOT NULL, " +
@@ -111,7 +121,7 @@ public class CreaYCargaTablas {
 				
 				try (PreparedStatement ps = conexion.prepareStatement(sql)) {
 
-					ps.setInt(1, centro.getCodigo());
+					ps.setInt(1, centro.getIDCentro());
 					ps.setInt(2, centro.getCodigoCentro());
 					ps.setString(3, centro.getNombre());
 					ps.setString(4, centro.getDireccion());
@@ -136,11 +146,11 @@ public class CreaYCargaTablas {
 		}
 	}
 	
-	//
+	//Tabla Personas
 	private static void creaTablaPersonas() throws SQLException {
 		
 		String crearTablaPersona = "create table " + NOMBREBD.toUpperCase() + ".PERSONAS " +
-										"(codigo INT NOT NULL PRIMARY KEY, " +
+										"(idPersona INT NOT NULL PRIMARY KEY, " +
 										"nif varchar(9) NOT NULL," +
 										"nombre varchar(40) NOT NULL, " +
 										"primerApellido varchar(60) NOT NULL, " +
@@ -167,7 +177,7 @@ public class CreaYCargaTablas {
 				
 				try (PreparedStatement ps = conexion.prepareStatement(sql)) {
 
-					ps.setInt(1, persona.getCodigo());
+					ps.setInt(1, persona.getIDPersona());
 					ps.setString(2, persona.getNombre());
 					ps.setString(3, persona.getNif());
 					ps.setString(4, persona.getPrimerApellido());
@@ -192,13 +202,13 @@ public class CreaYCargaTablas {
 		}
 	}
 	
-	//
+	//Tabla Animales
 	private static void creaTablaAnimales() throws SQLException {
 		//int cod, String nombre, String tipo, String raza, String descripcion, byte edad, String fechaAlojamiento
 		String crearTablaAnimal = "create table " + NOMBREBD.toUpperCase() + ".ANIMALES " +
-										"(codigo INT NOT NULL PRIMARY KEY, " +
-										"codCentro INT NOT NULL, " +
-										"codPersona INT, " +
+										"(idAnimal INT NOT NULL PRIMARY KEY, " +
+										"idCentro INT NOT NULL, " +
+										"idPersona INT, " +
 										"nombre varchar(40) NOT NULL, " +
 										"tipo varchar(60) NOT NULL, " +
 										"raza varchar(60) NOT NULL, "+
@@ -206,8 +216,8 @@ public class CreaYCargaTablas {
 										"edad INT NOT NULL, " +
 										"fechaAlojamiento DATE NOT NULL, " +
 										"fechaAdopcion DATE, " +
-										"FOREIGN KEY (codCentro) REFERENCES CENTROS(codigo), " +
-										"FOREIGN KEY (codPersona) REFERENCES PERSONAS(codigo))";
+										"FOREIGN KEY (idCentro) REFERENCES CENTROS(idCentro), " +
+										"FOREIGN KEY (idPersona) REFERENCES PERSONAS(idPersona))";
 
 		statement.executeUpdate(crearTablaAnimal);
 		System.out.println("La tabla ANIMALES se ha creado correctamente");
@@ -229,9 +239,18 @@ public class CreaYCargaTablas {
 				
 				try (PreparedStatement ps = conexion.prepareStatement(sql)) {
 
-					ps.setInt(1, animal.getCodigo());
-					ps.setInt(2, animal.getCodigoCentro());
-					ps.setInt(3, animal.getCodigoPersona());
+					ps.setInt(1, animal.getIDAnimal());
+					ps.setInt(2, animal.getIDCentro());
+					
+					if(animal.getIDPersona() == 0) {
+						
+						ps.setNull(3, Types.INTEGER);
+						
+					} else {
+						
+						ps.setInt(3, animal.getIDPersona());
+					}
+					
 					ps.setString(4, animal.getNombre());
 					ps.setString(5, animal.getTipo());
 					ps.setString(6, animal.getRaza());

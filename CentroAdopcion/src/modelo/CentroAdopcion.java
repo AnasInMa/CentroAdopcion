@@ -8,13 +8,13 @@ public class CentroAdopcion implements Serializable{
 	private static final long serialVersionUID = 6572561929713311485L;
 	
 	private String nombre, direccion;
-	private int codigo, codigoPostal, codigoCentro;
+	private int idCentro, codigoPostal, codigoCentro;
 	private short capacidadMaxima;
 	private SortedSet<Animal> animalesAlojados;
 	
 	public CentroAdopcion(int cod, String nombre, String direccion, int codigoCentro, int codPostal, short capacidadMaxima, TreeSet<Animal> animalesAlojados) {
 
-		this.codigo = cod;
+		this.idCentro = cod;
 		this.nombre = nombre;
 		this.direccion = direccion;
 		this.codigoCentro = codigoCentro;
@@ -30,7 +30,7 @@ public class CentroAdopcion implements Serializable{
 	
 	public CentroAdopcion(CentroAdopcion centro) {
 		
-		this(centro.getCodigo(), centro.getNombre(), centro.getDireccion(), centro.getCodigoCentro(), centro.getCodigoPostal(), centro.capacidadMaxima, (TreeSet<Animal>) centro.animalesAlojados);
+		this(centro.getIDCentro(), centro.getNombre(), centro.getDireccion(), centro.getCodigoCentro(), centro.getCodigoPostal(), centro.capacidadMaxima, (TreeSet<Animal>) centro.animalesAlojados);
 	}
 	
 	public CentroAdopcion() {
@@ -51,10 +51,18 @@ public class CentroAdopcion implements Serializable{
 		return (animal == null)? false	//comprueba que el animal que se pasa exista, si no existe devuelve un nulo
 				: (this.animalesAlojados.size() < capacidadMaxima? this.animalesAlojados.add(animal) : false);	//si existe comprueba que se puede alojar el animal y lo aloja
 	}
+	
+	public void alojaAnimales(SortedSet<Animal> animales) {
+		
+		for(Animal animal : animales) {
+			
+			alojaAnimal(animal);
+		}
+	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(codigo, codigoCentro, nombre);
+		return Objects.hash(idCentro, codigoCentro, nombre);
 	}
 
 	@Override
@@ -67,7 +75,7 @@ public class CentroAdopcion implements Serializable{
 			return false;
 		CentroAdopcion other = (CentroAdopcion) obj;
 		//dos centros seran iguales si coinciden el codigo de la bd, el codigo del centro o el nombre
-		return codigo == other.codigo || codigoCentro == other.codigoCentro || Objects.equals(nombre, other.nombre);
+		return idCentro == other.idCentro || codigoCentro == other.codigoCentro || Objects.equals(nombre, other.nombre);
 	}
 
 	public String toStringSimple() {
@@ -115,8 +123,8 @@ public class CentroAdopcion implements Serializable{
 		return direccion;
 	}
 
-	public int getCodigo() {
-		return codigo;
+	public int getIDCentro() {
+		return idCentro;
 	}
 
 	public int getCodigoPostal() {
