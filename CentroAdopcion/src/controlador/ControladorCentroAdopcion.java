@@ -2,6 +2,11 @@ package controlador;
 
 import java.awt.event.*;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+
+import vista.DialogoAdoptar;
 import vista.Vista;
 import vista.VistaAnimales;
 import vista.VistaCentroAdopcion;
@@ -17,10 +22,9 @@ public class ControladorCentroAdopcion implements MouseListener, ActionListener 
 		vista = v;
 
 		vCentroAdopcion = vista.getvCentroAdopcion();
+		vCentroAdopcion.control(this);
 		
 		vAnimales = vCentroAdopcion.getVistaAnimales();
-		
-		vCentroAdopcion.control(this);
 	}
 
 	@Override
@@ -29,6 +33,14 @@ public class ControladorCentroAdopcion implements MouseListener, ActionListener 
 		if (e.getSource() == vCentroAdopcion.getbAdoptar()) {
 
 			// System.out.println("adoptar");
+			try {
+				
+				new DialogoAdoptar((JFrame) SwingUtilities.getWindowAncestor(vista), vAnimales.panelAnimalSeleccionado());
+				
+			} catch (NullPointerException error) {
+				
+				JOptionPane.showMessageDialog(vCentroAdopcion, "Debe de seleccionar un animal para poder adoptarlo" , "ERROR", JOptionPane.ERROR_MESSAGE);
+			}
 
 		} else if (e.getSource() == vCentroAdopcion.getbDarEnAdopcion()) {
 			

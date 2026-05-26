@@ -25,7 +25,7 @@ public class VistaAnimales extends JPanel {
 	private CardLayout cartas;
 	private int filas;
 	private ButtonGroup grupoRB;
-	private JRadioButton rbAnimal1, rbAnimal2, rbAnimal3, rbAnimal4; 	//como siempre van a haber 4 paneles de animales visibles, entonces puedo acceder al animal q se quiera adoptar siempre que este el animal visible
+	private JRadioButton rbAnimal1, rbAnimal2, rbAnimal3, rbAnimal4;	//el jradioButton que este presionado sera el animal que va a ser adoptado
 	private Dimension tamañoPanelAnimal;
 	
 	static {
@@ -103,8 +103,7 @@ public class VistaAnimales extends JPanel {
 	private void matrizPanelesAnimales() {
 		
 		filas = (int) Math.ceil(centroAdopcion.getAnimalesAlojados().size() / COLUMNAS);	// si tiene 6 animales habran 2 filas, si
-																							// hay 13 animales habran 4 filas, si
-																							// hay 3 animales solo habra 1 fila
+																				// hay 3 animales solo habra 1 fila
 		int columnas = (int) COLUMNAS;
 		
 		iniciaRBotones();
@@ -179,6 +178,32 @@ public class VistaAnimales extends JPanel {
 		}
 		
 		mueveRBotonesAlSiguientePanel(contFilas);
+	}
+
+	public JPanel panelAnimalSeleccionado() {
+
+		//int columna = -1;
+
+		if (this.rbAnimal1.isSelected()) {
+			
+			return this.matrizPaneles[contFilas][0];
+			
+		} else if (this.rbAnimal2.isSelected()) {
+			
+			return this.matrizPaneles[contFilas][1];
+		
+		} else if (this.rbAnimal3.isSelected()) {
+			
+			return this.matrizPaneles[contFilas][2];
+			
+		} else if (this.rbAnimal4.isSelected()) {
+			
+			return this.matrizPaneles[contFilas][3];
+			
+		} else
+			return null;
+
+		//return (columna == -1) ? null : this.matrizPaneles[contFilas][columna];
 	}
 	
 	public void primeraFila() {

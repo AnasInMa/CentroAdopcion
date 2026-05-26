@@ -41,12 +41,12 @@ public class Vista extends JPanel{
 		//Colores
 		MARRON_CLARO1 = new Color(249, 248, 246);
 		MARRON_CLARO2 = new Color(239, 233, 227);
-		MARRON_CLARO3 = new Color(217, 207, 199);
-		MARRON_CLARO4 = new Color(201, 181, 156);
+		MARRON_CLARO3 = new Color(214, 244, 237);
+		MARRON_CLARO4 = new Color(135, 186, 195);
 		
 		MARRON_OSCURO1 = new Color(243, 238, 234);
 		MARRON_OSCURO2 = new Color(235, 227, 213);
-		MARRON_OSCURO3 = new Color(176, 166, 149);
+		MARRON_OSCURO3 = new Color(135, 186, 195);
 		MARRON_OSCURO4 = new Color(75, 64, 56);
 		
 		//Fuentes

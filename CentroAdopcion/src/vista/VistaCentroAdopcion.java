@@ -16,16 +16,16 @@ public class VistaCentroAdopcion extends JPanel {
 	private JButton bPrimero, bAnterior, bSiguiente, bUltimo,
 					bDarEnAdopcion, /*bPedirCita,*/ bAdoptar;
 	
-	private static LineBorder bordeLinea;
-	private static EmptyBorder bordeVacio;
+	public final static LineBorder BORDELINEA;
+	public final static EmptyBorder BORDEVACIO;
 	
 	private JPanel panelAnimales;
 	private VistaAnimales vAnimales;
 
 	static {
 
-		bordeLinea = new LineBorder(Vista.MARRON_OSCURO3, 4);
-		bordeVacio = new EmptyBorder(10, 10, 10, 10);
+		BORDELINEA = new LineBorder(Vista.MARRON_OSCURO3, 4);
+		BORDEVACIO = new EmptyBorder(10, 10, 10, 10);
 		
 	}
 
@@ -55,7 +55,7 @@ public class VistaCentroAdopcion extends JPanel {
 	private void modificaPanelPrincipal() {
 
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		this.setBorder(bordeVacio);
+		this.setBorder(BORDEVACIO);
 		this.setBackground(Vista.MARRON_CLARO3);
 
 		iniciaComponentes();
@@ -122,7 +122,7 @@ public class VistaCentroAdopcion extends JPanel {
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		panel.setBackground(Vista.MARRON_CLARO3);
-		panel.setBorder(bordeLinea);
+		panel.setBorder(BORDELINEA);
 
 		JPanel panelTitulo = new JPanel(new BorderLayout());
 		//panelTitulo.setLayout(new BoxLayout(panelTitulo, BoxLayout.X_AXIS));
@@ -142,7 +142,7 @@ public class VistaCentroAdopcion extends JPanel {
 	private JPanel panelAnimales() {
 
 		panelAnimales = new JPanel();
-		panelAnimales.setBorder(bordeLinea);
+		panelAnimales.setBorder(BORDELINEA);
 		panelAnimales.setBackground(Vista.MARRON_CLARO3);
 		
 		panelAnimales.add(this.vAnimales = new VistaAnimales(this.centroAdopcion, this));
@@ -192,7 +192,7 @@ public class VistaCentroAdopcion extends JPanel {
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 		panel.setBackground(Vista.MARRON_CLARO3);
-		panel.setBorder(bordeLinea);
+		panel.setBorder(BORDELINEA);
 
 		panel.add(bPrimero);
 		panel.add(Box.createRigidArea(espacio));

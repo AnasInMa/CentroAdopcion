@@ -237,7 +237,6 @@ public class DAOAnimales {
 					+ "edad = ?, fechaAlojamiento = ?, codCentro = ?, codPersona = ?"
 					+ "WHERE codigo = ?");
 		
-		
 		ps.setString(1, animal.getNombre());
 		ps.setString(2, animal.getTipo());
 		ps.setString(3, animal.getRaza());
