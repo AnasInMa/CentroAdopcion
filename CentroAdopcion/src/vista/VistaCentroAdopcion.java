@@ -16,7 +16,7 @@ public class VistaCentroAdopcion extends JPanel {
 	private JButton bPrimero, bAnterior, bSiguiente, bUltimo,
 					bDarEnAdopcion, /*bPedirCita,*/ bAdoptar;
 	
-	public final static LineBorder BORDELINEA;
+	public static LineBorder BordeLinea;
 	public final static EmptyBorder BORDEVACIO;
 	
 	private JPanel panelAnimales;
@@ -24,9 +24,8 @@ public class VistaCentroAdopcion extends JPanel {
 
 	static {
 
-		BORDELINEA = new LineBorder(Vista.TEXTO_OSCURO, 4);
+		BordeLinea = new LineBorder(Vista.TEXTO_OSCURO, 4);
 		BORDEVACIO = new EmptyBorder(10, 10, 10, 10);
-		
 	}
 
 	public VistaCentroAdopcion(CentroAdopcion centro) {
@@ -54,6 +53,7 @@ public class VistaCentroAdopcion extends JPanel {
 
 	private void modificaPanelPrincipal() {
 
+		this.setPreferredSize(new Dimension(Vista.ANCHO_PANEL, Vista.ALTO_PANEL));
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.setBorder(BORDEVACIO);
 		this.setBackground(Vista.FONDO_PRINCIPAL);
@@ -122,7 +122,7 @@ public class VistaCentroAdopcion extends JPanel {
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		panel.setBackground(Vista.FONDO_DATOS);
-		panel.setBorder(BORDELINEA);
+		panel.setBorder(BordeLinea);
 
 		JPanel panelTitulo = new JPanel(new BorderLayout());
 		//panelTitulo.setLayout(new BoxLayout(panelTitulo, BoxLayout.X_AXIS));
@@ -142,7 +142,7 @@ public class VistaCentroAdopcion extends JPanel {
 	private JPanel panelAnimales() {
 
 		panelAnimales = new JPanel();
-		panelAnimales.setBorder(BORDELINEA);
+		panelAnimales.setBorder(BordeLinea);
 		panelAnimales.setBackground(Vista.FONDO_PRINCIPAL);
 		
 		panelAnimales.add(this.vAnimales = new VistaAnimales(this.centroAdopcion, this));
@@ -192,7 +192,7 @@ public class VistaCentroAdopcion extends JPanel {
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 		panel.setBackground(Vista.FONDO_PRINCIPAL);
-		panel.setBorder(BORDELINEA);
+		panel.setBorder(BordeLinea);
 
 		panel.add(bPrimero);
 		panel.add(Box.createRigidArea(espacio));

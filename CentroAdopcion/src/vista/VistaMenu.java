@@ -28,7 +28,7 @@ public class VistaMenu extends JPanel{
 		iniciaBotones();
 		
 		this.add(titulo);
-		this.add(Box.createRigidArea(new Dimension(0,80)));
+		this.add(Box.createRigidArea(new Dimension(0,60)));
 		this.decorarYAñadirBotones();
 	}
 	
@@ -68,6 +68,17 @@ public class VistaMenu extends JPanel{
 			this.add(Box.createRigidArea(new Dimension(0, Vista.ALTO_COMPONENTE)));
 			
 		}
+	}
+	
+	public void actualizarColores() {
+		
+		this.setBackground(Vista.FONDO_PRINCIPAL);
+		bComenzar.setBackground(Vista.FONDO_BOTON);
+		bComenzar.setForeground(Vista.TEXTO_CLARO);
+		bOpciones.setBackground(Vista.FONDO_BOTON);
+		bOpciones.setForeground(Vista.TEXTO_CLARO);
+		bSalir.setBackground(Vista.FONDO_BOTON);
+		bSalir.setForeground(Vista.TEXTO_CLARO);
 	}
 
 	public JButton getbComenzar() {

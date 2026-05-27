@@ -29,6 +29,7 @@ public class Vista extends JPanel{
 	
 	public static Color[] ColoresVisibles, ColoresMarron, ColoresVerde, ColoresGris;
 	
+	public static Font FuenteTexto, FuenteTextoPC;
 	public static final Font FUENTE_BOTONES;
 	
 	static {
@@ -48,10 +49,30 @@ public class Vista extends JPanel{
 		ANCHO_COMPONENTE = (int) (ANCHO_PANEL * multiplicadorAnchoComponente);
 		ALTO_COMPONENTE = (int) (ALTO_PANEL * multiplicadorAltoComponente);
 
+		/*
+		 * Fondo principal: new Color(245, 238, 216) 
+		 * Tarjetas: new Color(232, 213, 163)
+		 * Cabecera: new Color(139, 94, 60)
+		 * Botón Adoptar: new Color(196, 134, 78)
+		 * Texto: new Color(107, 79, 42)
+		 * 
+		 * Fondo principal: new Color(237, 242, 230)
+		 * Tarjetas: new Color(212, 230, 191)
+		 * Cabecera: new Color(74, 122, 58)
+		 * Botón Adoptar: new Color(125, 184, 90)
+		 * Texto: new Color(58, 92, 46)
+		 * 
+		 * Fondo principal: new Color(242, 239, 233)
+		 * Tarjetas: new Color(224, 221, 213)
+		 * Cabecera: new Color(90, 86, 80)
+		 * Botón Adoptar: new Color(196, 114, 74)
+		 * Texto: new Color(61, 58, 53)
+		 */
+		
 		//Marron
-		FONDO_DATOS_MARRON = new Color(249, 248, 246);
-		FONDO_ANIMALES_MARRON = new Color(239, 233, 227);
-		FONDO_PRINCIPAL_MARRON = Color.black;
+		FONDO_DATOS_MARRON = new Color(139, 94, 60);
+		FONDO_ANIMALES_MARRON = new Color(232, 213, 163);
+		FONDO_PRINCIPAL_MARRON = new Color(245, 238, 216);
 		FONDO_BOTON_MARRON = new Color(196, 134, 78);
 		
 		TEXTO_CLARO_MARRON = new Color(243, 238, 234);
@@ -61,13 +82,13 @@ public class Vista extends JPanel{
 								TEXTO_CLARO_MARRON, TEXTO_OSCURO_MARRON};
 		
 		//Verde
-		FONDO_DATOS_VERDE = new Color(249, 248, 246);
-		FONDO_ANIMALES_VERDE = new Color(239, 233, 227);
-		FONDO_PRINCIPAL_VERDE = Color.green;
-		FONDO_BOTON_VERDE = new Color(196, 134, 78);
+		FONDO_DATOS_VERDE = new Color(74, 122, 58);
+		FONDO_ANIMALES_VERDE = new Color(212, 230, 191);
+		FONDO_PRINCIPAL_VERDE = new Color(237, 242, 230);
+		FONDO_BOTON_VERDE = new Color(125, 184, 90);
 		
 		TEXTO_CLARO_VERDE = new Color(243, 238, 234);
-		TEXTO_OSCURO_VERDE = new Color(107, 79, 42);
+		TEXTO_OSCURO_VERDE = new Color(58, 92, 46);
 		
 		ColoresVerde = new Color[] {FONDO_DATOS_VERDE, FONDO_ANIMALES_VERDE, FONDO_PRINCIPAL_VERDE, FONDO_BOTON_VERDE,
 								TEXTO_CLARO_VERDE, TEXTO_OSCURO_VERDE};
@@ -85,7 +106,6 @@ public class Vista extends JPanel{
 								TEXTO_CLARO_GRIS, TEXTO_OSCURO_GRIS};
 		
 		//Colores
-		
 		ColoresVisibles = ColoresGris;
 		
 		FONDO_DATOS = ColoresVisibles[0];
@@ -97,6 +117,8 @@ public class Vista extends JPanel{
 		TEXTO_OSCURO = ColoresVisibles[5];
 		
 		//Fuentes
+		FuenteTexto = new Font(Font.SERIF, Font.BOLD, 25);
+		FuenteTextoPC = new Font(Font.SERIF, Font.BOLD, 35);
 		FUENTE_BOTONES = new Font(Font.SANS_SERIF, Font.BOLD, 25);
 	}
 	

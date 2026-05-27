@@ -1,13 +1,18 @@
 package vista;
 
 import java.awt.*;
+import java.awt.event.*;
 
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
 
-public class DialogoAdoptar extends JDialog{
+import controlador.ControladorDialogoAdoptar;
+
+public class DialogoAdoptar extends JDialog implements ActionListener{
 
 	private static final long serialVersionUID = 7518864593720141813L;
 
+	private JPanel panelAnimal;
 	private JTextField tfNombre, tfDni, tfApellido1, tfApellido2, tfEdad;
 	private JButton bConfirmar, bCancelar, bElegirPersona;
 	
@@ -21,7 +26,7 @@ public class DialogoAdoptar extends JDialog{
 		JPanel panelAnimalPersona = new JPanel(new GridLayout(1, 2, 10, 10));
 		panelAnimalPersona.setBorder(VistaCentroAdopcion.BORDEVACIO);
 		panelAnimalPersona.setBackground(Vista.FONDO_PRINCIPAL);
-		panelAnimalPersona.add(panelAnimal);
+		panelAnimalPersona.add(this.panelAnimal = panelAnimal);
 		panelAnimalPersona.add(panelPersona());
 		
 		panelPrincipal.add(panelAnimalPersona);
@@ -35,13 +40,15 @@ public class DialogoAdoptar extends JDialog{
 		this.setVisible(true);
 	}
 	
+	public void control (ControladorDialogoAdoptar c) {
+		
+		this.bConfirmar.addActionListener(c);
+		this.bCancelar.addActionListener(c);
+		this.bElegirPersona.addActionListener(c);
+	}
+	
 	private JPanel panelPersona() {
-		
-		JPanel panel = new JPanel();
-		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-		panel.setBorder(VistaCentroAdopcion.BORDELINEA);
-		panel.setBackground(Vista.FONDO_PRINCIPAL);
-		
+		/*
 		JPanel panelNombre = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		panelNombre.setBackground(Vista.FONDO_PRINCIPAL);
 		panelNombre.add(new JLabel("Nombre: "));
@@ -66,24 +73,73 @@ public class DialogoAdoptar extends JDialog{
 		panelEdad.setBackground(Vista.FONDO_PRINCIPAL);
 		panelEdad.add(new JLabel("Edad: "));
 		panelEdad.add(tfEdad = new JTextField(10));
-
-		panel.add(panelNombre);
-		panel.add(panelDni);
-		panel.add(panelApellido1);
-		panel.add(panelApellido2);
-		panel.add(panelEdad);
 		
-		panel.add(new JLabel(" "));
-		panel.add(new JLabel(" "));
-		panel.add(new JLabel(" "));
-		panel.add(new JLabel(" "));
-		panel.add(new JLabel(" "));
-		panel.add(new JLabel(" "));
-		panel.add(new JLabel(" "));
-		panel.add(new JLabel(" "));
-		panel.add(bElegirPersona = new JButton("Elegir Persona"));
+		modificaPaneles(new JPanel[] {panelNombre, panelDni, panelApellido1, panelApellido2, panelEdad});;
+		 */
+
+		JPanel panel = new JPanel();
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		panel.setBorder(VistaCentroAdopcion.BordeLinea);
+		panel.setBackground(Vista.FONDO_ANIMALES);
+		
+		
+//		panel.add(panelNombre);
+//		panel.add(panelDni);
+//		panel.add(panelApellido1);
+//		panel.add(panelApellido2);
+//		panel.add(panelEdad);
+//		panel.add(Box.createVerticalStrut(150));
+
+		tfNombre = new JTextField(10);
+		tfNombre.setBorder(new TitledBorder("Nombre"));
+		tfNombre.setBackground(Vista.FONDO_ANIMALES);
+		panel.add(tfNombre);
+		
+		tfDni = new JTextField(10);
+		tfDni.setBorder(new TitledBorder("DNI"));
+		tfDni.setBackground(Vista.FONDO_ANIMALES);
+		panel.add(tfDni);
+		
+		tfApellido1 = new JTextField(10);
+		tfApellido1.setBorder(new TitledBorder("Primer Apellido"));
+		tfApellido1.setBackground(Vista.FONDO_ANIMALES);
+		panel.add(tfApellido1);
+		
+		tfApellido2 = new JTextField(10);
+		tfApellido2.setBorder(new TitledBorder("Segundo Apellido"));
+		tfApellido2.setBackground(Vista.FONDO_ANIMALES);
+		panel.add(tfApellido2);
+		
+		tfEdad = new JTextField(10);
+		tfEdad.setBorder(new TitledBorder("Edad"));
+		tfEdad.setBackground(Vista.FONDO_ANIMALES);
+		panel.add(tfEdad);
+
+		panel.add(Box.createVerticalStrut(120));
+		
+		bElegirPersona = new JButton("Elegir Persona");
+		bElegirPersona.setAlignmentX(JButton.CENTER_ALIGNMENT);
+		
+		panel.add(bElegirPersona);
+		
+//		panel.add(new JLabel(" "));
+//		panel.add(new JLabel(" "));
+//		panel.add(new JLabel(" "));
+//		panel.add(new JLabel(" "));
+//		panel.add(new JLabel(" "));
+//		panel.add(new JLabel(" "));
+//		panel.add(new JLabel(" "));
+//		panel.add(new JLabel(" "));
 
 		return panel;
+	}
+	
+	private void modificaPaneles(JPanel[] paneles) {
+		
+		for(JPanel panel : paneles) {
+			
+			panel.setBackground(Vista.FONDO_ANIMALES);
+		}
 	}
 		
 	private JPanel panelBotones() {
@@ -108,8 +164,19 @@ public class DialogoAdoptar extends JDialog{
 		
 		for (JButton boton : botones) {
 			
+			boton.setForeground(Vista.TEXTO_CLARO);
 			boton.setBackground(Vista.FONDO_BOTON);
 		}
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
+		if(e.getSource() == bConfirmar) {
+			
+			System.out.println("confirmar");
+		}
+		
 	}
 
 	public JTextField getTfNombre() {

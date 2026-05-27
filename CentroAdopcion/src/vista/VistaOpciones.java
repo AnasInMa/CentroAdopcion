@@ -16,6 +16,7 @@ public class VistaOpciones extends JPanel{
 	private JLabel lColores;
 	private JComboBox<String> cmbColores;
 	private JButton bGuardarCambios, bCancelarCambios;
+	private JPanel panelPrincipal, panelColores, panelBotones;
 	
 	private static final ImageIcon IMG_EQUIS, IMG_SINMARCAR;
 	
@@ -74,13 +75,14 @@ public class VistaOpciones extends JPanel{
 			} else if(componente instanceof JLabel || componente instanceof JCheckBox) {
 
 				componente.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
-				componente.setForeground(Vista.TEXTO_OSCURO);
+				//componente.setForeground(Vista.TEXTO_OSCURO);
+				componente.setBackground(Vista.FONDO_PRINCIPAL);
 				componente.setAlignmentX(CENTER_ALIGNMENT);
 				
 			} else {
 				
-				cmbColores.setForeground(Vista.TEXTO_OSCURO);
-				cmbColores.setBackground(Vista.FONDO_ANIMALES);
+				//cmbColores.setForeground(Vista.TEXTO_OSCURO);
+				componente.setBackground(Vista.FONDO_ANIMALES);
 			}
 			
 			componente.setFocusable(false);
@@ -92,18 +94,20 @@ public class VistaOpciones extends JPanel{
 	
 	private JPanel panelPantallaCompleta() {
 		
-		JPanel panel = new JPanel();
-		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-		panel.setBackground(Vista.FONDO_PRINCIPAL);
+		panelPrincipal = new JPanel();
+		panelPrincipal.setLayout(new BoxLayout(panelPrincipal, BoxLayout.Y_AXIS));
+		panelPrincipal.setBackground(Vista.FONDO_PRINCIPAL);
 		
-		JPanel panelColores = new JPanel();
+		panelColores = new JPanel();
+		panelColores.setBackground(Vista.FONDO_PRINCIPAL);
 		panelColores.add(lColores); 
 		panelColores.add(cmbColores);
 		
-		panel.add(cbPantallaCompleta);
-		panel.add(panelColores);
+		panelPrincipal.add(cbPantallaCompleta);
+		panelPrincipal.add(Box.createVerticalGlue());
+		panelPrincipal.add(panelColores);
 		
-		return panel;
+		return panelPrincipal;
 	}
 	
 	public JPanel panelElegirColor() {
@@ -119,14 +123,34 @@ public class VistaOpciones extends JPanel{
 	
 	private JPanel panelBotones() {
 		
-		JPanel panel = new JPanel();
-		panel.setBackground(Vista.FONDO_PRINCIPAL);
+		panelBotones = new JPanel();
+		panelBotones.setBackground(Vista.FONDO_PRINCIPAL);
 		
-		panel.add(bGuardarCambios);
-		panel.add(Box.createRigidArea(new Dimension(100,0)));
-		panel.add(bCancelarCambios);
+		panelBotones.add(bGuardarCambios);
+		panelBotones.add(Box.createRigidArea(new Dimension(100,0)));
+		panelBotones.add(bCancelarCambios);
 		
-		return panel;
+		return panelBotones;
+	}
+	
+	public void actualizarColores() {
+		
+	    this.setBackground(Vista.FONDO_PRINCIPAL);
+	    bGuardarCambios.setBackground(Vista.FONDO_BOTON);
+	    bGuardarCambios.setForeground(Vista.TEXTO_CLARO);
+	    
+	    bCancelarCambios.setBackground(Vista.FONDO_BOTON);
+	    bCancelarCambios.setForeground(Vista.TEXTO_CLARO);
+	    
+	    //lColores.setForeground(Vista.TEXTO_OSCURO);
+	    //cmbColores.setForeground(Vista.TEXTO_OSCURO);
+	    cmbColores.setBackground(Vista.FONDO_ANIMALES);
+	    
+	    cbPantallaCompleta.setBackground(Vista.FONDO_PRINCIPAL);
+	    
+	    panelPrincipal.setBackground(Vista.FONDO_PRINCIPAL);
+	    panelColores.setBackground(Vista.FONDO_PRINCIPAL);
+	    panelBotones.setBackground(Vista.FONDO_PRINCIPAL);
 	}
 	
 	public static JCheckBox getCbPantallaCompleta() {

@@ -71,6 +71,15 @@ public class VistaSalir extends JPanel{
 		
 		return panel;
 	}
+	
+	public void actualizarColores() {
+		
+	    this.setBackground(Vista.FONDO_PRINCIPAL);
+	    bConfirmarSalida.setBackground(Vista.FONDO_BOTON);
+	    bConfirmarSalida.setForeground(Vista.TEXTO_CLARO);
+	    bCancelarSalida.setBackground(Vista.FONDO_BOTON);
+	    bCancelarSalida.setForeground(Vista.TEXTO_CLARO);
+	}
 
 	public JButton getbConfirmarSalida() {
 		return bConfirmarSalida;

@@ -11,20 +11,22 @@ public class VistaOpcionesCentros extends JPanel{
 
 	private static final long serialVersionUID = -6104990496472019211L;
 	
+	private JPanel panelCentro1, panelCentro2, panelCentro3, panelCentro4;
 	private String nombreCentro1, nombreCentro2, nombreCentro3, nombreCentro4;
 	private JButton bEntrarCentro1, bEntrarCentro2, bEntrarCentro3, bEntrarCentro4;
-	private JLabel menu;
+	private JLabel menu, texto;
 	
 	public VistaOpcionesCentros() {
 		
+		//this.setPreferredSize(new Dimension(Vista.ANCHO_PANEL, Vista.ALTO_PANEL));
 		this.setLayout(new BorderLayout());
 		this.setBackground(Vista.FONDO_PRINCIPAL);
 		
-		JLabel texto = new JLabel("⬇️ELIJA UNO DE ESTOS CENTROS PARA VER LOS ANIMALES DISPONIBLES⬇️");
-		texto.setFont(new Font(Font.SERIF, Font.BOLD, 25));
+		texto = new JLabel("⬇️ELIJA UNO DE ESTOS CENTROS PARA VER LOS ANIMALES DISPONIBLES⬇️");
+		texto.setFont(Vista.FuenteTexto);
 		texto.setForeground(Vista.TEXTO_OSCURO);
 		texto.setHorizontalAlignment(JLabel.CENTER);
-		texto.setBorder(new EmptyBorder(0, 0, 100, 0));
+		texto.setBorder(new EmptyBorder(50, 0, 50, 0));
 		
 		editarBotones();
 		
@@ -32,10 +34,10 @@ public class VistaOpcionesCentros extends JPanel{
 		panelPrincipal.setBorder(new EmptyBorder(0, 0, 200, 0));
 		panelPrincipal.setBackground(Vista.FONDO_PRINCIPAL);
 		
-		panelPrincipal.add(añadePanelesCentros(nombreCentro1 = "ARCA DEL TORCAL", bEntrarCentro1, new ImageIcon("./imgs/arcaDelTorcal.jpg")));
-		panelPrincipal.add(añadePanelesCentros(nombreCentro2 = "S.P.A.P.M.", bEntrarCentro2, new ImageIcon("./imgs/SPAPM.png")));
-		panelPrincipal.add(añadePanelesCentros(nombreCentro3 = "REFUGIO DEL BURRITO", bEntrarCentro3, new ImageIcon("./imgs/refugioDelBurrito.jpg")));
-		panelPrincipal.add(añadePanelesCentros(nombreCentro4 = "P.A.D.", bEntrarCentro4, new ImageIcon("./imgs/PAD.png")));
+		panelPrincipal.add(panelCentro1 = añadePanelesCentros(nombreCentro1 = "ARCA DEL TORCAL", bEntrarCentro1, new ImageIcon("./imgs/arcaDelTorcal.jpg")));
+		panelPrincipal.add(panelCentro2 = añadePanelesCentros(nombreCentro2 = "S.P.A.P.M.", bEntrarCentro2, new ImageIcon("./imgs/SPAPM.png")));
+		panelPrincipal.add(panelCentro3 = añadePanelesCentros(nombreCentro3 = "REFUGIO DEL BURRITO", bEntrarCentro3, new ImageIcon("./imgs/refugioDelBurrito.jpg")));
+		panelPrincipal.add(panelCentro4 = añadePanelesCentros(nombreCentro4 = "P.A.D.", bEntrarCentro4, new ImageIcon("./imgs/PAD.png")));
 		
 		menu = new JLabel(" ≡");
 		menu.setFocusable(true);
@@ -108,6 +110,32 @@ public class VistaOpcionesCentros extends JPanel{
 		panel.add(boton);
 		
 		return panel;
+	}
+	
+	public void actualizarColores() {
+		
+	    this.setBackground(Vista.FONDO_PRINCIPAL);
+	    
+	    bEntrarCentro1.setBackground(Vista.FONDO_BOTON);
+	    bEntrarCentro1.setForeground(Vista.TEXTO_CLARO);
+	    
+	    bEntrarCentro2.setBackground(Vista.FONDO_BOTON);
+	    bEntrarCentro2.setForeground(Vista.TEXTO_CLARO);
+	    
+	    bEntrarCentro3.setBackground(Vista.FONDO_BOTON);
+	    bEntrarCentro3.setForeground(Vista.TEXTO_CLARO);
+	    
+	    bEntrarCentro4.setBackground(Vista.FONDO_BOTON);
+	    bEntrarCentro4.setForeground(Vista.TEXTO_CLARO);
+	    
+	    panelCentro1.setBackground(Vista.FONDO_PRINCIPAL);
+	    panelCentro2.setBackground(Vista.FONDO_PRINCIPAL);
+	    panelCentro3.setBackground(Vista.FONDO_PRINCIPAL);
+	    panelCentro4.setBackground(Vista.FONDO_PRINCIPAL);
+	}
+
+	public JLabel getTexto() {
+		return texto;
 	}
 
 	public JButton getbEntrarCentro1() {

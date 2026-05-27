@@ -2,9 +2,7 @@ package controlador;
 
 import java.awt.event.*;
 
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 
 import vista.DialogoAdoptar;
 import vista.Vista;
@@ -33,9 +31,11 @@ public class ControladorCentroAdopcion implements MouseListener, ActionListener 
 		if (e.getSource() == vCentroAdopcion.getbAdoptar()) {
 
 			// System.out.println("adoptar");
+			
 			try {
 				
-				new DialogoAdoptar((JFrame) SwingUtilities.getWindowAncestor(vista), vAnimales.panelAnimalSeleccionado());
+				/*DialogoAdoptar d =*/ new DialogoAdoptar((JFrame) SwingUtilities.getWindowAncestor(vista), vAnimales.panelAnimalSeleccionado());
+				//new ControladorDialogoAdoptar(d);
 				
 			} catch (NullPointerException error) {
 				
@@ -101,7 +101,7 @@ public class ControladorCentroAdopcion implements MouseListener, ActionListener 
 			
 			vAnimales.ultimaFila();
 		}
-
+		
 	}
 
 	@Override

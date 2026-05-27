@@ -258,4 +258,8 @@ public class VistaAnimales extends JPanel {
 		return dao;
 	}
 
+	public ButtonGroup getGrupoRB() {
+		return grupoRB;
+	}
+
 }
