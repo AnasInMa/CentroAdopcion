@@ -30,10 +30,11 @@ public class ControladorCentroAdopcion implements MouseListener, ActionListener 
 
 		if (e.getSource() == vCentroAdopcion.getbAdoptar()) {
 
-			// System.out.println("adoptar");
+			//System.out.println("adoptar");
 			
 			try {
 				
+				//System.out.println("adoptar");
 				/*DialogoAdoptar d =*/ new DialogoAdoptar((JFrame) SwingUtilities.getWindowAncestor(vista), vAnimales.panelAnimalSeleccionado());
 				//new ControladorDialogoAdoptar(d);
 				

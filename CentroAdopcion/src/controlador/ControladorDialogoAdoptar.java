@@ -17,7 +17,7 @@ public class ControladorDialogoAdoptar implements ActionListener{
 		
 		dAdoptar = d;
 		
-		dAdoptar.control(this);
+		//dAdoptar.control(this);
 	}
 	
 	@Override

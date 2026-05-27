@@ -1,6 +1,7 @@
 package modelo;
 
 import java.awt.Color;
+import java.util.Arrays;
 
 import vista.Vista;
 
@@ -8,7 +9,9 @@ public enum EnumColores {
 
 	MARRON(Vista.ColoresMarron, "Marron"),
 	VERDE(Vista.ColoresVerde, "Verde"),
-	GRIS(Vista.ColoresGris, "Gris");
+	GRIS(Vista.ColoresGris, "Gris"),
+	AZUL(Vista.ColoresAzul, "Azul"),
+	MORADO(Vista.ColoresMorado, "Morado");
 	
 	private Color[] colores;
 	private String nombreColor;
@@ -30,7 +33,7 @@ public enum EnumColores {
 		Color[] coloresAux = new Color[Vista.ColoresVisibles.length];
 		boolean encontrado = false;
 		
-		for (int i = 0; i < coloresAux.length && !encontrado; i++) {
+		for (int i = 0; i < enumColores.length && !encontrado; i++) {
 			
 			if(enumColores[i].getNombreColor().equalsIgnoreCase(nombreColor)) {
 				
@@ -40,6 +43,21 @@ public enum EnumColores {
 		}
 		
 		return coloresAux;
+	}
+	
+	public static String buscaNombrePorColores(Color[] colores) {
+		
+		String nombreColor = null;
+		
+		for (EnumColores color : enumColores) {
+			
+			if(Arrays.equals(color.getColores(), colores)) {
+				
+				nombreColor = color.nombreColor;
+			}
+		}
+		
+		return nombreColor;
 	}
 	
 	public static String[] getNombreColores() {

@@ -38,6 +38,8 @@ public class VistaOpciones extends JPanel{
 		//this.add(panelElegirColor());
 		this.add(panelBotones());
 		this.add(Box.createVerticalGlue());
+		
+		
 	}
 	
 	public void control(ControladorOpciones c) {
@@ -56,7 +58,7 @@ public class VistaOpciones extends JPanel{
 		this.lColores = new JLabel("Color de la Vista: ");
 		
 		this.cmbColores = new JComboBox<String>(EnumColores.getNombreColores());
-		this.cmbColores.setSelectedItem("Gris");
+		this.cmbColores.setSelectedItem(EnumColores.buscaNombrePorColores(Vista.ColoresVisibles));
 		this.cmbColores.setFont(Vista.FUENTE_BOTONES);
 		
 		this.bGuardarCambios = new JButton("Guardar");

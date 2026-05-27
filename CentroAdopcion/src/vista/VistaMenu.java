@@ -12,6 +12,7 @@ public class VistaMenu extends JPanel{
 	private static final long serialVersionUID = 4112437023958187221L;
 
 	private JButton bComenzar, bOpciones, bSalir;
+	private JLabel titulo;
 
 	public VistaMenu() {
 		
@@ -20,7 +21,7 @@ public class VistaMenu extends JPanel{
 		this.setBorder(new EmptyBorder(60,10,10,10));
 		this.setBackground(Vista.FONDO_PRINCIPAL);
 		
-		JLabel titulo = new JLabel("CEADOP");
+		titulo = new JLabel("CEADOP");
 		titulo.setFont(new Font(Font.SERIF, Font.BOLD, 60));
 		titulo.setForeground(Vista.TEXTO_OSCURO);
 		titulo.setAlignmentX(CENTER_ALIGNMENT);
@@ -73,6 +74,7 @@ public class VistaMenu extends JPanel{
 	public void actualizarColores() {
 		
 		this.setBackground(Vista.FONDO_PRINCIPAL);
+		titulo.setForeground(Vista.TEXTO_OSCURO);
 		bComenzar.setBackground(Vista.FONDO_BOTON);
 		bComenzar.setForeground(Vista.TEXTO_CLARO);
 		bOpciones.setBackground(Vista.FONDO_BOTON);

@@ -49,7 +49,7 @@ public class ControladorOpcionesCentros implements MouseListener, ActionListener
 			
 			if(centroAdopcion1 == null) {
 				
-				centroAdopcion1 = new CentroAdopcion(FicheroConCentros.buscaCentro(vOpcionesCentros.getNombreCentro1()));
+				centroAdopcion1 = new CentroAdopcion(FicheroConCentros.buscaCentro(vOpcionesCentros.getNombreCentro1().getText()));
 				
 				//System.out.println("centro " + centroAdopcion1.getNombre() + " creado");
 			}
@@ -60,7 +60,7 @@ public class ControladorOpcionesCentros implements MouseListener, ActionListener
 			
 			if(centroAdopcion2 == null) {
 				
-				centroAdopcion2 = new CentroAdopcion(FicheroConCentros.buscaCentro(vOpcionesCentros.getNombreCentro2()));
+				centroAdopcion2 = new CentroAdopcion(FicheroConCentros.buscaCentro(vOpcionesCentros.getNombreCentro2().getText()));
 			}
 			
 			vista.añadeVistaCentroAdopcion(centroAdopcion2);
@@ -69,7 +69,7 @@ public class ControladorOpcionesCentros implements MouseListener, ActionListener
 			
 			if(centroAdopcion3 == null) {
 				
-				centroAdopcion3 = new CentroAdopcion(FicheroConCentros.buscaCentro(vOpcionesCentros.getNombreCentro3()));
+				centroAdopcion3 = new CentroAdopcion(FicheroConCentros.buscaCentro(vOpcionesCentros.getNombreCentro3().getText()));
 			}
 			
 			vista.añadeVistaCentroAdopcion(centroAdopcion3);
@@ -78,7 +78,7 @@ public class ControladorOpcionesCentros implements MouseListener, ActionListener
 			
 			if(centroAdopcion4 == null) {
 				
-				centroAdopcion4 = new CentroAdopcion(FicheroConCentros.buscaCentro(vOpcionesCentros.getNombreCentro4()));
+				centroAdopcion4 = new CentroAdopcion(FicheroConCentros.buscaCentro(vOpcionesCentros.getNombreCentro4().getText()));
 			}
 			
 			vista.añadeVistaCentroAdopcion(centroAdopcion4);

@@ -11,8 +11,9 @@ public class VistaOpcionesCentros extends JPanel{
 
 	private static final long serialVersionUID = -6104990496472019211L;
 	
-	private JPanel panelCentro1, panelCentro2, panelCentro3, panelCentro4;
-	private String nombreCentro1, nombreCentro2, nombreCentro3, nombreCentro4;
+	private JPanel panelCentro1, panelCentro2, panelCentro3, panelCentro4, panelPrincipal;
+	private JLabel nombreCentro1, nombreCentro2, nombreCentro3, nombreCentro4,
+					imgCentro1, imgCentro2, imgCentro3, imgCentro4;
 	private JButton bEntrarCentro1, bEntrarCentro2, bEntrarCentro3, bEntrarCentro4;
 	private JLabel menu, texto;
 	
@@ -30,14 +31,14 @@ public class VistaOpcionesCentros extends JPanel{
 		
 		editarBotones();
 		
-		JPanel panelPrincipal = new JPanel(new GridLayout(1, 4));
+		panelPrincipal = new JPanel(new GridLayout(1, 4));
 		panelPrincipal.setBorder(new EmptyBorder(0, 0, 200, 0));
 		panelPrincipal.setBackground(Vista.FONDO_PRINCIPAL);
 		
-		panelPrincipal.add(panelCentro1 = añadePanelesCentros(nombreCentro1 = "ARCA DEL TORCAL", bEntrarCentro1, new ImageIcon("./imgs/arcaDelTorcal.jpg")));
-		panelPrincipal.add(panelCentro2 = añadePanelesCentros(nombreCentro2 = "S.P.A.P.M.", bEntrarCentro2, new ImageIcon("./imgs/SPAPM.png")));
-		panelPrincipal.add(panelCentro3 = añadePanelesCentros(nombreCentro3 = "REFUGIO DEL BURRITO", bEntrarCentro3, new ImageIcon("./imgs/refugioDelBurrito.jpg")));
-		panelPrincipal.add(panelCentro4 = añadePanelesCentros(nombreCentro4 = "P.A.D.", bEntrarCentro4, new ImageIcon("./imgs/PAD.png")));
+		panelPrincipal.add(panelCentro1 = añadePanelesCentros(nombreCentro1 = new JLabel("ARCA DEL TORCAL"), bEntrarCentro1, new ImageIcon("./imgs/arcaDelTorcal.jpg"), imgCentro1 = new JLabel()));
+		panelPrincipal.add(panelCentro2 = añadePanelesCentros(nombreCentro2 = new JLabel("S.P.A.P.M."), bEntrarCentro2, new ImageIcon("./imgs/SPAPM.png"), imgCentro2 = new JLabel()));
+		panelPrincipal.add(panelCentro3 = añadePanelesCentros(nombreCentro3 = new JLabel("REFUGIO DEL BURRITO"), bEntrarCentro3, new ImageIcon("./imgs/refugioDelBurrito.jpg"), imgCentro3 = new JLabel()));
+		panelPrincipal.add(panelCentro4 = añadePanelesCentros(nombreCentro4 = new JLabel("P.A.D."), bEntrarCentro4, new ImageIcon("./imgs/PAD.png"), imgCentro4 = new JLabel()));
 		
 		menu = new JLabel(" ≡");
 		menu.setFocusable(true);
@@ -83,28 +84,26 @@ public class VistaOpcionesCentros extends JPanel{
 		}
 	}
 	
-	private JPanel añadePanelesCentros(String nombreCentro, JButton boton, ImageIcon imagen) {
+	private JPanel añadePanelesCentros(JLabel nombreCentro, JButton boton, ImageIcon imagen, JLabel img) {
 		
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		panel.setBackground(Vista.FONDO_PRINCIPAL);
 		
-		JLabel texto = new JLabel(nombreCentro);
-		texto.setForeground(Vista.TEXTO_OSCURO);
-		texto.setBorder(new EmptyBorder(0,0,10,0));
-		texto.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+		nombreCentro.setForeground(Vista.TEXTO_OSCURO);
+		nombreCentro.setBorder(new EmptyBorder(0, 0, 10, 0));
+		nombreCentro.setAlignmentX(JLabel.CENTER_ALIGNMENT);
 		
 		Image imagenNueva = imagen.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
 		
-		JLabel img = new JLabel();
 		img.setIcon(new ImageIcon(imagenNueva));
-		img.setBorder(new LineBorder(Vista.TEXTO_OSCURO, 3));
+		img.setBorder(VistaCentroAdopcion.BordeLinea);
 		img.setAlignmentX(JLabel.CENTER_ALIGNMENT);
 		
 		JLabel espacio = new JLabel();
 		espacio.setBorder(new EmptyBorder(10,0,0,0));
 		
-		panel.add(texto);
+		panel.add(nombreCentro);
 		panel.add(img);
 		panel.add(espacio);		//Preguntar si es una mala practica o esta bien
 		panel.add(boton);
@@ -113,25 +112,39 @@ public class VistaOpcionesCentros extends JPanel{
 	}
 	
 	public void actualizarColores() {
+
+		this.setBackground(Vista.FONDO_PRINCIPAL);
+
+		texto.setForeground(Vista.TEXTO_OSCURO);
+
+		bEntrarCentro1.setBackground(Vista.FONDO_BOTON);
+		bEntrarCentro1.setForeground(Vista.TEXTO_CLARO);
+
+		bEntrarCentro2.setBackground(Vista.FONDO_BOTON);
+		bEntrarCentro2.setForeground(Vista.TEXTO_CLARO);
+
+		bEntrarCentro3.setBackground(Vista.FONDO_BOTON);
+		bEntrarCentro3.setForeground(Vista.TEXTO_CLARO);
+
+		bEntrarCentro4.setBackground(Vista.FONDO_BOTON);
+		bEntrarCentro4.setForeground(Vista.TEXTO_CLARO);
+
+		panelPrincipal.setBackground(Vista.FONDO_PRINCIPAL);
+
+		nombreCentro1.setForeground(Vista.TEXTO_OSCURO);
+		nombreCentro2.setForeground(Vista.TEXTO_OSCURO);
+		nombreCentro3.setForeground(Vista.TEXTO_OSCURO);
+		nombreCentro4.setForeground(Vista.TEXTO_OSCURO);
 		
-	    this.setBackground(Vista.FONDO_PRINCIPAL);
-	    
-	    bEntrarCentro1.setBackground(Vista.FONDO_BOTON);
-	    bEntrarCentro1.setForeground(Vista.TEXTO_CLARO);
-	    
-	    bEntrarCentro2.setBackground(Vista.FONDO_BOTON);
-	    bEntrarCentro2.setForeground(Vista.TEXTO_CLARO);
-	    
-	    bEntrarCentro3.setBackground(Vista.FONDO_BOTON);
-	    bEntrarCentro3.setForeground(Vista.TEXTO_CLARO);
-	    
-	    bEntrarCentro4.setBackground(Vista.FONDO_BOTON);
-	    bEntrarCentro4.setForeground(Vista.TEXTO_CLARO);
-	    
-	    panelCentro1.setBackground(Vista.FONDO_PRINCIPAL);
-	    panelCentro2.setBackground(Vista.FONDO_PRINCIPAL);
-	    panelCentro3.setBackground(Vista.FONDO_PRINCIPAL);
-	    panelCentro4.setBackground(Vista.FONDO_PRINCIPAL);
+		imgCentro1.setBorder(VistaCentroAdopcion.BordeLinea);
+		imgCentro2.setBorder(VistaCentroAdopcion.BordeLinea);
+		imgCentro3.setBorder(VistaCentroAdopcion.BordeLinea);
+		imgCentro4.setBorder(VistaCentroAdopcion.BordeLinea);
+
+		panelCentro1.setBackground(Vista.FONDO_PRINCIPAL);
+		panelCentro2.setBackground(Vista.FONDO_PRINCIPAL);
+		panelCentro3.setBackground(Vista.FONDO_PRINCIPAL);
+		panelCentro4.setBackground(Vista.FONDO_PRINCIPAL);
 	}
 
 	public JLabel getTexto() {
@@ -158,19 +171,19 @@ public class VistaOpcionesCentros extends JPanel{
 		return menu;
 	}
 
-	public String getNombreCentro1() {
+	public JLabel getNombreCentro1() {
 		return nombreCentro1;
 	}
 
-	public String getNombreCentro2() {
+	public JLabel getNombreCentro2() {
 		return nombreCentro2;
 	}
 
-	public String getNombreCentro3() {
+	public JLabel getNombreCentro3() {
 		return nombreCentro3;
 	}
 
-	public String getNombreCentro4() {
+	public JLabel getNombreCentro4() {
 		return nombreCentro4;
 	}
 

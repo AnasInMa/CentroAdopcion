@@ -1,6 +1,7 @@
 package vista;
 
 import java.awt.*;
+import java.io.*;
 
 import javax.swing.*;
 
@@ -25,12 +26,18 @@ public class Vista extends JPanel{
 							FONDO_DATOS_VERDE, FONDO_ANIMALES_VERDE, FONDO_PRINCIPAL_VERDE, FONDO_BOTON_VERDE,
 								TEXTO_CLARO_VERDE, TEXTO_OSCURO_VERDE,
 							FONDO_DATOS_GRIS, FONDO_ANIMALES_GRIS, FONDO_PRINCIPAL_GRIS, FONDO_BOTON_GRIS,
-								TEXTO_CLARO_GRIS, TEXTO_OSCURO_GRIS;
+								TEXTO_CLARO_GRIS, TEXTO_OSCURO_GRIS,
+							FONDO_DATOS_AZUL, FONDO_ANIMALES_AZUL, FONDO_PRINCIPAL_AZUL, FONDO_BOTON_AZUL,
+		                        TEXTO_CLARO_AZUL, TEXTO_OSCURO_AZUL,
+	                        FONDO_DATOS_MORADO, FONDO_ANIMALES_MORADO, FONDO_PRINCIPAL_MORADO, FONDO_BOTON_MORADO,
+		                        TEXTO_CLARO_MORADO, TEXTO_OSCURO_MORADO;
 	
-	public static Color[] ColoresVisibles, ColoresMarron, ColoresVerde, ColoresGris;
+	public static Color[] ColoresVisibles, ColoresMarron, ColoresVerde, ColoresGris, ColoresAzul, ColoresMorado;
 	
-	public static Font FuenteTexto, FuenteTextoPC;
+	public static Font FuenteTexto, FuenteTextoPC;	//PC -> Pantalla Completa
 	public static final Font FUENTE_BOTONES;
+	
+	public static final String FicheroColor;
 	
 	static {
 		
@@ -105,8 +112,33 @@ public class Vista extends JPanel{
 		ColoresGris = new Color[] {FONDO_DATOS_GRIS, FONDO_ANIMALES_GRIS, FONDO_PRINCIPAL_GRIS, FONDO_BOTON_GRIS,
 								TEXTO_CLARO_GRIS, TEXTO_OSCURO_GRIS};
 		
+		//Azul
+		FONDO_DATOS_AZUL = new Color(58, 100, 160);
+		FONDO_ANIMALES_AZUL = new Color(191, 213, 237);
+		FONDO_PRINCIPAL_AZUL = new Color(230, 238, 248);
+		FONDO_BOTON_AZUL = new Color(90, 145, 210);
+
+		TEXTO_CLARO_AZUL = new Color(240, 244, 250);
+		TEXTO_OSCURO_AZUL = new Color(30, 65, 115);
+
+		ColoresAzul = new Color[] {FONDO_DATOS_AZUL, FONDO_ANIMALES_AZUL, FONDO_PRINCIPAL_AZUL, FONDO_BOTON_AZUL,
+		                        TEXTO_CLARO_AZUL, TEXTO_OSCURO_AZUL};
+
+		//Morado
+		FONDO_DATOS_MORADO = new Color(110, 60, 160);
+		FONDO_ANIMALES_MORADO = new Color(220, 195, 245);
+		FONDO_PRINCIPAL_MORADO = new Color(242, 235, 252);
+		FONDO_BOTON_MORADO = new Color(155, 95, 210);
+
+		TEXTO_CLARO_MORADO = new Color(248, 243, 252);
+		TEXTO_OSCURO_MORADO = new Color(75, 35, 115);
+
+		ColoresMorado = new Color[] {FONDO_DATOS_MORADO, FONDO_ANIMALES_MORADO, FONDO_PRINCIPAL_MORADO, FONDO_BOTON_MORADO,
+		                        TEXTO_CLARO_MORADO, TEXTO_OSCURO_MORADO};
+		
 		//Colores
-		ColoresVisibles = ColoresGris;
+		FicheroColor = "./files/color.dat";
+		ColoresVisibles = cargaColorFichero();
 		
 		FONDO_DATOS = ColoresVisibles[0];
 		FONDO_ANIMALES = ColoresVisibles[1];
@@ -120,6 +152,30 @@ public class Vista extends JPanel{
 		FuenteTexto = new Font(Font.SERIF, Font.BOLD, 25);
 		FuenteTextoPC = new Font(Font.SERIF, Font.BOLD, 35);
 		FUENTE_BOTONES = new Font(Font.SANS_SERIF, Font.BOLD, 25);
+	}
+	
+	private static Color[] cargaColorFichero() {
+		
+		Color[] colores = null;
+		
+		try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File(FicheroColor)))) {
+			
+			colores = (Color[]) ois.readObject();
+			
+		} catch (FileNotFoundException e) {
+			
+			e.printStackTrace();
+			
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+			
+		} catch (ClassNotFoundException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return (colores == null)? ColoresGris : colores;
 	}
 	
 	private CardLayout cartas;

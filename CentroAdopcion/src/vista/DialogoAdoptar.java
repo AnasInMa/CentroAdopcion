@@ -6,8 +6,6 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
-import controlador.ControladorDialogoAdoptar;
-
 public class DialogoAdoptar extends JDialog implements ActionListener{
 
 	private static final long serialVersionUID = 7518864593720141813L;
@@ -33,6 +31,8 @@ public class DialogoAdoptar extends JDialog implements ActionListener{
 		panelPrincipal.add(panelBotones());
 		
 		this.add(panelPrincipal);
+
+		control();
 		
 		this.pack();
 		this.setLocationRelativeTo(ventanaPadre);
@@ -40,11 +40,11 @@ public class DialogoAdoptar extends JDialog implements ActionListener{
 		this.setVisible(true);
 	}
 	
-	public void control (ControladorDialogoAdoptar c) {
+	private void control () {
 		
-		this.bConfirmar.addActionListener(c);
-		this.bCancelar.addActionListener(c);
-		this.bElegirPersona.addActionListener(c);
+		this.bConfirmar.addActionListener(this);
+		this.bCancelar.addActionListener(this);
+		this.bElegirPersona.addActionListener(this);
 	}
 	
 	private JPanel panelPersona() {
@@ -82,7 +82,6 @@ public class DialogoAdoptar extends JDialog implements ActionListener{
 		panel.setBorder(VistaCentroAdopcion.BordeLinea);
 		panel.setBackground(Vista.FONDO_ANIMALES);
 		
-		
 //		panel.add(panelNombre);
 //		panel.add(panelDni);
 //		panel.add(panelApellido1);
@@ -95,11 +94,6 @@ public class DialogoAdoptar extends JDialog implements ActionListener{
 		tfNombre.setBackground(Vista.FONDO_ANIMALES);
 		panel.add(tfNombre);
 		
-		tfDni = new JTextField(10);
-		tfDni.setBorder(new TitledBorder("DNI"));
-		tfDni.setBackground(Vista.FONDO_ANIMALES);
-		panel.add(tfDni);
-		
 		tfApellido1 = new JTextField(10);
 		tfApellido1.setBorder(new TitledBorder("Primer Apellido"));
 		tfApellido1.setBackground(Vista.FONDO_ANIMALES);
@@ -109,6 +103,11 @@ public class DialogoAdoptar extends JDialog implements ActionListener{
 		tfApellido2.setBorder(new TitledBorder("Segundo Apellido"));
 		tfApellido2.setBackground(Vista.FONDO_ANIMALES);
 		panel.add(tfApellido2);
+		
+		tfDni = new JTextField(10);
+		tfDni.setBorder(new TitledBorder("DNI"));
+		tfDni.setBackground(Vista.FONDO_ANIMALES);
+		panel.add(tfDni);
 		
 		tfEdad = new JTextField(10);
 		tfEdad.setBorder(new TitledBorder("Edad"));
@@ -132,14 +131,6 @@ public class DialogoAdoptar extends JDialog implements ActionListener{
 //		panel.add(new JLabel(" "));
 
 		return panel;
-	}
-	
-	private void modificaPaneles(JPanel[] paneles) {
-		
-		for(JPanel panel : paneles) {
-			
-			panel.setBackground(Vista.FONDO_ANIMALES);
-		}
 	}
 		
 	private JPanel panelBotones() {
@@ -174,7 +165,16 @@ public class DialogoAdoptar extends JDialog implements ActionListener{
 		
 		if(e.getSource() == bConfirmar) {
 			
-			System.out.println("confirmar");
+			//System.out.println("confirmar");
+			
+		} else if (e.getSource()	 == bCancelar) {
+			
+			this.dispose();
+			
+		} else { 	//Elegir persona
+			
+			
+			
 		}
 		
 	}
