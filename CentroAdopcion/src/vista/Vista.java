@@ -15,14 +15,25 @@ public class Vista extends JPanel{
 	public static final int ANCHO_COMPONENTE, ALTO_COMPONENTE;
 	
 	public static float multiplicadorPanel,		//esta variable se va a utilizar para las resoluciones de los paneles
-						multiplicadorAnchoComponente,	//⬇️
+						multiplicadorAnchoComponente,
 						multiplicadorAltoComponente;	//y estos para el tamaño de los componetes
 
-	public static final Color MARRON_CLARO1, MARRON_CLARO2, MARRON_CLARO3, MARRON_CLARO4,
-							 MARRON_OSCURO1, MARRON_OSCURO2, MARRON_OSCURO3, MARRON_OSCURO4;
+	public static Color FONDO_DATOS, FONDO_ANIMALES, FONDO_PRINCIPAL, FONDO_BOTON,
+						TEXTO_CLARO, TEXTO_OSCURO;	//Colores que tendra la vista, y cambiara en funcion de la eleccion del usuario en el panel opciones
+	public static final Color FONDO_DATOS_MARRON, FONDO_ANIMALES_MARRON, FONDO_PRINCIPAL_MARRON, FONDO_BOTON_MARRON,
+								TEXTO_CLARO_MARRON, TEXTO_OSCURO_MARRON,
+							FONDO_DATOS_VERDE, FONDO_ANIMALES_VERDE, FONDO_PRINCIPAL_VERDE, FONDO_BOTON_VERDE,
+								TEXTO_CLARO_VERDE, TEXTO_OSCURO_VERDE,
+							FONDO_DATOS_GRIS, FONDO_ANIMALES_GRIS, FONDO_PRINCIPAL_GRIS, FONDO_BOTON_GRIS,
+								TEXTO_CLARO_GRIS, TEXTO_OSCURO_GRIS;
+	
+	public static Color[] ColoresVisibles, ColoresMarron, ColoresVerde, ColoresGris;
+	
 	public static final Font FUENTE_BOTONES;
 	
 	static {
+		
+		//Dimensiones de la ventana y los componentes
 		BASE_HORIZONTAL = 16;
 		BASE_VERTICAL = 9;
 		
@@ -37,17 +48,53 @@ public class Vista extends JPanel{
 		ANCHO_COMPONENTE = (int) (ANCHO_PANEL * multiplicadorAnchoComponente);
 		ALTO_COMPONENTE = (int) (ALTO_PANEL * multiplicadorAltoComponente);
 
+		//Marron
+		FONDO_DATOS_MARRON = new Color(249, 248, 246);
+		FONDO_ANIMALES_MARRON = new Color(239, 233, 227);
+		FONDO_PRINCIPAL_MARRON = Color.black;
+		FONDO_BOTON_MARRON = new Color(196, 134, 78);
+		
+		TEXTO_CLARO_MARRON = new Color(243, 238, 234);
+		TEXTO_OSCURO_MARRON = new Color(107, 79, 42);
+		
+		ColoresMarron = new Color[] {FONDO_DATOS_MARRON, FONDO_ANIMALES_MARRON, FONDO_PRINCIPAL_MARRON, FONDO_BOTON_MARRON,
+								TEXTO_CLARO_MARRON, TEXTO_OSCURO_MARRON};
+		
+		//Verde
+		FONDO_DATOS_VERDE = new Color(249, 248, 246);
+		FONDO_ANIMALES_VERDE = new Color(239, 233, 227);
+		FONDO_PRINCIPAL_VERDE = Color.green;
+		FONDO_BOTON_VERDE = new Color(196, 134, 78);
+		
+		TEXTO_CLARO_VERDE = new Color(243, 238, 234);
+		TEXTO_OSCURO_VERDE = new Color(107, 79, 42);
+		
+		ColoresVerde = new Color[] {FONDO_DATOS_VERDE, FONDO_ANIMALES_VERDE, FONDO_PRINCIPAL_VERDE, FONDO_BOTON_VERDE,
+								TEXTO_CLARO_VERDE, TEXTO_OSCURO_VERDE};
+
+		//Gris
+		FONDO_PRINCIPAL_GRIS = new Color(242, 239, 233);
+		FONDO_ANIMALES_GRIS = new Color(224, 221, 213);
+		FONDO_DATOS_GRIS = new Color(90, 86, 80);
+		FONDO_BOTON_GRIS = new Color(90, 86, 80);
+		
+		TEXTO_CLARO_GRIS = new Color(243, 238, 234);
+		TEXTO_OSCURO_GRIS = new Color(61, 58, 53);
+		
+		ColoresGris = new Color[] {FONDO_DATOS_GRIS, FONDO_ANIMALES_GRIS, FONDO_PRINCIPAL_GRIS, FONDO_BOTON_GRIS,
+								TEXTO_CLARO_GRIS, TEXTO_OSCURO_GRIS};
 		
 		//Colores
-		MARRON_CLARO1 = new Color(249, 248, 246);
-		MARRON_CLARO2 = new Color(239, 233, 227);
-		MARRON_CLARO3 = new Color(214, 244, 237);
-		MARRON_CLARO4 = new Color(135, 186, 195);
 		
-		MARRON_OSCURO1 = new Color(243, 238, 234);
-		MARRON_OSCURO2 = new Color(235, 227, 213);
-		MARRON_OSCURO3 = new Color(135, 186, 195);
-		MARRON_OSCURO4 = new Color(75, 64, 56);
+		ColoresVisibles = ColoresGris;
+		
+		FONDO_DATOS = ColoresVisibles[0];
+		FONDO_ANIMALES = ColoresVisibles[1];
+		FONDO_PRINCIPAL = ColoresVisibles[2];
+		FONDO_BOTON = ColoresVisibles[3];
+		
+		TEXTO_CLARO = ColoresVisibles[4];
+		TEXTO_OSCURO = ColoresVisibles[5];
 		
 		//Fuentes
 		FUENTE_BOTONES = new Font(Font.SANS_SERIF, Font.BOLD, 25);

@@ -20,7 +20,7 @@ public class DialogoAdoptar extends JDialog{
 		
 		JPanel panelAnimalPersona = new JPanel(new GridLayout(1, 2, 10, 10));
 		panelAnimalPersona.setBorder(VistaCentroAdopcion.BORDEVACIO);
-		panelAnimalPersona.setBackground(Vista.MARRON_CLARO3);
+		panelAnimalPersona.setBackground(Vista.FONDO_PRINCIPAL);
 		panelAnimalPersona.add(panelAnimal);
 		panelAnimalPersona.add(panelPersona());
 		
@@ -40,30 +40,30 @@ public class DialogoAdoptar extends JDialog{
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		panel.setBorder(VistaCentroAdopcion.BORDELINEA);
-		panel.setBackground(Vista.MARRON_CLARO3);
+		panel.setBackground(Vista.FONDO_PRINCIPAL);
 		
 		JPanel panelNombre = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-		panelNombre.setBackground(Vista.MARRON_CLARO3);
+		panelNombre.setBackground(Vista.FONDO_PRINCIPAL);
 		panelNombre.add(new JLabel("Nombre: "));
 		panelNombre.add(tfNombre = new JTextField(10));
 		
 		JPanel panelDni = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-		panelDni.setBackground(Vista.MARRON_CLARO3);
+		panelDni.setBackground(Vista.FONDO_PRINCIPAL);
 		panelDni.add(new JLabel("DNI: "));
 		panelDni.add(tfDni = new JTextField(10));
 		
 		JPanel panelApellido1 = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-		panelApellido1.setBackground(Vista.MARRON_CLARO3);
+		panelApellido1.setBackground(Vista.FONDO_PRINCIPAL);
 		panelApellido1.add(new JLabel("Primer Apellido: "));
 		panelApellido1.add(tfApellido1 = new JTextField(10));
 		
 		JPanel panelApellido2 = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-		panelApellido2.setBackground(Vista.MARRON_CLARO3);
+		panelApellido2.setBackground(Vista.FONDO_PRINCIPAL);
 		panelApellido2.add(new JLabel("Segundo Apellido: "));
 		panelApellido2.add(tfApellido2 = new JTextField(10));
 		
 		JPanel panelEdad = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-		panelEdad.setBackground(Vista.MARRON_CLARO3);
+		panelEdad.setBackground(Vista.FONDO_PRINCIPAL);
 		panelEdad.add(new JLabel("Edad: "));
 		panelEdad.add(tfEdad = new JTextField(10));
 
@@ -89,7 +89,7 @@ public class DialogoAdoptar extends JDialog{
 	private JPanel panelBotones() {
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(Vista.MARRON_CLARO3);
+		panel.setBackground(Vista.FONDO_PRINCIPAL);
 		
 		bConfirmar = new JButton("Confirmar");
 		bCancelar = new JButton("Cancelar");
@@ -108,7 +108,7 @@ public class DialogoAdoptar extends JDialog{
 		
 		for (JButton boton : botones) {
 			
-			boton.setBackground(Vista.MARRON_CLARO4);
+			boton.setBackground(Vista.FONDO_BOTON);
 		}
 	}
 

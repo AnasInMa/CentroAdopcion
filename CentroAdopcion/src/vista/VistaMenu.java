@@ -18,11 +18,11 @@ public class VistaMenu extends JPanel{
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.setPreferredSize(new Dimension(Vista.ANCHO_PANEL, Vista.ALTO_PANEL));
 		this.setBorder(new EmptyBorder(60,10,10,10));
-		this.setBackground(Vista.MARRON_CLARO3);
+		this.setBackground(Vista.FONDO_PRINCIPAL);
 		
 		JLabel titulo = new JLabel("CEADOP");
 		titulo.setFont(new Font(Font.SERIF, Font.BOLD, 60));
-		titulo.setForeground(Vista.MARRON_OSCURO4);
+		titulo.setForeground(Vista.TEXTO_OSCURO);
 		titulo.setAlignmentX(CENTER_ALIGNMENT);
 		
 		iniciaBotones();
@@ -61,8 +61,8 @@ public class VistaMenu extends JPanel{
 			boton.setFont(Vista.FUENTE_BOTONES);
 			boton.setFocusable(false);
 			
-			boton.setForeground(Vista.MARRON_OSCURO4);
-			boton.setBackground(Vista.MARRON_CLARO4);
+			boton.setForeground(Vista.TEXTO_CLARO);
+			boton.setBackground(Vista.FONDO_BOTON);
 			
 			this.add(boton);
 			this.add(Box.createRigidArea(new Dimension(0, Vista.ALTO_COMPONENTE)));

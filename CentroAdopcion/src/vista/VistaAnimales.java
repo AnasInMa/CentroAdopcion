@@ -38,7 +38,7 @@ public class VistaAnimales extends JPanel {
 	public VistaAnimales(CentroAdopcion centro) {
 		
 		this.setLayout(cartas = new CardLayout());
-		this.setBackground(Vista.MARRON_CLARO3);
+		this.setBackground(Vista.FONDO_PRINCIPAL);
 		
 		centroAdopcion = centro;
 		
@@ -95,7 +95,7 @@ public class VistaAnimales extends JPanel {
 			
 			rboton.setFocusable(false);
 			rboton.setAlignmentX(JRadioButton.LEFT_ALIGNMENT);
-			rboton.setBackground(Vista.MARRON_CLARO3);
+			rboton.setBackground(Vista.FONDO_ANIMALES);
 			grupoRB.add(rboton);
 		}
 	}
@@ -113,7 +113,7 @@ public class VistaAnimales extends JPanel {
 		JPanel panel;
 		Animal animal;
 		
-		LineBorder bordeLinea = new LineBorder(Vista.MARRON_OSCURO3, 4);
+		LineBorder bordeLinea = new LineBorder(Vista.TEXTO_OSCURO, 4);
 		
 		Iterator<Animal> iterador = centroAdopcion.getAnimalesAlojados().iterator();
 		
@@ -132,7 +132,7 @@ public class VistaAnimales extends JPanel {
 				animal = iterador.next();
 				
 				panel = (matrizPaneles[i][j] = new JPanel());
-				panel.setBackground(Vista.MARRON_CLARO3);
+				panel.setBackground(Vista.FONDO_ANIMALES);
 				panel.setBorder(bordeLinea);
 				panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 				
@@ -149,14 +149,14 @@ public class VistaAnimales extends JPanel {
 				
 				panel.add(lNombre);
 				panel.add(new Separator());
-				//aqui va a ir la imagen
+				//TODO aqui va a ir la imagen
 				panel.add(lDatos);
 				panel.add(new Separator());
 
 				taDescripcion = new JTextArea(animal.toStringDescripcion());				
 				taDescripcion.setEditable(false);
 				taDescripcion.setFocusable(false);
-				taDescripcion.setBackground(Vista.MARRON_CLARO3);
+				taDescripcion.setBackground(Vista.FONDO_ANIMALES);
 				taDescripcion.setAlignmentX(JTextArea.LEFT_ALIGNMENT);
 				
 				taDescripcion.setLineWrap(true);		// salto de linea automatico
@@ -170,7 +170,7 @@ public class VistaAnimales extends JPanel {
 				panel.add(spDescripcion);
 				
 				arrayPaneles[i].add(panel);
-				arrayPaneles[i].setBackground(Vista.MARRON_CLARO3);
+				arrayPaneles[i].setBackground(Vista.FONDO_PRINCIPAL);
 			}
 			
 			

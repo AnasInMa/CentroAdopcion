@@ -18,11 +18,11 @@ public class VistaOpcionesCentros extends JPanel{
 	public VistaOpcionesCentros() {
 		
 		this.setLayout(new BorderLayout());
-		this.setBackground(Vista.MARRON_CLARO3);
+		this.setBackground(Vista.FONDO_PRINCIPAL);
 		
 		JLabel texto = new JLabel("⬇️ELIJA UNO DE ESTOS CENTROS PARA VER LOS ANIMALES DISPONIBLES⬇️");
 		texto.setFont(new Font(Font.SERIF, Font.BOLD, 25));
-		texto.setForeground(Vista.MARRON_OSCURO4);
+		texto.setForeground(Vista.TEXTO_OSCURO);
 		texto.setHorizontalAlignment(JLabel.CENTER);
 		texto.setBorder(new EmptyBorder(0, 0, 100, 0));
 		
@@ -30,7 +30,7 @@ public class VistaOpcionesCentros extends JPanel{
 		
 		JPanel panelPrincipal = new JPanel(new GridLayout(1, 4));
 		panelPrincipal.setBorder(new EmptyBorder(0, 0, 200, 0));
-		panelPrincipal.setBackground(Vista.MARRON_CLARO3);
+		panelPrincipal.setBackground(Vista.FONDO_PRINCIPAL);
 		
 		panelPrincipal.add(añadePanelesCentros(nombreCentro1 = "ARCA DEL TORCAL", bEntrarCentro1, new ImageIcon("./imgs/arcaDelTorcal.jpg")));
 		panelPrincipal.add(añadePanelesCentros(nombreCentro2 = "S.P.A.P.M.", bEntrarCentro2, new ImageIcon("./imgs/SPAPM.png")));
@@ -40,7 +40,7 @@ public class VistaOpcionesCentros extends JPanel{
 		menu = new JLabel(" ≡");
 		menu.setFocusable(true);
 		menu.setFont(new Font(Font.SERIF, Font.BOLD, 40));
-		menu.setBackground(Vista.MARRON_CLARO3);
+		menu.setBackground(Vista.FONDO_PRINCIPAL);
 		
 		this.add(menu, BorderLayout.NORTH);
 		this.add(texto, BorderLayout.CENTER);
@@ -76,8 +76,8 @@ public class VistaOpcionesCentros extends JPanel{
 			boton.setFocusable(false);
 			boton.setAlignmentX(JButton.CENTER_ALIGNMENT);
 			
-			boton.setForeground(Vista.MARRON_OSCURO4);
-			boton.setBackground(Vista.MARRON_CLARO4);
+			boton.setForeground(Vista.TEXTO_CLARO);
+			boton.setBackground(Vista.FONDO_BOTON);
 		}
 	}
 	
@@ -85,10 +85,10 @@ public class VistaOpcionesCentros extends JPanel{
 		
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-		panel.setBackground(Vista.MARRON_CLARO3);
+		panel.setBackground(Vista.FONDO_PRINCIPAL);
 		
 		JLabel texto = new JLabel(nombreCentro);
-		texto.setForeground(Vista.MARRON_OSCURO4);
+		texto.setForeground(Vista.TEXTO_OSCURO);
 		texto.setBorder(new EmptyBorder(0,0,10,0));
 		texto.setAlignmentX(JLabel.CENTER_ALIGNMENT);
 		
@@ -96,7 +96,7 @@ public class VistaOpcionesCentros extends JPanel{
 		
 		JLabel img = new JLabel();
 		img.setIcon(new ImageIcon(imagenNueva));
-		img.setBorder(new LineBorder(Vista.MARRON_OSCURO4, 3));
+		img.setBorder(new LineBorder(Vista.TEXTO_OSCURO, 3));
 		img.setAlignmentX(JLabel.CENTER_ALIGNMENT);
 		
 		JLabel espacio = new JLabel();

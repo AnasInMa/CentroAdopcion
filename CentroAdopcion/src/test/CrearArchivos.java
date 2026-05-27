@@ -9,7 +9,6 @@ public class CrearArchivos {
 		FicheroConCentros.creaFicheroCentros();
 		FicheroConPersonas.creaFicheroPersonas();
 		FicheroConAnimales.creaFicheroAnimales();
-
 	}
 
 }

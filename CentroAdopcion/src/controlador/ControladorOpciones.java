@@ -4,6 +4,7 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
+import modelo.EnumColores;
 import vista.*;
 
 public class ControladorOpciones implements ActionListener {
@@ -49,6 +50,8 @@ public class ControladorOpciones implements ActionListener {
 			}
 			
 			estaSeleccionado = VistaOpciones.getCbPantallaCompleta().isSelected();
+			
+			Vista.ColoresVisibles = EnumColores.buscaColoresPorNombre(vOpciones.getCmbColores().getSelectedItem().toString());
 			
 		} else {
 			

@@ -24,7 +24,7 @@ public class VistaCentroAdopcion extends JPanel {
 
 	static {
 
-		BORDELINEA = new LineBorder(Vista.MARRON_OSCURO3, 4);
+		BORDELINEA = new LineBorder(Vista.TEXTO_OSCURO, 4);
 		BORDEVACIO = new EmptyBorder(10, 10, 10, 10);
 		
 	}
@@ -56,7 +56,7 @@ public class VistaCentroAdopcion extends JPanel {
 
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.setBorder(BORDEVACIO);
-		this.setBackground(Vista.MARRON_CLARO3);
+		this.setBackground(Vista.FONDO_PRINCIPAL);
 
 		iniciaComponentes();
 		modificaComponentes();
@@ -112,8 +112,8 @@ public class VistaCentroAdopcion extends JPanel {
 
 			componente.setFocusable(false);
 
-			componente.setForeground(Vista.MARRON_OSCURO4);
-			componente.setBackground(Vista.MARRON_CLARO4);
+			componente.setForeground(Vista.TEXTO_CLARO);
+			componente.setBackground(Vista.FONDO_BOTON);
 		}
 	}
 
@@ -121,12 +121,12 @@ public class VistaCentroAdopcion extends JPanel {
 
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-		panel.setBackground(Vista.MARRON_CLARO3);
+		panel.setBackground(Vista.FONDO_DATOS);
 		panel.setBorder(BORDELINEA);
 
 		JPanel panelTitulo = new JPanel(new BorderLayout());
 		//panelTitulo.setLayout(new BoxLayout(panelTitulo, BoxLayout.X_AXIS));
-		panelTitulo.setBackground(Vista.MARRON_CLARO3);
+		panelTitulo.setBackground(Vista.FONDO_DATOS);
 		
 		panelTitulo.add(atras, BorderLayout.WEST);
 		//panelTitulo.add(Box.createHorizontalGlue());
@@ -143,7 +143,7 @@ public class VistaCentroAdopcion extends JPanel {
 
 		panelAnimales = new JPanel();
 		panelAnimales.setBorder(BORDELINEA);
-		panelAnimales.setBackground(Vista.MARRON_CLARO3);
+		panelAnimales.setBackground(Vista.FONDO_PRINCIPAL);
 		
 		panelAnimales.add(this.vAnimales = new VistaAnimales(this.centroAdopcion, this));
 
@@ -191,7 +191,7 @@ public class VistaCentroAdopcion extends JPanel {
 
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
-		panel.setBackground(Vista.MARRON_CLARO3);
+		panel.setBackground(Vista.FONDO_PRINCIPAL);
 		panel.setBorder(BORDELINEA);
 
 		panel.add(bPrimero);
