@@ -140,6 +140,7 @@ public class Vista extends JPanel{
 		
 		//Colores
 		FicheroOpciones = "./files/opciones.txt";
+		ColoresVisibles = new Color[6];
 		ColoresVisibles = cargaColorFichero();
 		
 		FONDO_DATOS = ColoresVisibles[0];
@@ -169,11 +170,11 @@ public class Vista extends JPanel{
 			
 		} catch (FileNotFoundException e) {
 			
-			e.printStackTrace();
+			//e.printStackTrace();
 			
 		} catch (IOException e) {
 			
-			e.printStackTrace();
+			//e.printStackTrace();
 			
 		}
 		

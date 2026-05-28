@@ -38,7 +38,8 @@ public class ControladorSalir implements ActionListener{
 		
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File(Vista.FicheroOpciones), false))) {
 			
-			bw.write(VistaOpciones.getCbPantallaCompleta().toString());
+			bw.write(Boolean.toString(VistaOpciones.getCbPantallaCompleta().isSelected()));
+			bw.newLine();
 			bw.write(vista.getvOpciones().getCmbColores().getSelectedItem().toString());
 			
 		} catch (FileNotFoundException e) {

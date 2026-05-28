@@ -40,6 +40,31 @@ public class DialogoAdoptar extends JDialog implements ActionListener{
 		this.setVisible(true);
 	}
 	
+	private void buscaIdAnimal(JPanel panelAnimal) {
+		
+		Component[] componentes = panelAnimal.getComponents();
+		JLabel l;
+		boolean encontrado = false;
+		for (int i = 0; i < componentes.length && !encontrado; i++) {
+
+			if (componentes[i] instanceof JLabel) {
+				
+				l = (JLabel) componentes[i];
+
+				try {
+					
+					Integer.parseInt(l.getText());
+					
+					encontrado = true;
+					
+				} catch(NumberFormatException e) {
+					
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
 	private void control () {
 		
 		this.bConfirmar.addActionListener(this);

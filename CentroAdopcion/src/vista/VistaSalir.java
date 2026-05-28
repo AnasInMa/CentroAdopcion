@@ -11,12 +11,12 @@ public class VistaSalir extends JPanel{
 
 	private static final long serialVersionUID = 6877306105475220920L;
 
+	private JPanel panelT, panelB;
 	private JButton bConfirmarSalida, bCancelarSalida;
 
 	public VistaSalir() {
 		
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		this.setBackground(Vista.FONDO_PRINCIPAL);
 		
 		iniciaComponentes();
 		
@@ -24,6 +24,8 @@ public class VistaSalir extends JPanel{
 		this.add(panelTexto());
 		this.add(panelBotones());
 		this.add(Box.createVerticalGlue());
+
+		actualizarColores();
 	}
 	
 	public void control(ControladorSalir c) {
@@ -36,49 +38,47 @@ public class VistaSalir extends JPanel{
 		
 		bConfirmarSalida = new JButton("Confirmar");
 		bConfirmarSalida.setFont(Vista.FUENTE_BOTONES);
-		bConfirmarSalida.setForeground(Vista.TEXTO_CLARO);
-		bConfirmarSalida.setBackground(Vista.FONDO_BOTON);
 		
 		bCancelarSalida = new JButton("Cancelar");
 		bCancelarSalida.setFont(Vista.FUENTE_BOTONES);
-		bCancelarSalida.setForeground(Vista.TEXTO_CLARO);
-		bCancelarSalida.setBackground(Vista.FONDO_BOTON);
 	}
 	
 	private JPanel panelTexto() {
 		
-		JPanel panel = new JPanel();
-		panel.setBackground(Vista.FONDO_PRINCIPAL);
+		panelT = new JPanel();
+		panelT.setBackground(Vista.FONDO_PRINCIPAL);
 		
 		JLabel texto = new JLabel("¿Esta seguro que desea salir?");
 		texto.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
-		texto.setForeground(Vista.TEXTO_OSCURO);
 		
-		panel.add(texto);
+		panelT.add(texto);
 		
-		return panel;
+		return panelT;
 	}
 	
 	private JPanel panelBotones() {
 		
-		JPanel panel = new JPanel();
-		//panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
-		panel.setBackground(Vista.FONDO_PRINCIPAL);
+		panelB = new JPanel();
 		
-		panel.add(bConfirmarSalida);
-		panel.add(Box.createRigidArea(new Dimension(100,0)));
-		panel.add(bCancelarSalida);
+		panelB.add(bConfirmarSalida);
+		panelB.add(Box.createRigidArea(new Dimension(100,0)));
+		panelB.add(bCancelarSalida);
 		
-		return panel;
+		return panelB;
 	}
 	
 	public void actualizarColores() {
 		
 	    this.setBackground(Vista.FONDO_PRINCIPAL);
+	    
 	    bConfirmarSalida.setBackground(Vista.FONDO_BOTON);
 	    bConfirmarSalida.setForeground(Vista.TEXTO_CLARO);
+	    
 	    bCancelarSalida.setBackground(Vista.FONDO_BOTON);
 	    bCancelarSalida.setForeground(Vista.TEXTO_CLARO);
+	    
+	    panelT.setBackground(Vista.FONDO_PRINCIPAL);
+	    panelB.setBackground(Vista.FONDO_PRINCIPAL);
 	}
 
 	public JButton getbConfirmarSalida() {

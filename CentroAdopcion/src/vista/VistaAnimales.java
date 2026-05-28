@@ -81,7 +81,6 @@ public class VistaAnimales extends JPanel {
 	
 	private void iniciaRBotones() {
 		
-		
 		this.rbAnimal1 = new JRadioButton("Elegir animal");
 		this.rbAnimal2 = new JRadioButton("Elegir animal");
 		this.rbAnimal3 = new JRadioButton("Elegir animal");
@@ -110,7 +109,8 @@ public class VistaAnimales extends JPanel {
 		
 		this.matrizPaneles = new JPanel[filas][columnas];
 		this.arrayPaneles = new JPanel[filas];
-		JPanel panel;
+		
+		JPanel panel, panelNombre;
 		Animal animal;
 		
 		LineBorder bordeLinea = new LineBorder(Vista.TEXTO_OSCURO, 4);
@@ -120,8 +120,7 @@ public class VistaAnimales extends JPanel {
 		JScrollPane spDescripcion;
 		JTextArea taDescripcion;
 		
-		JLabel lNombre;
-		JLabel lDatos;
+		JLabel lNombre, lId, lDatos;
 		
 		for (int i = 0; i < filas; i++) {
 			
@@ -142,12 +141,21 @@ public class VistaAnimales extends JPanel {
 				panel.setMaximumSize(tamañoPanelAnimal);
 				
 				lNombre = new JLabel(animal.getNombre());
-				lNombre.setAlignmentX(JLabel.LEFT_ALIGNMENT);
+				
+				lId = new JLabel(animal.getIDAnimal() + "");
+				
+				panelNombre = new JPanel();
+				panelNombre.setBackground(Vista.FONDO_ANIMALES);
+				panelNombre.setAlignmentX(JPanel.LEFT_ALIGNMENT);
+				panelNombre.setLayout(new BoxLayout(panelNombre, BoxLayout.X_AXIS));
+				panelNombre.add(lNombre);
+				panelNombre.add(Box.createHorizontalGlue());
+				panelNombre.add(lId);
 				
 				lDatos = new JLabel(animal.toStringSinCodigo());
 				lDatos.setAlignmentX(JLabel.LEFT_ALIGNMENT);
 				
-				panel.add(lNombre);
+				panel.add(panelNombre);
 				panel.add(new Separator());
 				//TODO aqui va a ir la imagen
 				panel.add(lDatos);

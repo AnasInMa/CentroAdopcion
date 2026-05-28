@@ -65,6 +65,8 @@ public class CreaYCargaTablas {
 			cargaTablaPersonas();
 			cargaTablaAnimales();
 			
+			System.out.println("Todo Listo!");
+			
 		} catch (SQLException e) {
 			
 			System.err.println("Error sql: " + e.getMessage());

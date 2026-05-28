@@ -72,7 +72,7 @@ public class VistaCentroAdopcion extends JPanel {
 
 		// int cod, String nombre, String direccion, int codigoCentro, int codPostal,
 		// short capacidadMaxima, TreeSet<Animal> animalesAlojados
-		atras = new JLabel(" 🔁");
+		atras = new JLabel(" ↩️");
 		nombreCentro = new JLabel(centroAdopcion.getNombre());
 		datosCentro = new JLabel(" " + centroAdopcion.toStringSinNombre() + " ");
 

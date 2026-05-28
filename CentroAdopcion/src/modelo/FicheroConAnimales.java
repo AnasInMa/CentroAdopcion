@@ -11,7 +11,6 @@ public class FicheroConAnimales {
 			
 		Animal[] animales = {
 				//Centro 1
-				new Animal(0, "Wilson", "Gato", "Dorado Sombreado", "es un gato que duerme mucho, come mucho y caga mucho", (byte) 2, "12/02/2025", 1),
 				new Animal(1, "Firulais", "Perro", "Chiuaua", "es un perro que lleva mucho tiempo aqui, y a pesar de ladrar mucho siempre le gusta dar y recibir cariño", (byte) 5, "12/02/2023", 1),
 				new Animal(2, "Luna", "Gata", "Siamés", "es una gata muy curiosa y juguetona, le encanta perseguir cualquier cosa que se mueva", (byte) 1, "05/06/2025", 1),
 				new Animal(3, "Rocky", "Perro", "Labrador", "es un perro muy energético y cariñoso, le encanta nadar y jugar con pelotas", (byte) 3, "18/03/2024", 1),
@@ -53,7 +52,8 @@ public class FicheroConAnimales {
 				new Animal(36, "Carbón", "Gato", "Europeo", "es un gato negro rescatado de la calle, al principio araña pero con paciencia se convierte en el mejor compañero", (byte) 7, "16/05/2022", 4),
 				new Animal(37, "Pip", "Hámster", "Hámster Sirio", "es un hámster muy activo por las noches, corre kilómetros en su rueda y acumula comida en los carrillos", (byte) 1, "31/01/2026", 4),
 				new Animal(38, "Atena", "Perra", "Border Collie", "es una perra extremadamente inteligente, aprende cualquier orden en minutos y se aburre si no tiene retos", (byte) 2, "05/09/2025", 4),
-				new Animal(39, "Goldie", "Pez", "Pez Dorado", "es un pez tranquilo y brillante, lleva años en el centro y sobrevive a todo, es prácticamente inmortal", (byte) 8, "20/04/2018", 4)};
+				new Animal(39, "Goldie", "Pez", "Pez Dorado", "es un pez tranquilo y brillante, lleva años en el centro y sobrevive a todo, es prácticamente inmortal", (byte) 8, "20/04/2018", 4),
+				new Animal(40, "Wilson", "Gato", "Dorado Sombreado", "es un gato que duerme mucho, come mucho y caga mucho", (byte) 2, "12/02/2025", 4)};
 		
 			for (int i = 0; i < animales.length; i++) {
 				
