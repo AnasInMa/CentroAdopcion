@@ -6,6 +6,7 @@ import java.io.*;
 import javax.swing.*;
 
 import modelo.CentroAdopcion;
+import modelo.EnumColores;
 
 public class Vista extends JPanel{
 
@@ -37,7 +38,8 @@ public class Vista extends JPanel{
 	public static Font FuenteTexto, FuenteTextoPC;	//PC -> Pantalla Completa
 	public static final Font FUENTE_BOTONES;
 	
-	public static final String FicheroColor;
+	public static final String FicheroOpciones;
+	public static boolean EsPantallaCompleta;
 	
 	static {
 		
@@ -137,7 +139,7 @@ public class Vista extends JPanel{
 		                        TEXTO_CLARO_MORADO, TEXTO_OSCURO_MORADO};
 		
 		//Colores
-		FicheroColor = "./files/color.dat";
+		FicheroOpciones = "./files/opciones.txt";
 		ColoresVisibles = cargaColorFichero();
 		
 		FONDO_DATOS = ColoresVisibles[0];
@@ -156,11 +158,14 @@ public class Vista extends JPanel{
 	
 	private static Color[] cargaColorFichero() {
 		
-		Color[] colores = null;
+		Color[] colores = ColoresGris;
 		
-		try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File(FicheroColor)))) {
+		EnumColores.buscaColoresPorNombre(FicheroOpciones);
+		
+		try(BufferedReader br = new BufferedReader(new FileReader((new File(FicheroOpciones))))) {
 			
-			colores = (Color[]) ois.readObject();
+			EsPantallaCompleta = Boolean.parseBoolean(br.readLine());
+			colores = EnumColores.buscaColoresPorNombre(br.readLine());
 			
 		} catch (FileNotFoundException e) {
 			
@@ -170,12 +175,9 @@ public class Vista extends JPanel{
 			
 			e.printStackTrace();
 			
-		} catch (ClassNotFoundException e) {
-			
-			e.printStackTrace();
 		}
 		
-		return (colores == null)? ColoresGris : colores;
+		return colores;
 	}
 	
 	private CardLayout cartas;

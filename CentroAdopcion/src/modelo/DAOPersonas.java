@@ -1,14 +1,10 @@
 package modelo;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-
-import fechas.LibFechas8;
+import java.sql.*;
+import java.util.*;
 
 /**
- * Esta clase SOLO se utilziara para insertar personas
+ * Esta clase SOLO se utilziara para insertar personas y visualizarlas en un JTable
  */
 public class DAOPersonas {
 	
@@ -39,7 +35,7 @@ public class DAOPersonas {
 	
 	public void crearConsulta() throws SQLException {
 		
-		this.rsNavegar = statement.executeQuery("SELECT * FROM animales");
+		this.rsNavegar = statement.executeQuery("SELECT * FROM personas");
 	}
 	
 	public void cierraConexion() throws SQLException {
@@ -61,6 +57,21 @@ public class DAOPersonas {
 					rsNavegar.getString("primerApellido"),
 					rsNavegar.getString("segundoApellido"),
 					rsNavegar.getByte("edad"));
+	}
+	
+	public SortedSet<Persona> getAll() throws SQLException, Exception {
+		
+		rsNavegar.beforeFirst(); // Para posicionar la consulta al principio
+		
+		SortedSet<Persona> listaPersonas = new TreeSet<>();
+
+		while (rsNavegar.next()) {
+			listaPersonas.add(crearPersona());
+		}
+
+		rsNavegar.beforeFirst();
+		
+		return listaPersonas;
 	}
 
 }

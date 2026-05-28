@@ -27,18 +27,19 @@ public class ControladorSalir implements ActionListener{
 			
 		} else {
 			
-			guardarColor();
+			guardarOpciones();
 			
 			System.exit(0);
 		}
 		
 	}
 	
-	private void guardarColor() {
+	private void guardarOpciones() {
 		
-		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(new File(Vista.FicheroColor), false))) {
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File(Vista.FicheroOpciones), false))) {
 			
-			oos.writeObject(Vista.ColoresVisibles);
+			bw.write(VistaOpciones.getCbPantallaCompleta().toString());
+			bw.write(vista.getvOpciones().getCmbColores().getSelectedItem().toString());
 			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
