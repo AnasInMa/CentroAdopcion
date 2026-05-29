@@ -12,6 +12,7 @@ public class Main {
 		Vista v = new Vista();
 		
 		JFrame f = new JFrame("CEADOP");
+		
 		f.setContentPane(v);
 		
 		new Controlador(v);
@@ -21,8 +22,8 @@ public class Main {
 		//f.setUndecorated(true);
 		f.pack();
 		f.setLocationRelativeTo(null);
-		 f.setResizable(false);
-		//f.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		f.setResizable(false);
+		f.setExtendedState(Vista.EsPantallaCompleta? JFrame.MAXIMIZED_BOTH : JFrame.NORMAL);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setVisible(true);
 		

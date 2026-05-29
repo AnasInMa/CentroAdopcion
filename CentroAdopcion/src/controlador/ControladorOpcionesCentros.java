@@ -3,6 +3,7 @@ package controlador;
 import java.awt.event.*;
 
 import modelo.CentroAdopcion;
+import modelo.DAOAnimales;
 import modelo.FicheroConCentros;
 import vista.*;
 
@@ -10,24 +11,19 @@ public class ControladorOpcionesCentros implements MouseListener, ActionListener
 
 	private Vista vista;
 	private VistaOpcionesCentros vOpcionesCentros;
-	//private static int cont1, cont2, cont3, cont4;	//contadores para controlar que los centros solo se creen una vez
 	
-	/*static {
-		
-		cont1 = 0;
-		cont2 = 0;
-		cont3 = 0;
-		cont4 = 0;
-	}*/
+	private DAOAnimales daoAnimales;
 	
 	private CentroAdopcion centroAdopcion1, centroAdopcion2, centroAdopcion3, centroAdopcion4;
 	
-	public ControladorOpcionesCentros(Vista v) {
+	public ControladorOpcionesCentros(Vista v, DAOAnimales daoA) {
 		
 		vista = v;
 		
 		vOpcionesCentros = vista.getvOpcionesCentros();
 		vOpcionesCentros.control(this);
+		
+		daoAnimales = daoA;
 	}
 
 	@Override
@@ -88,7 +84,7 @@ public class ControladorOpcionesCentros implements MouseListener, ActionListener
 		//vista.añadeVistaCentroAdopcion(centroAdopcion);
 
 		vista.muestraPanelCentro();
-		new ControladorCentroAdopcion(vista);
+		new ControladorCentroAdopcion(vista, daoAnimales);
 	}
 	
 	/*private void creaYAñadeCentro(CentroAdopcion centro, String nombre) {

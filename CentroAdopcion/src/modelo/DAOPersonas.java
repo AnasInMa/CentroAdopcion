@@ -16,8 +16,7 @@ public class DAOPersonas {
 		
 		this.estableceConexion();  // Dar valor a la variable con (Connection)
 		this.crearStatement();  // Dar valor a la variable stmt (Statement)
-		this.crearConsulta();  // Dar valor a la variable rsNavegar (ResultSet)
-		
+		this.crearConsulta();  // Dar valor a la variable rsNavegar (ResultSet)	
 	}
 
 	public void estableceConexion() throws ClassNotFoundException, SQLException {
@@ -36,6 +35,11 @@ public class DAOPersonas {
 	public void crearConsulta() throws SQLException {
 		
 		this.rsNavegar = statement.executeQuery("SELECT * FROM personas");
+	}
+	
+	public int numPersonas() throws SQLException {
+		
+		return statement.executeQuery("SELECT COUNT(idPersona) FROM personas").getInt("idPersona");
 	}
 	
 	public void cierraConexion() throws SQLException {
@@ -57,6 +61,49 @@ public class DAOPersonas {
 					rsNavegar.getString("primerApellido"),
 					rsNavegar.getString("segundoApellido"),
 					rsNavegar.getByte("edad"));
+	}
+	
+	public void insertaPersona(Persona persona) throws SQLException {
+		
+		PreparedStatement ps = 
+				conexion.prepareStatement("insert into centroadopcion.personas values (?,?,?,?,?,?)");
+
+		ps.setInt(1, persona.getIDPersona());
+		ps.setString(2, persona.getNombre());
+		ps.setString(3, persona.getNif());
+		ps.setString(4, persona.getPrimerApellido());
+		ps.setString(5, persona.getSegundoApellido());
+		ps.setInt(6, persona.getEdad());
+		
+		ps.executeUpdate();
+		ps.close();
+	
+		this.crearConsulta();
+	}
+	
+	public String[][] getAllMatriz() throws SQLException, Exception {
+		
+		rsNavegar.first();
+		
+		Persona persona;
+		
+		String[][] matrizPersonas = new String[numPersonas()][6];
+		
+		for (int fila = 0; fila < matrizPersonas.length; fila++) {
+			
+			persona = crearPersona();
+			
+			matrizPersonas[fila][0] = persona.getIDPersona() + "";
+			matrizPersonas[fila][1] = persona.getNombre();
+			matrizPersonas[fila][2] = persona.getNif();
+			matrizPersonas[fila][3] = persona.getPrimerApellido();
+			matrizPersonas[fila][4] = persona.getSegundoApellido();
+			matrizPersonas[fila][5] = persona.getEdad() + "";
+			
+			rsNavegar.next();
+		}
+		
+		return matrizPersonas;
 	}
 	
 	public SortedSet<Persona> getAll() throws SQLException, Exception {

@@ -120,7 +120,9 @@ public class VistaAnimales extends JPanel {
 		JScrollPane spDescripcion;
 		JTextArea taDescripcion;
 		
-		JLabel lNombre, lId, lDatos;
+		Image imagen;
+		
+		JLabel lNombre, lId, lDatos, imagenEscalada;
 		
 		for (int i = 0; i < filas; i++) {
 			
@@ -155,9 +157,19 @@ public class VistaAnimales extends JPanel {
 				lDatos = new JLabel(animal.toStringSinCodigo());
 				lDatos.setAlignmentX(JLabel.LEFT_ALIGNMENT);
 				
+				//Imagen
+				imagen = new ImageIcon(animal.getRutaFicheroImagen()).getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
+				imagenEscalada = new JLabel(new ImageIcon(imagen));
+				imagenEscalada.setBorder(bordeLinea);
+				//System.out.println(imagenEscalada.getIcon().getIconHeight());	//Si no existe la imagen devuelve -1
+				JPanel panelImagen = new JPanel(new FlowLayout(FlowLayout.CENTER));
+				panelImagen.setAlignmentX(JPanel.LEFT_ALIGNMENT);
+				panelImagen.setBackground(Vista.FONDO_ANIMALES);
+				panelImagen.add(imagenEscalada);
+				
 				panel.add(panelNombre);
 				panel.add(new Separator());
-				//TODO aqui va a ir la imagen
+				panel.add(panelImagen);
 				panel.add(lDatos);
 				panel.add(new Separator());
 

@@ -235,7 +235,7 @@ public class DAOAnimales {
 		PreparedStatement ps = conexion.prepareStatement(
 				"UPDATE animales SET nombre = ?, tipo = ?, raza = ?, descripcion = ?, "
 					+ "edad = ?, fechaAlojamiento = ?, codCentro = ?, codPersona = ?"
-					+ "WHERE codigo = ?");
+					+ "WHERE idAnimal = ?");
 		
 		ps.setString(1, animal.getNombre());
 		ps.setString(2, animal.getTipo());
@@ -253,9 +253,9 @@ public class DAOAnimales {
 		this.crearConsulta();		
 	}
 	
-	public void eliminaAnimal(int cod) throws SQLException{
+	public void adoptaAnimal(int cod) throws SQLException{
 		PreparedStatement ps = 
-				conexion.prepareStatement("DELETE FROM animales WHERE codigo = ?");
+				conexion.prepareStatement("DELETE FROM animales WHERE idAnimal = ?");
 		
 		ps.setInt(1, cod);
 
@@ -301,7 +301,7 @@ public class DAOAnimales {
 	
 	public Animal buscaAnimal(int cod) throws SQLException, Exception {
 
-		PreparedStatement ps = conexion.prepareStatement("SELECT * FROM animales WHERE codigo = ?");
+		PreparedStatement ps = conexion.prepareStatement("SELECT * FROM animales WHERE idAnimal = ?");
 		ps.setInt(1, cod);
 
 		ResultSet rs = ps.executeQuery();
@@ -311,7 +311,7 @@ public class DAOAnimales {
 		if (rs.next()) {
 			animal = 
 					new Animal(
-							rs.getInt("codigo"),
+							rs.getInt("idAnimal"),
 							rs.getString("nombre"),
 							rs.getString("tipo"),
 							rs.getString("raza"),
@@ -319,7 +319,7 @@ public class DAOAnimales {
 							rs.getByte("edad"),
 							LibFechas8.transformaFecha(
 									rs.getDate("fechaAlojamiento").toLocalDate().toString()),
-							rs.getInt("codCentro"));
+							rs.getInt("idCentro"));
 		}
 
 		rs.close();

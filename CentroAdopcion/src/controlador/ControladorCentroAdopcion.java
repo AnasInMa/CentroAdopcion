@@ -1,9 +1,11 @@
 package controlador;
 
 import java.awt.event.*;
+import java.sql.SQLException;
 
 import javax.swing.*;
 
+import modelo.DAOAnimales;
 import vista.DialogoAdoptar;
 import vista.Vista;
 import vista.VistaAnimales;
@@ -14,8 +16,10 @@ public class ControladorCentroAdopcion implements MouseListener, ActionListener 
 	private Vista vista;
 	private VistaCentroAdopcion vCentroAdopcion;
 	private VistaAnimales vAnimales;
+	
+	private DAOAnimales daoAnimales;
 
-	public ControladorCentroAdopcion(Vista v) {
+	public ControladorCentroAdopcion(Vista v, DAOAnimales daoA) {
 
 		vista = v;
 
@@ -23,6 +27,8 @@ public class ControladorCentroAdopcion implements MouseListener, ActionListener 
 		vCentroAdopcion.control(this);
 		
 		vAnimales = vCentroAdopcion.getVistaAnimales();
+		
+		daoAnimales = daoA;
 	}
 
 	@Override
@@ -35,12 +41,18 @@ public class ControladorCentroAdopcion implements MouseListener, ActionListener 
 			try {
 				
 				//System.out.println("adoptar");
-				/*DialogoAdoptar d =*/ new DialogoAdoptar((JFrame) SwingUtilities.getWindowAncestor(vista), vAnimales.panelAnimalSeleccionado());
+				/*DialogoAdoptar d =*/ new DialogoAdoptar((JFrame) SwingUtilities.getWindowAncestor(vista), vAnimales.panelAnimalSeleccionado(), daoAnimales);
 				//new ControladorDialogoAdoptar(d);
 				
 			} catch (NullPointerException error) {
 				
 				JOptionPane.showMessageDialog(vCentroAdopcion, "Debe de seleccionar un animal para poder adoptarlo" , "ERROR", JOptionPane.ERROR_MESSAGE);
+			} catch (ClassNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
 
 		} else if (e.getSource() == vCentroAdopcion.getbDarEnAdopcion()) {

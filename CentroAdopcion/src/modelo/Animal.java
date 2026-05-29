@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-import javax.swing.ImageIcon;
-
 import fechas.LibFechas8;
 
 public class Animal implements Comparable<Animal>, Serializable{
@@ -19,7 +17,7 @@ public class Animal implements Comparable<Animal>, Serializable{
 	private boolean estaAdoptado;
 	private LocalDate fechaAlojamiento, fechaAdopcion;
 	
-	private ImageIcon imagen;
+	private String rutaImagen;
 
 	public Animal(int cod, String nombre, String tipo, String raza, String descripcion, byte edad, String fechaAlojamiento) throws Exception {
 		
@@ -37,6 +35,8 @@ public class Animal implements Comparable<Animal>, Serializable{
 			this.fechaAlojamiento = fechas.LibFechas8.convierteStringToLocalDate(fechaAlojamiento);
 			
 		} else throw new Exception("Fecha incorrecta");
+		
+		this.rutaImagen = "./imgs/Animal" + idAnimal + ".png";
 	}
 	
 	public Animal(int cod, String nombre, String tipo, String raza, String descripcion, byte edad, String fechaAlojamiento, int codCentro) throws Exception {
@@ -53,13 +53,14 @@ public class Animal implements Comparable<Animal>, Serializable{
 		this.idPersona = codPersona;
 	}
 	
-	public Animal(Animal animal, ImageIcon imagen) throws Exception {
+	/*
+	public Animal(Animal animal, String rutaFicheroImagen) throws Exception {
 		
 		this(animal.idAnimal, animal.nombre, animal.tipo, animal.raza, animal.descripcion, animal.edad, LibFechas8.getFechaFull(animal.fechaAlojamiento), animal.idCentro, animal.idPersona);
 		
-		this.imagen = imagen;
+		this.imagen = new ImageIcon(rutaFicheroImagen);
 		
-	}
+	}*/
 	
 	public void esAdoptado(int codPersona) {
 		
@@ -99,7 +100,7 @@ public class Animal implements Comparable<Animal>, Serializable{
 	@Override
 	public String toString() {
 		
-		return toStringSimple() + "\n\tDescripcion: " + descripcion +
+		return toStringSimple() + "\n\tDescripcion: " + toStringDescripcion() +
 				"\n\tEstado: " + (this.estaAdoptado? "Adoptado (" + LibFechas8.getFechaFull(this.fechaAdopcion) + ")"
 										: "No adoptado");
 	}
@@ -158,9 +159,9 @@ public class Animal implements Comparable<Animal>, Serializable{
 	public LocalDate getFechaAdopcion() {
 		return fechaAdopcion;
 	}
-	
-	public ImageIcon getImagen() {
-		return imagen;
+
+	public String getRutaFicheroImagen() {
+		return rutaImagen;
 	}
 	
 }

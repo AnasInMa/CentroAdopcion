@@ -2,9 +2,13 @@ package vista;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.SQLException;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
+
+import modelo.DAOAnimales;
+import modelo.DAOPersonas;
 
 public class DialogoAdoptar extends JDialog implements ActionListener{
 
@@ -14,7 +18,10 @@ public class DialogoAdoptar extends JDialog implements ActionListener{
 	private JTextField tfNombre, tfDni, tfApellido1, tfApellido2, tfEdad;
 	private JButton bConfirmar, bCancelar, bElegirPersona;
 	
-	public DialogoAdoptar(JFrame ventanaPadre, JPanel panelAnimal) {
+	private DAOAnimales daoAnimales;
+	private DAOPersonas daoPersonas;
+	
+	public DialogoAdoptar(JFrame ventanaPadre, JPanel panelAnimal, DAOAnimales daoA) throws ClassNotFoundException, SQLException {
 		
 		super(ventanaPadre, ventanaPadre.getTitle(), true);	//el true es para que no se pueda cambiar de ventana hasta que se cierre
 		
@@ -33,6 +40,8 @@ public class DialogoAdoptar extends JDialog implements ActionListener{
 		this.add(panelPrincipal);
 
 		control();
+		daoAnimales = daoA;
+		daoPersonas = new DAOPersonas();
 		
 		this.pack();
 		this.setLocationRelativeTo(ventanaPadre);
@@ -40,29 +49,45 @@ public class DialogoAdoptar extends JDialog implements ActionListener{
 		this.setVisible(true);
 	}
 	
-	private void buscaIdAnimal(JPanel panelAnimal) {
+	private int buscaIdAnimal(JPanel panelAnimal) {
 		
-		Component[] componentes = panelAnimal.getComponents();
+		JPanel panelNombre = new JPanel();
+		int idAnimal = 0;
+		
+		for (Component componente : panelAnimal.getComponents()) {
+			
+			if(componente instanceof JPanel) {
+				
+				panelNombre = (JPanel) componente;
+			}
+		}
+		
+		
+		Component[] componentes = panelNombre.getComponents();
 		JLabel l;
 		boolean encontrado = false;
+		
 		for (int i = 0; i < componentes.length && !encontrado; i++) {
 
 			if (componentes[i] instanceof JLabel) {
-				
+
 				l = (JLabel) componentes[i];
 
 				try {
 					
-					Integer.parseInt(l.getText());
+					//System.out.println(Integer.parseInt(l.getText()));
+					idAnimal = Integer.parseInt(l.getText());
 					
 					encontrado = true;
 					
 				} catch(NumberFormatException e) {
 					
-					e.printStackTrace();
+					//e.printStackTrace();
 				}
 			}
 		}
+		
+		return idAnimal;
 	}
 	
 	private void control () {
@@ -191,6 +216,14 @@ public class DialogoAdoptar extends JDialog implements ActionListener{
 		if(e.getSource() == bConfirmar) {
 			
 			//System.out.println("confirmar");
+			try {
+				
+				System.out.println(daoAnimales.buscaAnimal(buscaIdAnimal(this.panelAnimal)));
+				
+			} catch (Exception e1) {
+
+				e1.printStackTrace();
+			}
 			
 		} else if (e.getSource()	 == bCancelar) {
 			
@@ -202,6 +235,11 @@ public class DialogoAdoptar extends JDialog implements ActionListener{
 			
 		}
 		
+	}
+	
+	private void mostrarTabla() {
+		
+		//TODO
 	}
 
 	public JTextField getTfNombre() {

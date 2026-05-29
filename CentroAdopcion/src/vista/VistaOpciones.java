@@ -22,6 +22,9 @@ public class VistaOpciones extends JPanel{
 	
 	static {
 		
+		cbPantallaCompleta = new JCheckBox("  Pantalla Completa");
+		cbPantallaCompleta.setSelected(Vista.EsPantallaCompleta);
+		
 		IMG_EQUIS = new ImageIcon("./imgs/equis.png");
 		IMG_SINMARCAR = new ImageIcon("./imgs/sinMarcar.png");
 	}
@@ -51,7 +54,6 @@ public class VistaOpciones extends JPanel{
 	
 	private void iniciaYModificaComponentes() {
 		
-		cbPantallaCompleta = new JCheckBox("  Pantalla Completa");
 		cbPantallaCompleta.setIcon(IMG_SINMARCAR);			//la imagen que tendra por defecto (cuando no esta seleccionado)
 		cbPantallaCompleta.setSelectedIcon(IMG_EQUIS);		//la imagen que tendra cuando este seleccionado
 		
