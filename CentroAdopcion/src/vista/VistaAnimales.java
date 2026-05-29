@@ -120,6 +120,7 @@ public class VistaAnimales extends JPanel {
 		JScrollPane spDescripcion;
 		JTextArea taDescripcion;
 		
+		ImageIcon imagenSinEscalar;
 		Image imagen;
 		
 		JLabel lNombre, lId, lDatos, imagenEscalada;
@@ -158,22 +159,31 @@ public class VistaAnimales extends JPanel {
 				lDatos.setAlignmentX(JLabel.LEFT_ALIGNMENT);
 				
 				//Imagen
-				imagen = new ImageIcon(animal.getRutaFicheroImagen()).getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
+				imagenSinEscalar = new ImageIcon(animal.getRutaFicheroImagen());
+				//System.out.println(imagenSinEscalar);
+				
+				if(imagenSinEscalar.getIconHeight() == -1) {
+					
+					imagenSinEscalar = new ImageIcon("./imgs/sinImagen.png");
+				}
+				
+				imagen = imagenSinEscalar.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
 				imagenEscalada = new JLabel(new ImageIcon(imagen));
 				imagenEscalada.setBorder(bordeLinea);
-				//System.out.println(imagenEscalada.getIcon().getIconHeight());	//Si no existe la imagen devuelve -1
+				
+				//System.out.println(new ImageIcon(animal.getRutaFicheroImagen()));	//Si no existe la imagen devuelve -1
 				JPanel panelImagen = new JPanel(new FlowLayout(FlowLayout.CENTER));
 				panelImagen.setAlignmentX(JPanel.LEFT_ALIGNMENT);
 				panelImagen.setBackground(Vista.FONDO_ANIMALES);
 				panelImagen.add(imagenEscalada);
 				
 				panel.add(panelNombre);
-				panel.add(new Separator());
+				panel.add(new JSeparator());
 				panel.add(panelImagen);
 				panel.add(lDatos);
 				panel.add(new Separator());
 
-				taDescripcion = new JTextArea(animal.toStringDescripcion());				
+				taDescripcion = new JTextArea(animal.toStringDescripcion());
 				taDescripcion.setEditable(false);
 				taDescripcion.setFocusable(false);
 				taDescripcion.setBackground(Vista.FONDO_ANIMALES);
