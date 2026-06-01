@@ -9,7 +9,6 @@ import java.time.LocalDate;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 import fechas.LibFechas8;
 import modelo.Animal;
@@ -39,6 +38,8 @@ public class DialogoDarEnAdopcion extends JDialog implements ActionListener {
 	private JButton bConfirmar, bCancelar, bElegirFotoAnimal, bElegirPersona;
 	
 	private boolean haElegidoPersona;
+	
+	private File imagenElegida;
 	
 	private DialogoTablaPersonasConAnimales dialogoP;
 	
@@ -126,7 +127,7 @@ public class DialogoDarEnAdopcion extends JDialog implements ActionListener {
 
 		panel.add(Box.createVerticalStrut(20));
 
-		ImageIcon imagenSinEscalar = new ImageIcon("./imgs/sinImageen.png");
+		ImageIcon imagenSinEscalar = new ImageIcon("./imgs/sinImagen.png");
 		imagenEscalada = imagenSinEscalar.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
 
 		imagenAnimal = new JLabel(new ImageIcon(imagenEscalada));
@@ -214,25 +215,23 @@ public class DialogoDarEnAdopcion extends JDialog implements ActionListener {
 
 		JFileChooser fc = new JFileChooser();
 
-	    fc.setFileFilter(new FileNameExtensionFilter("Imagenes(.png)", ".png"));
-
 		int opcion = fc.showOpenDialog(this);
 
 		if (opcion == JFileChooser.APPROVE_OPTION) {
 
-			File archivoSeleccionado = fc.getSelectedFile();
+			imagenElegida = fc.getSelectedFile();
 
-			return archivoSeleccionado;
+			return imagenElegida;
 		}
 
 		return null;
 	}
 	
-	private void guardarImagen() {
+	private void guardarImagen(Animal animal, File imagenElegida) {
 	    
-		try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(new File("./imgs/Animal" + this.animal.getIDAnimal() + ".png")))){
+		try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(new File("./imgs/Animal" + animal.getIDAnimal() + ".png")))) {
 			
-			byte[] bytesImagen = Files.readAllBytes(Paths.get(elegirImagen().getAbsolutePath()));
+			byte[] bytesImagen = Files.readAllBytes(Paths.get(imagenElegida.getAbsolutePath()));
 			
 			for (int i = 0; i < bytesImagen.length; i++) {
 				
@@ -241,7 +240,8 @@ public class DialogoDarEnAdopcion extends JDialog implements ActionListener {
 			
 		} catch (Exception e) {
 			
-			JOptionPane.showMessageDialog(this, "No se ha seleccionado ninguna imagen", "ERROR", JOptionPane.ERROR_MESSAGE);
+			//JOptionPane.showMessageDialog(this, "No se ha seleccionado ninguna imagen o la imagen no es compatible (.png)", "ERROR", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
 		}
 	}
 
@@ -255,7 +255,11 @@ public class DialogoDarEnAdopcion extends JDialog implements ActionListener {
 			if (f != null) {
 				
 				this.imagenAnimal.setIcon(new ImageIcon(new ImageIcon(f.getAbsolutePath()).getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
-/*
+
+				//elegirImagen();
+				
+				/*
+				 *	 
 				try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(new File("")))) {
 
 				} catch (FileNotFoundException e1) {
@@ -323,16 +327,15 @@ public class DialogoDarEnAdopcion extends JDialog implements ActionListener {
 						//this.centroAdopcion.alojaAnimal(animal);
 						verificaAnimal();
 						
-						Animal anim;
+						//Animal anim;
 						
-						System.out.println(centroAdopcion);
+						//System.out.println(centroAdopcion);
 						
-						this.daoAnimales.insertaAnimalSinId(anim = new Animal(0, this.tfNombreAnimal.getText(), this.tfTipo.getText(), this.tfRaza.getText(), this.tfDescripcion.getText(), Byte.parseByte(this.tfEdadAnimal.getText()), LibFechas8.getFechaShort(LocalDate.now()), this.centroAdopcion.getIDCentro()));
+						this.daoAnimales.insertaAnimalSinId(/*anim = */new Animal(0, this.tfNombreAnimal.getText(), this.tfTipo.getText(), this.tfRaza.getText(), this.tfDescripcion.getText(), Byte.parseByte(this.tfEdadAnimal.getText()), LibFechas8.getFechaShort(LocalDate.now()), this.centroAdopcion.getIDCentro()));
 						
-						System.out.println(anim);
-						System.out.println(centroAdopcion);
+						//System.out.println(anim);
+						//System.out.println(centroAdopcion);
 					}
-					
 					
 				} else {
 					
@@ -342,11 +345,14 @@ public class DialogoDarEnAdopcion extends JDialog implements ActionListener {
 					
 					daoAnimales.insertaAnimalSinId(this.animal = new Animal(0, this.tfNombreAnimal.getText(), this.tfTipo.getText(), this.tfRaza.getText(), this.tfDescripcion.getText(), Byte.parseByte(this.tfEdadAnimal.getText()), LibFechas8.getFechaShort(LocalDate.now()), this.centroAdopcion.getIDCentro()));
 
+					guardarImagen(daoAnimales.getUltimo(), this.imagenElegida);
+					
 					daoPersonas.insertaPersonaSinId(new Persona(0, this.tfNombrePersona.getText(), this.tfDni.getText(), this.tfApellido1.getText(), this.tfApellido2.getText(), (byte) Byte.parseByte(this.tfEdadPersona.getText())));
 					
 				}
 				
-				this.guardarImagen();
+//				this.guardarImagen();
+				
 				this.dispose();
 				
 			} catch (Exception e1) {
@@ -359,6 +365,8 @@ public class DialogoDarEnAdopcion extends JDialog implements ActionListener {
 		} else {
 
 			// System.out.println("cancelar");
+			haElegidoPersona = false;
+			
 			this.dispose();
 		}
 

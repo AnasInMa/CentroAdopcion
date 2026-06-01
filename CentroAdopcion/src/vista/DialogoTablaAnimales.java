@@ -58,7 +58,7 @@ public class DialogoTablaAnimales extends JDialog implements ActionListener{
 	
 	private String[][] leeFichero() throws Exception {
 		
-		LinkedList<Animal> listaAnimales = new LinkedList<>();
+		LinkedList<Animal> listaAnimales = null;
 		
 		try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File("./files/AnimalesAdoptados.dat")))) {
 			

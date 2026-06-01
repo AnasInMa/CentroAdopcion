@@ -170,6 +170,8 @@ public class DialogoTablaPersonasConAnimales extends JDialog implements ActionLi
 			
 		} else {
 			
+			this.haSeleccionadoAnimal = false;
+			
 			this.dispose();
 		}
 		
