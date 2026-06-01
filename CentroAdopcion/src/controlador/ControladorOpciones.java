@@ -1,6 +1,7 @@
 package controlador;
 
 import java.awt.event.*;
+import java.io.*;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -14,6 +15,9 @@ public class ControladorOpciones implements ActionListener {
 	private VistaOpciones vOpciones;
 	private boolean estaSeleccionado;
 	private JFrame ventanaPadre;
+	
+	double anchoBoton;
+	double altoBoton;
 
 	public ControladorOpciones(Vista v) {
 
@@ -24,6 +28,11 @@ public class ControladorOpciones implements ActionListener {
 		
 		ventanaPadre = (JFrame) SwingUtilities.getWindowAncestor(vista);
 		estaSeleccionado = VistaOpciones.getCbPantallaCompleta().isSelected();
+		
+
+		anchoBoton = vista.getvMenu().getbComenzar().getPreferredSize().getWidth();
+		altoBoton = vista.getvMenu().getbComenzar().getPreferredSize().getHeight();
+
 	}
 
 	@Override
@@ -31,31 +40,30 @@ public class ControladorOpciones implements ActionListener {
 		
 		if (e.getSource() == vOpciones.getbGuardarCambios()) {
 
-			// System.out.println("guardar");
-
 			if (VistaOpciones.getCbPantallaCompleta().isSelected()) {
 
-				//System.out.println("activo");
-
-				//ventanaPadre.dispose();
-				//ventanaPadre.setVisible(false);
-				//ventanaPadre.setUndecorated(true);
 				ventanaPadre.setExtendedState(JFrame.MAXIMIZED_BOTH);
-				//ventanaPadre.setVisible(true);
 				
+				//vista.getvMenu().getbComenzar().setPreferredSize(new Dimension((int) (anchoBoton * 1.5), (int) (altoBoton * 1.5)));
+				//vista.getvMenu().getbOpciones().setPreferredSize(new Dimension((int) (anchoBoton * 1.5), (int) (altoBoton * 1.5)));
+				//vista.getvMenu().getbSalir().setPreferredSize(new Dimension((int) (anchoBoton * 1.5), (int) (altoBoton * 1.5)));
 				vista.getvOpcionesCentros().getTexto().setFont(Vista.FuenteTextoPC);
-
+				
 			} else {
-
-				//System.out.println("no");
 				
 				ventanaPadre.setExtendedState(JFrame.NORMAL);
+				
+				//vista.getvMenu().getbComenzar().setPreferredSize(new Dimension((int) (anchoBoton), (int) (altoBoton)));
+				//vista.getvMenu().getbOpciones().setPreferredSize(new Dimension((int) (anchoBoton), (int) (altoBoton)));
+				//vista.getvMenu().getbSalir().setPreferredSize(new Dimension((int) (anchoBoton), (int) (altoBoton)));
 				vista.getvOpcionesCentros().getTexto().setFont(Vista.FuenteTexto);
 			}
 			
 			estaSeleccionado = VistaOpciones.getCbPantallaCompleta().isSelected();
 			
 			actualizarColores(vOpciones.getCmbColores().getSelectedItem().toString());
+			
+			guardarOpciones();
 			
 		} else {
 			
@@ -65,6 +73,23 @@ public class ControladorOpciones implements ActionListener {
 		vOpciones.getCmbColores().setSelectedItem(EnumColores.buscaNombrePorColores(Vista.ColoresVisibles));
 		vista.muestraPrimerPanel();
 
+	}
+
+	private void guardarOpciones() {
+
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File(Vista.FicheroOpciones), false))) {
+
+			bw.write(Boolean.toString(VistaOpciones.getCbPantallaCompleta().isSelected()));
+			bw.newLine();
+			bw.write(vista.getvOpciones().getCmbColores().getSelectedItem().toString());
+
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private void actualizarColores(String nombreColor) {

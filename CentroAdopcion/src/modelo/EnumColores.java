@@ -11,7 +11,9 @@ public enum EnumColores {
 	VERDE(Vista.ColoresVerde, "Verde"),
 	GRIS(Vista.ColoresGris, "Gris"),
 	AZUL(Vista.ColoresAzul, "Azul"),
-	MORADO(Vista.ColoresMorado, "Morado");
+	MORADO(Vista.ColoresMorado, "Morado"),
+	ROJO(Vista.ColoresRojo, "Rojo"),
+	TURQUESA(Vista.ColoresTurquesa, "Turquesa");
 	
 	private Color[] colores;
 	private String nombreColor;

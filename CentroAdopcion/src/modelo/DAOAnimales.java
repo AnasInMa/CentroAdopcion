@@ -212,17 +212,64 @@ public class DAOAnimales {
 	public void insertaAnimal(Animal animal) throws SQLException {
 		
 		PreparedStatement ps = 
-				conexion.prepareStatement("insert into centroadopcion.animales values (?,?,?,?,?,?,?,?,?)");
+				conexion.prepareStatement("insert into centroadopcion.animales values (?,?,?,?,?,?,?,?,?,?)");
 
 		ps.setInt(1, animal.getIDAnimal());
-		ps.setString(2, animal.getNombre());
-		ps.setString(3, animal.getTipo());
-		ps.setString(4, animal.getRaza());
-		ps.setString(5, animal.getDescripcion());
-		ps.setInt(6, animal.getEdad());
-		ps.setDate(7, Date.valueOf(animal.getFechaAlojamiento()));
-		ps.setInt(8, animal.getIDCentro());
-		ps.setInt(9, animal.getIDPersona());
+		ps.setInt(2, animal.getIDCentro());
+		
+		if(animal.getIDPersona() == 0) {
+			
+			ps.setNull(3, Types.INTEGER);
+			
+		} else {
+			
+			ps.setInt(3, animal.getIDPersona());
+		}
+		
+		ps.setString(4, animal.getNombre());
+		ps.setString(5, animal.getTipo());
+		ps.setString(6, animal.getRaza());
+		ps.setString(7, animal.getDescripcion());
+		ps.setInt(8, animal.getEdad());
+		ps.setDate(9, Date.valueOf(animal.getFechaAlojamiento()));
+		
+		if(animal.getFechaAdopcion() == null) {
+			
+			ps.setNull(10, Types.DATE);
+			
+		} else {
+			
+			ps.setDate(10, Date.valueOf(animal.getFechaAdopcion()));
+		}
+		
+		ps.executeUpdate();
+		ps.close();
+	
+		this.crearConsulta();
+	}
+	
+	public int idUltimoAnimal() throws SQLException {
+
+		rsNavegar.last();
+
+		return rsNavegar.getInt("idAnimal");
+	}
+	
+	public void insertaAnimalSinId(Animal animal) throws SQLException {
+		
+		PreparedStatement ps = 
+				conexion.prepareStatement("insert into centroadopcion.animales values (?,?,?,?,?,?,?,?,?,?)");
+
+		ps.setInt(1, this.idUltimoAnimal() + 1);
+		ps.setInt(2, animal.getIDCentro());
+		ps.setNull(3, Types.INTEGER);
+		ps.setString(4, animal.getNombre());
+		ps.setString(5, animal.getTipo());
+		ps.setString(6, animal.getRaza());
+		ps.setString(7, animal.getDescripcion());
+		ps.setInt(8, animal.getEdad());
+		ps.setDate(9, Date.valueOf(animal.getFechaAlojamiento()));
+		ps.setNull(10, Types.INTEGER);
 		
 		ps.executeUpdate();
 		ps.close();
@@ -234,7 +281,7 @@ public class DAOAnimales {
 		
 		PreparedStatement ps = conexion.prepareStatement(
 				"UPDATE animales SET nombre = ?, tipo = ?, raza = ?, descripcion = ?, "
-					+ "edad = ?, fechaAlojamiento = ?, codCentro = ?, codPersona = ?"
+					+ "edad = ?, fechaAlojamiento = ?, fechaAdopcion = ?, idCentro = ?, idPersona = ? "
 					+ "WHERE idAnimal = ?");
 		
 		ps.setString(1, animal.getNombre());
@@ -243,9 +290,10 @@ public class DAOAnimales {
 		ps.setString(4, animal.getDescripcion());
 		ps.setInt(5, animal.getEdad());
 		ps.setDate(6, Date.valueOf(animal.getFechaAlojamiento()));
-		ps.setInt(7, animal.getIDCentro());
-		ps.setInt(8, animal.getIDPersona());
-		ps.setInt(9, animal.getIDAnimal());
+		ps.setDate(7, Date.valueOf(animal.getFechaAdopcion()));
+		ps.setInt(8, animal.getIDCentro());
+		ps.setInt(9, animal.getIDPersona());
+		ps.setInt(10, animal.getIDAnimal());
 		
 		ps.executeUpdate();
 		ps.close();
@@ -253,16 +301,34 @@ public class DAOAnimales {
 		this.crearConsulta();		
 	}
 	
-	public void adoptaAnimal(int cod) throws SQLException{
+	public Animal adoptaAnimal(int idAnimal, int idPersona) throws Exception {
+		
+		Animal animal = null;
+		
+		PreparedStatement psS = conexion.prepareStatement("SELECT * FROM animales WHERE idAnimal = ?");
+
+		psS.setInt(1, idAnimal);
+		rsNavegar = psS.executeQuery();
+		
+		if (rsNavegar.next()) {
+
+			animal = crearAnimal();
+		    animal.esAdoptado(idPersona);
+		}
+		
+	    psS.close();
+		
 		PreparedStatement ps = 
 				conexion.prepareStatement("DELETE FROM animales WHERE idAnimal = ?");
 		
-		ps.setInt(1, cod);
+		ps.setInt(1, idAnimal);
 
 		ps.executeUpdate();
 		ps.close();
 
 		this.crearConsulta();
+		
+		return animal;
 	}
 	
 	public SortedSet<Animal> getAnimalesCentro(CentroAdopcion centro) throws SQLException, Exception {
@@ -282,6 +348,85 @@ public class DAOAnimales {
 		rsNavegar.beforeFirst();
 		
 		return listaAnimales;
+	}
+	
+	public int numAnimales() throws SQLException {
+		
+		rsNavegar.last();
+		
+		return rsNavegar.getRow();
+	}
+	
+	public int numAnimalesPorPersona(int idPersona) throws SQLException {
+
+		//System.out.println(idPersona);
+		
+	    PreparedStatement ps = conexion.prepareStatement("SELECT COUNT(idAnimal) FROM animales WHERE idPersona = ?");
+	    ps.setInt(1, idPersona);
+
+	    ResultSet rs = ps.executeQuery();
+
+	    return (rs.next())? rs.getInt(1) : -1; //en caso de que no tenga ningun animal adoptado (o en la base de datos) devuelve -1, porque si no daria un error de que el cursor solo se puede mover hacia delante
+	}
+	
+	public String[][] getMatrizAnimalesPorPersona(int idPersona) throws SQLException, Exception {
+		
+		//y aqui controlo que me llegue ese -1, y lanzare una exepcion, que despues obtendre el mensaje y lo mostrare al usuario con un JOptionPane
+		if(numAnimalesPorPersona(idPersona) <= 0) throw new Exception("Esta persona no tiene ningun animal adoptado registrado");
+		
+		String[][] animales = new String[numAnimalesPorPersona(idPersona)][10];
+
+		rsNavegar.first();
+
+		Animal animal;
+
+		for (int fila = 0; fila < animales.length; fila++) {
+
+			animal = crearAnimal();
+			//int cod, String nombre, String tipo, String raza, String descripcion, byte edad,
+			//String fechaAlojamiento, int codCentro, int codPersona
+			animales[fila][0] = animal.getIDAnimal() + "";
+			animales[fila][1] = animal.getIDCentro() + "";
+			animales[fila][2] = animal.getIDPersona() + "";
+			animales[fila][3] = animal.getNombre();
+			animales[fila][4] = animal.getTipo();
+			animales[fila][5] = animal.getRaza();
+			animales[fila][6] = animal.getDescripcion();
+			animales[fila][7] = animal.getEdad() + "";
+			animales[fila][8] = LibFechas8.getFechaFull(animal.getFechaAdopcion());
+			animales[fila][9] = LibFechas8.getFechaFull(animal.getFechaAlojamiento());
+
+			rsNavegar.next();
+		}
+		
+		return animales;
+	}
+	
+	public Animal[][] getAllMatrizVista(int idCentro) throws SQLException, Exception {
+		
+		Animal[][] matrizAnimales = new Animal[(int) Math.ceil(numAnimales() / 4f)][4];
+		Animal animal;
+
+		rsNavegar.first();
+		
+		for (int fila = 0; fila < matrizAnimales.length; fila++) {
+			
+			for (int columna = 0; columna < matrizAnimales[fila].length; columna++) {
+			
+			animal = crearAnimal();
+			
+			if(animal.getIDCentro() == idCentro) {
+								
+				matrizAnimales[fila][columna] = animal;
+				
+			} else matrizAnimales[fila][columna] = null;
+			
+			rsNavegar.next();
+			
+			}
+		}
+		
+		return matrizAnimales;
 	}
 
 	public SortedSet<Animal> getAll() throws SQLException, Exception {

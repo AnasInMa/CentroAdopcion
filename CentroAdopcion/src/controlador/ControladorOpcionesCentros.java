@@ -3,7 +3,6 @@ package controlador;
 import java.awt.event.*;
 
 import modelo.CentroAdopcion;
-import modelo.DAOAnimales;
 import modelo.FicheroConCentros;
 import vista.*;
 
@@ -12,18 +11,14 @@ public class ControladorOpcionesCentros implements MouseListener, ActionListener
 	private Vista vista;
 	private VistaOpcionesCentros vOpcionesCentros;
 	
-	private DAOAnimales daoAnimales;
-	
 	private CentroAdopcion centroAdopcion1, centroAdopcion2, centroAdopcion3, centroAdopcion4;
 	
-	public ControladorOpcionesCentros(Vista v, DAOAnimales daoA) {
+	public ControladorOpcionesCentros(Vista v) {
 		
 		vista = v;
 		
 		vOpcionesCentros = vista.getvOpcionesCentros();
 		vOpcionesCentros.control(this);
-		
-		daoAnimales = daoA;
 	}
 
 	@Override
@@ -84,7 +79,7 @@ public class ControladorOpcionesCentros implements MouseListener, ActionListener
 		//vista.añadeVistaCentroAdopcion(centroAdopcion);
 
 		vista.muestraPanelCentro();
-		new ControladorCentroAdopcion(vista, daoAnimales);
+		new ControladorCentroAdopcion(vista);
 	}
 	
 	/*private void creaYAñadeCentro(CentroAdopcion centro, String nombre) {

@@ -153,8 +153,8 @@ public class CreaYCargaTablas {
 		
 		String crearTablaPersona = "create table " + NOMBREBD.toUpperCase() + ".PERSONAS " +
 										"(idPersona INT NOT NULL PRIMARY KEY, " +
-										"nif varchar(9) NOT NULL," +
 										"nombre varchar(40) NOT NULL, " +
+										"nif varchar(9) NOT NULL," +
 										"primerApellido varchar(60) NOT NULL, " +
 										"segundoApellido varchar(60) NOT NULL, "+
 										"edad INT NOT NULL) ";

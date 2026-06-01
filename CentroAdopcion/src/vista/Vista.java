@@ -31,9 +31,14 @@ public class Vista extends JPanel{
 							FONDO_DATOS_AZUL, FONDO_ANIMALES_AZUL, FONDO_PRINCIPAL_AZUL, FONDO_BOTON_AZUL,
 		                        TEXTO_CLARO_AZUL, TEXTO_OSCURO_AZUL,
 	                        FONDO_DATOS_MORADO, FONDO_ANIMALES_MORADO, FONDO_PRINCIPAL_MORADO, FONDO_BOTON_MORADO,
-		                        TEXTO_CLARO_MORADO, TEXTO_OSCURO_MORADO;
+		                        TEXTO_CLARO_MORADO, TEXTO_OSCURO_MORADO,
+	                        FONDO_DATOS_ROJO, FONDO_ANIMALES_ROJO, FONDO_PRINCIPAL_ROJO, FONDO_BOTON_ROJO,
+		                        TEXTO_CLARO_ROJO, TEXTO_OSCURO_ROJO,
+	                        FONDO_DATOS_TURQUESA, FONDO_ANIMALES_TURQUESA, FONDO_PRINCIPAL_TURQUESA, FONDO_BOTON_TURQUESA,
+		                        TEXTO_CLARO_TURQUESA, TEXTO_OSCURO_TURQUESA;
 	
-	public static Color[] ColoresVisibles, ColoresMarron, ColoresVerde, ColoresGris, ColoresAzul, ColoresMorado;
+	public static Color[] ColoresVisibles, ColoresMarron, ColoresVerde, ColoresGris,
+						ColoresAzul, ColoresMorado, ColoresRojo, ColoresTurquesa;
 	
 	public static Font FuenteTexto, FuenteTextoPC;	//PC -> Pantalla Completa
 	public static final Font FUENTE_BOTONES;
@@ -137,6 +142,30 @@ public class Vista extends JPanel{
 
 		ColoresMorado = new Color[] {FONDO_DATOS_MORADO, FONDO_ANIMALES_MORADO, FONDO_PRINCIPAL_MORADO, FONDO_BOTON_MORADO,
 		                        TEXTO_CLARO_MORADO, TEXTO_OSCURO_MORADO};
+		
+		//Rojo
+		FONDO_DATOS_ROJO = new Color(160, 40, 35);
+		FONDO_ANIMALES_ROJO = new Color(240, 195, 190);
+		FONDO_PRINCIPAL_ROJO = new Color(252, 235, 233);
+		FONDO_BOTON_ROJO = new Color(205, 70, 60);
+
+		TEXTO_CLARO_ROJO = new Color(252, 243, 242);
+		TEXTO_OSCURO_ROJO = new Color(110, 25, 20);
+
+		ColoresRojo = new Color[] {FONDO_DATOS_ROJO, FONDO_ANIMALES_ROJO, FONDO_PRINCIPAL_ROJO, FONDO_BOTON_ROJO,
+		                        TEXTO_CLARO_ROJO, TEXTO_OSCURO_ROJO};
+		
+		//Teal
+		FONDO_DATOS_TURQUESA = new Color(32, 115, 105);
+		FONDO_ANIMALES_TURQUESA = new Color(185, 225, 220);
+		FONDO_PRINCIPAL_TURQUESA = new Color(230, 245, 243);
+		FONDO_BOTON_TURQUESA = new Color(55, 165, 150);
+
+		TEXTO_CLARO_TURQUESA = new Color(235, 248, 246);
+		TEXTO_OSCURO_TURQUESA = new Color(18, 75, 68);
+
+		ColoresTurquesa = new Color[] {FONDO_DATOS_TURQUESA, FONDO_ANIMALES_TURQUESA, FONDO_PRINCIPAL_TURQUESA, FONDO_BOTON_TURQUESA,
+		                        TEXTO_CLARO_TURQUESA, TEXTO_OSCURO_TURQUESA};
 		
 		//Colores
 		FicheroOpciones = "./files/opciones.txt";

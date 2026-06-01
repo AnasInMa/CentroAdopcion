@@ -9,7 +9,7 @@ public class Persona implements Serializable{
 	
 	private SortedSet<Animal> animalesAdoptados;	//Va a ser un SortedSet, ya que se ordenaran por la fecha de adopcion y ademas no habran repetidos
 	private String nombre, nif, primerApellido, segundoApellido;
-	private int idPersona; //TODO
+	private int idPersona;
 	private byte edad;
 	
 	public Persona(int cod, TreeSet<Animal> animales, String nombre, String nif, String apellido1, String apellido2, byte edad) {
@@ -26,6 +26,39 @@ public class Persona implements Serializable{
 	public Persona(int cod, String nombre, String nif, String apellido1, String apellido2, byte edad) {
 		
 		this(cod, new TreeSet<Animal>(), nombre, nif, apellido1, apellido2, edad);
+	}
+	
+	public static void validaDni(String dni) throws Exception {
+		
+		Exception ex = new Exception("Dni no valido");
+		
+		if(dni == null || dni.length() != 9 ) {
+			
+			throw ex;
+		}
+		
+		String numeros = "";
+		
+		for (int i = 0; i < dni.length() - 1; i++) {
+			
+			numeros += dni.charAt(i);
+		}
+		
+		//System.out.println("1: " +numeros);
+		
+		try {
+			
+			Integer.parseInt(numeros);
+			
+		} catch (NumberFormatException e) {
+			
+			throw ex;
+		}
+		
+		//System.out.println("2: " + dni);
+		//System.out.println("3: " + dni.charAt(8));
+		
+		if(!Character.isLetter(dni.charAt(8))) throw ex;
 	}
 	
 	/**
@@ -49,15 +82,20 @@ public class Persona implements Serializable{
 
 		if (puedeAdoptar()) {
 
-			boolean adoptado = false;
+			boolean estaAdoptado = false;
 
 			for (Animal anim : animalesAdoptados) {
 
 				if (anim.equals(animal))
-					adoptado = true;
+					estaAdoptado = true;
 			}
 
-			if (!adoptado) animalesAdoptados.add(animal);
+			if (!estaAdoptado) {
+				
+				animal.esAdoptado(idPersona);
+				
+				animalesAdoptados.add(animal);
+			}
 		}
 	}
 	

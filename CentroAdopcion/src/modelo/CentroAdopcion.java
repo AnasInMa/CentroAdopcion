@@ -143,4 +143,8 @@ public class CentroAdopcion implements Serializable{
 		return animalesAlojados;
 	}
 
+	public void setAnimalesAlojados(SortedSet<Animal> animalesAlojados) {
+		this.animalesAlojados = animalesAlojados;
+	}
+
 }

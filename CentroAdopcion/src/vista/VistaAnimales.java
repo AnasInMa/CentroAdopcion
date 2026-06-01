@@ -4,7 +4,6 @@ import java.awt.*;
 import java.util.*;
 
 import javax.swing.*;
-import javax.swing.JPopupMenu.Separator;
 import javax.swing.border.LineBorder;
 
 import modelo.Animal;
@@ -20,7 +19,7 @@ public class VistaAnimales extends JPanel {
 	private CentroAdopcion centroAdopcion;
 	private JPanel[][] matrizPaneles;
 	private JPanel[] arrayPaneles; 	//array de paneles en los que en cada uno habran metidos los 4 paneles con los animales
-	private static int contFilas;
+	private int contFilas;
 	private static final float COLUMNAS;
 	private CardLayout cartas;
 	private int filas;
@@ -29,8 +28,6 @@ public class VistaAnimales extends JPanel {
 	private Dimension tamañoPanelAnimal;
 	
 	static {
-		
-		contFilas = 0;
 		
 		COLUMNAS = 4;
 	}
@@ -54,6 +51,8 @@ public class VistaAnimales extends JPanel {
 			
 			e.printStackTrace();
 		}
+		
+		contFilas = 0;
 	}
 	
 	public VistaAnimales(CentroAdopcion centro, VistaCentroAdopcion v) {
@@ -158,20 +157,22 @@ public class VistaAnimales extends JPanel {
 				lDatos = new JLabel(animal.toStringSinCodigo());
 				lDatos.setAlignmentX(JLabel.LEFT_ALIGNMENT);
 				
+				//System.out.println(animal);
+				
 				//Imagen
 				imagenSinEscalar = new ImageIcon(animal.getRutaFicheroImagen());
-				//System.out.println(imagenSinEscalar);
 				
 				if(imagenSinEscalar.getIconHeight() == -1) {
 					
 					imagenSinEscalar = new ImageIcon("./imgs/sinImagen.png");
 				}
 				
+				//System.out.println(imagenSinEscalar.getDescription());
+				
 				imagen = imagenSinEscalar.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
 				imagenEscalada = new JLabel(new ImageIcon(imagen));
 				imagenEscalada.setBorder(bordeLinea);
 				
-				//System.out.println(new ImageIcon(animal.getRutaFicheroImagen()));	//Si no existe la imagen devuelve -1
 				JPanel panelImagen = new JPanel(new FlowLayout(FlowLayout.CENTER));
 				panelImagen.setAlignmentX(JPanel.LEFT_ALIGNMENT);
 				panelImagen.setBackground(Vista.FONDO_ANIMALES);
@@ -181,7 +182,7 @@ public class VistaAnimales extends JPanel {
 				panel.add(new JSeparator());
 				panel.add(panelImagen);
 				panel.add(lDatos);
-				panel.add(new Separator());
+				panel.add(new JSeparator());
 
 				taDescripcion = new JTextArea(animal.toStringDescripcion());
 				taDescripcion.setEditable(false);
@@ -290,6 +291,10 @@ public class VistaAnimales extends JPanel {
 
 	public ButtonGroup getGrupoRB() {
 		return grupoRB;
+	}
+
+	public CentroAdopcion getCentroAdopcion() {
+		return centroAdopcion;
 	}
 
 }

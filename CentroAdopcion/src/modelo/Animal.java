@@ -22,7 +22,7 @@ public class Animal implements Comparable<Animal>, Serializable{
 	public Animal(int cod, String nombre, String tipo, String raza, String descripcion, byte edad, String fechaAlojamiento) throws Exception {
 		
 		this.idAnimal = cod;
-		this.nombre = (nombre.isEmpty() || nombre == null)? "Sin Nombre" : nombre;
+		this.nombre = (nombre == null || nombre.isEmpty())? "Sin Nombre" : nombre;
 		this.tipo = tipo;
 		this.raza = raza;
 		this.descripcion = descripcion;
@@ -61,7 +61,7 @@ public class Animal implements Comparable<Animal>, Serializable{
 		this.imagen = new ImageIcon(rutaFicheroImagen);
 		
 	}*/
-	
+
 	public void esAdoptado(int codPersona) {
 		
 		idPersona = codPersona;
@@ -163,5 +163,8 @@ public class Animal implements Comparable<Animal>, Serializable{
 	public String getRutaFicheroImagen() {
 		return rutaImagen;
 	}
-	
+
+	public void setIdCentro(int idCentro) {
+		this.idCentro = idCentro;
+	}
 }

@@ -1,25 +1,29 @@
 package controlador;
 
 import java.awt.event.*;
+import java.io.*;
 import java.sql.SQLException;
+import java.util.LinkedList;
 
 import javax.swing.*;
 
+import modelo.Animal;
 import modelo.DAOAnimales;
-import vista.DialogoAdoptar;
-import vista.Vista;
-import vista.VistaAnimales;
-import vista.VistaCentroAdopcion;
+import modelo.DAOPersonas;
+import vista.*;
 
 public class ControladorCentroAdopcion implements MouseListener, ActionListener {
 
+	private JFrame ventanaPadre;
+	
 	private Vista vista;
 	private VistaCentroAdopcion vCentroAdopcion;
 	private VistaAnimales vAnimales;
 	
 	private DAOAnimales daoAnimales;
+	private DAOPersonas daoPersonas;
 
-	public ControladorCentroAdopcion(Vista v, DAOAnimales daoA) {
+	public ControladorCentroAdopcion(Vista v) {
 
 		vista = v;
 
@@ -28,7 +32,16 @@ public class ControladorCentroAdopcion implements MouseListener, ActionListener 
 		
 		vAnimales = vCentroAdopcion.getVistaAnimales();
 		
-		daoAnimales = daoA;
+		daoAnimales = vAnimales.getDao();
+		
+		try {
+			daoPersonas = new DAOPersonas();
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		ventanaPadre = (JFrame) SwingUtilities.getWindowAncestor(vista);
 	}
 
 	@Override
@@ -41,24 +54,43 @@ public class ControladorCentroAdopcion implements MouseListener, ActionListener 
 			try {
 				
 				//System.out.println("adoptar");
-				/*DialogoAdoptar d =*/ new DialogoAdoptar((JFrame) SwingUtilities.getWindowAncestor(vista), vAnimales.panelAnimalSeleccionado(), daoAnimales);
+				DialogoAdoptar d = new DialogoAdoptar(ventanaPadre, vAnimales.panelAnimalSeleccionado(), daoAnimales, daoPersonas);
 				//new ControladorDialogoAdoptar(d);
+				
+				if(d.getAnimalAdoptado() != null) {
+					
+					//Animal animal = daoAnimales.adoptaAnimal(d.getAnimalAdoptado().getIDAnimal());
+					guardaAnimalEnFichero(daoAnimales.adoptaAnimal(d.getAnimalAdoptado().getIDAnimal(), d.getIdPersona()));
+					
+					this.vCentroAdopcion.getCentroAdopcion().setAnimalesAlojados(daoAnimales.getAnimalesCentro(this.vCentroAdopcion.getCentroAdopcion()));
+					
+					JOptionPane.showMessageDialog(vAnimales, "Gracias " + d.getNombrePersona() + " por adoptar a " +  d.getAnimalAdoptado().getNombre() + "!", "Adoptado en " + this.vCentroAdopcion.getCentroAdopcion().getNombre(), JOptionPane.INFORMATION_MESSAGE);
+					
+					this.vista.muestraPanelOpcionesCentros();
+				}
+				
 				
 			} catch (NullPointerException error) {
 				
 				JOptionPane.showMessageDialog(vCentroAdopcion, "Debe de seleccionar un animal para poder adoptarlo" , "ERROR", JOptionPane.ERROR_MESSAGE);
+				
 			} catch (ClassNotFoundException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
 
 		} else if (e.getSource() == vCentroAdopcion.getbDarEnAdopcion()) {
 			
-			//TODO
+			new DialogoDarEnAdopcion(ventanaPadre, vCentroAdopcion.getCentroAdopcion(), daoPersonas, daoAnimales);
 
+			this.vista.muestraPanelOpcionesCentros();
+			
 		} else if (e.getSource() == vCentroAdopcion.getbPrimero()) {
 
 			//System.out.println("primero");
@@ -115,6 +147,41 @@ public class ControladorCentroAdopcion implements MouseListener, ActionListener 
 			vAnimales.ultimaFila();
 		}
 		
+	}
+	
+	/**
+	 * Metodo que guardara el animal recien adoptado (y eliminado de la base de datos)
+	 * en un fichero, para despues poder ver todos los animales que ha adoptado una persona
+	 * 
+	 * @param animal
+	 * @throws IOException 
+	 * @throws FileNotFoundException 
+	 * @throws ClassNotFoundException 
+	 */
+	private void guardaAnimalEnFichero(Animal animal) throws FileNotFoundException, IOException, ClassNotFoundException {
+		
+		LinkedList<Animal> listaAnimales = new LinkedList<>();
+		
+		//Por si el fichero no esta creado
+		if(!(new File("./files/AnimalesAdoptados.dat").exists())) {
+			
+			try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(new File("./files/AnimalesAdoptados.dat")))) {
+				
+				oos.writeObject(listaAnimales);
+			}			
+		}
+		
+		try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File("./files/AnimalesAdoptados.dat")))) {
+			
+			listaAnimales = (LinkedList<Animal>) ois.readObject();
+		}
+		
+		listaAnimales.add(animal);
+		
+		try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(new File("./files/AnimalesAdoptados.dat")))) {
+			
+			oos.writeObject(listaAnimales);
+		}
 	}
 
 	@Override

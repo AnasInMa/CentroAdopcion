@@ -39,9 +39,9 @@ public class FicheroConAnimales {
 				new Animal(24, "Perla", "Gata", "Ragdoll", "es una gata muy dócil y relajada, se queda flácida cuando la coges en brazos y no protesta nunca", (byte) 1, "03/02/2026", 3),
 				new Animal(25, "Chispa", "Perra", "Jack Russell", "es una perra diminuta con energía de sobra, corre sin parar y necesita mucha estimulación mental", (byte) 3, "22/09/2024", 3),
 				new Animal(26, "Oreo", "Gato", "Europeo", "es un gato blanco y negro muy goloso, siempre ronda la cocina esperando que le den algo rico", (byte) 5, "11/04/2023", 3),
-				new Animal(27, "Nemo", "Pez", "Pez Payaso", "es un pez muy vistoso y tranquilo, perfecto para quien quiera una mascota de bajo mantenimiento", (byte) 2, "07/01/2026", 3),
+				new Animal(27, "Nemo", "Pez", "Payaso", "es un pez muy vistoso y tranquilo, perfecto para quien quiera una mascota de bajo mantenimiento", (byte) 2, "07/01/2026", 3),
 				new Animal(28, "Zeus", "Perro", "Akita Inu", "es un perro muy noble y reservado, extremadamente leal a su dueño pero desconfiado con extraños", (byte) 6, "30/08/2022", 3),
-				new Animal(29, "Tarta", "Tortuga", "Tortuga Mediterránea", "es una tortuga lenta y longeva, lleva en el centro más tiempo que ningún trabajador y ya forma parte del mobiliario", (byte) 15, "01/06/2010", 3),
+				new Animal(29, "Tarta", "Tortuga", "Mediterránea", "es una tortuga lenta y longeva, lleva en el centro más tiempo que ningún trabajador y ya forma parte del mobiliario", (byte) 15, "01/06/2010", 3),
 				//Centro4
 				new Animal(30, "Amber", "Perra", "Cocker Spaniel", "es una perra muy dulce y melancólica, le encanta apoyar la cabeza en el regazo de cualquiera que se siente", (byte) 4, "15/07/2024", 4),
 				new Animal(31, "Misty", "Gata", "Azul Ruso", "es una gata elegante y silenciosa, observa todo con sus ojos verdes y raramente hace ruido", (byte) 3, "28/03/2025", 4),
@@ -50,9 +50,9 @@ public class FicheroConAnimales {
 				new Animal(34, "Tofu", "Conejo", "Holandés", "es un conejo pequeño y muy nervioso, da saltos de alegría cuando le sacan de la jaula a explorar", (byte) 1, "23/08/2025", 4),
 				new Animal(35, "Hera", "Perra", "Shiba Inu", "es una perra muy orgullosa e independiente, hace lo que quiere pero siempre vuelve para un abrazo", (byte) 4, "10/02/2024", 4),
 				new Animal(36, "Carbón", "Gato", "Europeo", "es un gato negro rescatado de la calle, al principio araña pero con paciencia se convierte en el mejor compañero", (byte) 7, "16/05/2022", 4),
-				new Animal(37, "Pip", "Hámster", "Hámster Sirio", "es un hámster muy activo por las noches, corre kilómetros en su rueda y acumula comida en los carrillos", (byte) 1, "31/01/2026", 4),
+				new Animal(37, "Pip", "Hámster", "Sirio", "es un hámster muy activo por las noches, corre kilómetros en su rueda y acumula comida en los carrillos", (byte) 1, "31/01/2026", 4),
 				new Animal(38, "Atena", "Perra", "Border Collie", "es una perra extremadamente inteligente, aprende cualquier orden en minutos y se aburre si no tiene retos", (byte) 2, "05/09/2025", 4),
-				new Animal(39, "Goldie", "Pez", "Pez Dorado", "es un pez tranquilo y brillante, lleva años en el centro y sobrevive a todo, es prácticamente inmortal", (byte) 8, "20/04/2018", 4),
+				new Animal(39, "Goldie", "Pez", "Dorado", "es un pez tranquilo y brillante, lleva años en el centro y sobrevive a todo, es prácticamente inmortal", (byte) 8, "20/04/2018", 4),
 				new Animal(40, "Wilson", "Gato", "Dorado Sombreado", "es un gato que duerme mucho, come mucho y caga mucho", (byte) 2, "12/02/2025", 4)};
 		
 			for (int i = 0; i < animales.length; i++) {

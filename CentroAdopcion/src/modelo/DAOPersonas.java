@@ -39,7 +39,16 @@ public class DAOPersonas {
 	
 	public int numPersonas() throws SQLException {
 		
-		return statement.executeQuery("SELECT COUNT(idPersona) FROM personas").getInt("idPersona");
+		rsNavegar.last();
+		
+		return rsNavegar.getRow();
+	}
+	
+	public int idUltimaPersona() throws SQLException {
+		
+		rsNavegar.last();
+		
+		return rsNavegar.getInt("idPersona");
 	}
 	
 	public void cierraConexion() throws SQLException {
@@ -63,6 +72,61 @@ public class DAOPersonas {
 					rsNavegar.getByte("edad"));
 	}
 	
+	public Persona buscaPersona(int idPersona) throws SQLException, Exception {
+
+		PreparedStatement ps = conexion.prepareStatement("SELECT * FROM personas WHERE idPersona = ?");
+		ps.setInt(1, idPersona);
+
+		ResultSet rs = ps.executeQuery();
+
+		Persona persona = null;
+
+		if (rs.next()) {
+			persona = 
+					new Persona(
+							rs.getInt("idPersona"),
+							rs.getString("nombre"),
+							rs.getString("nif"),
+							rs.getString("primerApellido"),
+							rs.getString("segundoApellido"),
+							rs.getByte("edad"));
+		}
+
+		rs.close();
+		ps.close();
+
+		return persona;
+
+	}
+	
+	public Persona buscaPersonaPorDni(String nif) throws SQLException, Exception {
+
+		PreparedStatement ps = conexion.prepareStatement("SELECT * FROM personas WHERE nif = ?");
+		ps.setString(1, nif);
+
+		ResultSet rs = ps.executeQuery();
+
+		Persona persona = null;
+
+		if (rs.next()) {
+			persona = new Persona(
+						rs.getInt("idPersona"),
+						rs.getString("nombre"),
+						rs.getString("nif"),
+						rs.getString("primerApellido"),
+						rs.getString("segundoApellido"),
+						rs.getByte("edad"));
+		}
+		
+		//System.out.println(persona);
+
+		rs.close();
+		ps.close();
+
+		return persona;
+
+	}
+	
 	public void insertaPersona(Persona persona) throws SQLException {
 		
 		PreparedStatement ps = 
@@ -81,13 +145,37 @@ public class DAOPersonas {
 		this.crearConsulta();
 	}
 	
+	public void insertaPersonaSinId(Persona persona) throws SQLException {
+		
+		PreparedStatement ps = 
+				conexion.prepareStatement("insert into centroadopcion.personas values (?,?,?,?,?,?)");
+
+		ps.setInt(1, this.idUltimaPersona() + 1);
+		ps.setString(2, persona.getNombre());
+		ps.setString(3, persona.getNif());
+		ps.setString(4, persona.getPrimerApellido());
+		ps.setString(5, persona.getSegundoApellido());
+		ps.setInt(6, persona.getEdad());
+		
+		ps.executeUpdate();
+		ps.close();
+	
+		this.crearConsulta();
+	}
+	
+	public Persona getUltimo() throws SQLException, Exception {
+		
+		rsNavegar.last();
+		return crearPersona();
+	}
+	
 	public String[][] getAllMatriz() throws SQLException, Exception {
+		
+		String[][] matrizPersonas = new String[this.numPersonas()][6];
 		
 		rsNavegar.first();
 		
 		Persona persona;
-		
-		String[][] matrizPersonas = new String[numPersonas()][6];
 		
 		for (int fila = 0; fila < matrizPersonas.length; fila++) {
 			
