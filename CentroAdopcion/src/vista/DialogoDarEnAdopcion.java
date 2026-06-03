@@ -304,6 +304,7 @@ public class DialogoDarEnAdopcion extends JDialog implements ActionListener {
 					if (dialogoP.isHaSeleccionadoAnimal()) {
 
 						this.animal = dialogoP.getAnimalSeleccionado();
+						this.animal.setIdAnimal(daoAnimales.idUltimoAnimal() + 1);
 						this.animal.setIdCentro(this.centroAdopcion.getIDCentro());
 
 						this.añadeAnimalACampos();

@@ -1,16 +1,12 @@
 package modelo;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 
 public class FicheroConPersonas {
 
 	public static void creaFicheroPersonas() {
 		
-		Persona p0 = new Persona(1, "Pedro", "12345678A", "Sánchez", "Castejón", (byte) 54);
+		Persona p0 = new Persona(1, "Pedro", "12345678A", "Abascal", "Garcia", (byte) 54);
 		Persona p1 = new Persona(2, "María", "23456789B", "García", "López", (byte) 32);
 		Persona p2 = new Persona(3, "Juan", "34567890C", "Martínez", "Ruiz", (byte) 47);
 		Persona p3 = new Persona(4, "Laura", "45678901D", "Fernández", "Torres", (byte) 28);
@@ -19,7 +15,7 @@ public class FicheroConPersonas {
 		Persona p6 = new Persona(7, "Diego", "78901234G", "López", "Navarro", (byte) 22);
 		Persona p7 = new Persona(8, "Isabel", "89012345H", "Muñoz", "Serrano", (byte) 55);
 		Persona p8 = new Persona(9, "Roberto", "90123456I", "Pérez", "Jiménez", (byte) 43);
-		Persona p9 = new Persona(10, "Sofía", "01234567J", "Castro", "Blanco", (byte) 17);
+		Persona p9 = new Persona(10, "Sofía", "01234567J", "Castro", "Blanco", (byte) 18);
 
 		Persona[] personas = {p0, p1, p2, p3, p4, p5, p6, p7, p8, p9};
 				

@@ -93,29 +93,29 @@ public class DAOAnimales {
 	 * @throws SQLException
 	 * @throws Exception
 	 */
-	public Animal[] getCuatroPrimeros() throws SQLException, Exception {		
-		
-		rsNavegar.first();
-		
-		Animal[] animales = new Animal[4];
-		Animal animal;
-		boolean quedanAnimales = true;
-		
-		for(int i = 0; i < 4 && quedanAnimales; i++) {
-						
-			animal = this.crearAnimal();
-						
-			if(animal != null) {
-				
-				animales[i] = animal;
-				
-				rsNavegar.next();
-				
-			} else quedanAnimales = false;
-		}
-		
-		return animales;
-	}
+//	public Animal[] getCuatroPrimeros() throws SQLException, Exception {		
+//		
+//		rsNavegar.first();
+//		
+//		Animal[] animales = new Animal[4];
+//		Animal animal;
+//		boolean quedanAnimales = true;
+//		
+//		for(int i = 0; i < 4 && quedanAnimales; i++) {
+//						
+//			animal = this.crearAnimal();
+//						
+//			if(animal != null) {
+//				
+//				animales[i] = animal;
+//				
+//				rsNavegar.next();
+//				
+//			} else quedanAnimales = false;
+//		}
+//		
+//		return animales;
+//	}
 	
 	/**
 	 * Metodo que devuelve una matriz de los cuatro animales siguientes,
@@ -125,27 +125,27 @@ public class DAOAnimales {
 	 * @throws SQLException
 	 * @throws Exception
 	 */
-	public Animal[] getCuatroSiguientes() throws SQLException, Exception {		
-		
-		Animal[] animales = new Animal[4];
-		Animal animal;
-		boolean quedanAnimales = true;
-		
-		for(int i = 0; i < 4 && quedanAnimales; i++) {
-			
-			rsNavegar.next();
-			
-			animal = this.crearAnimal();
-			
-			if(animal != null) {
-				
-				animales[i] = animal;
-				
-			} else quedanAnimales = false;
-		}
-		
-		return animales;
-	}
+//	public Animal[] getCuatroSiguientes() throws SQLException, Exception {		
+//		
+//		Animal[] animales = new Animal[4];
+//		Animal animal;
+//		boolean quedanAnimales = true;
+//		
+//		for(int i = 0; i < 4 && quedanAnimales; i++) {
+//			
+//			rsNavegar.next();
+//			
+//			animal = this.crearAnimal();
+//			
+//			if(animal != null) {
+//				
+//				animales[i] = animal;
+//				
+//			} else quedanAnimales = false;
+//		}
+//		
+//		return animales;
+//	}
 	
 	/**
 	 * Metodo que devuelve una matriz de los cuatro animales anteriores,
@@ -155,27 +155,27 @@ public class DAOAnimales {
 	 * @throws SQLException
 	 * @throws Exception
 	 */
-	public Animal[] getCuatroAnteriores() throws SQLException, Exception {		
-		
-		Animal[] animales = new Animal[4];
-		Animal animal;
-		boolean quedanAnimales = true;
-		
-		for(int i = 0; i < 4 && quedanAnimales; i++) {
-						
-			animal = this.crearAnimal();
-						
-			if(animal != null) {
-				
-				animales[i] = animal;
-				
-				rsNavegar.previous();
-				
-			} else quedanAnimales = false;
-		}
-		
-		return animales;
-	}
+//	public Animal[] getCuatroAnteriores() throws SQLException, Exception {		
+//		
+//		Animal[] animales = new Animal[4];
+//		Animal animal;
+//		boolean quedanAnimales = true;
+//		
+//		for(int i = 0; i < 4 && quedanAnimales; i++) {
+//						
+//			animal = this.crearAnimal();
+//						
+//			if(animal != null) {
+//				
+//				animales[i] = animal;
+//				
+//				rsNavegar.previous();
+//				
+//			} else quedanAnimales = false;
+//		}
+//		
+//		return animales;
+//	}
 	
 	/**
 	 * Metodo que devuelve una matriz de los cuatro ultimos animales,
@@ -185,29 +185,29 @@ public class DAOAnimales {
 	 * @throws SQLException
 	 * @throws Exception
 	 */
-	public Animal[] getCuatroUltimos() throws SQLException, Exception {		
-		
-		rsNavegar.last();
-		
-		Animal[] animales = new Animal[4];
-		Animal animal;
-		boolean quedanAnimales = true;
-		
-		for(int i = 0; i < 4 && quedanAnimales; i++) {
-						
-			animal = this.crearAnimal();
-						
-			if(animal != null) {
-				
-				animales[i] = animal;
-				
-				rsNavegar.previous();
-				
-			} else quedanAnimales = false;
-		}
-		
-		return animales;
-	}
+//	public Animal[] getCuatroUltimos() throws SQLException, Exception {		
+//		
+//		rsNavegar.last();
+//		
+//		Animal[] animales = new Animal[4];
+//		Animal animal;
+//		boolean quedanAnimales = true;
+//		
+//		for(int i = 0; i < 4 && quedanAnimales; i++) {
+//						
+//			animal = this.crearAnimal();
+//						
+//			if(animal != null) {
+//				
+//				animales[i] = animal;
+//				
+//				rsNavegar.previous();
+//				
+//			} else quedanAnimales = false;
+//		}
+//		
+//		return animales;
+//	}
 	
 	public void insertaAnimal(Animal animal) throws SQLException {
 		
@@ -248,14 +248,12 @@ public class DAOAnimales {
 		this.crearConsulta();
 	}
 	
-	public int idUltimoAnimal() throws SQLException {
+	public int idUltimoAnimal() throws SQLException, Exception {
 
-		rsNavegar.last();
-
-		return rsNavegar.getInt("idAnimal");
+		return this.getUltimo().getIDAnimal();
 	}
 	
-	public void insertaAnimalSinId(Animal animal) throws SQLException {
+	public void insertaAnimalSinId(Animal animal) throws SQLException, Exception {
 		
 		PreparedStatement ps = 
 				conexion.prepareStatement("insert into centroadopcion.animales values (?,?,?,?,?,?,?,?,?,?)");
@@ -473,45 +471,6 @@ public class DAOAnimales {
 		return animal;
 
 	}
-	
-	/**
-	 * Método que devuelve una matriz con una matriz que contiene el 
-	 * resultado de una consulta
-	 * @return
-	 * @throws SQLException
-	 */
-	/*public String[][] datosConsulta1() throws SQLException{
-		
-		// Crear la consulta, mejor parametrizarla si la fecha se le va a pedir al usuario
-		java.sql.Date fechaAdopcion = Date.valueOf(LocalDate.of(2010, 01, 01));
-		String consulta = "select * from animales where fechaAdopcion >'"+ fechaAdopcion+ "'";
-	
-		ResultSet rsConsulta = null;  
-		rsConsulta = this.stmt.executeQuery(consulta);
-		
-		// Averiguar el numero de filas devueltas
-		rsConsulta.last();
-		int numFilas = rsConsulta.getRow();
-		rsConsulta.first();
-		
-		// Ir volcando cada fila en una fila de la matriz
-		String [][]datos = new String[numFilas][5];
-		
-		for(int fila = 0; fila < numFilas; fila++){
-			datos[fila][0] = Integer.toString(rsConsulta.getInt("codigo"));
-			datos[fila][1] = rsConsulta.getString("titulo");
-			datos[fila][2] = rsConsulta.getString("autor");
-			datos[fila][3] = LibFechas8.transformaFecha(
-									rsConsulta.getDate("fechaPubli").toLocalDate().toString());
-			datos[fila][4] = Double.toString(rsConsulta.getDouble("precio"));
-			
-			rsConsulta.next();
-		}
-		
-		this.crearConsulta();
-		
-		return datos;
-	}*/
 	
 }
 

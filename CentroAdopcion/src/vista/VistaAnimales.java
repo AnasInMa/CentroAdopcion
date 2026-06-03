@@ -132,6 +132,8 @@ public class VistaAnimales extends JPanel {
 				
 				animal = iterador.next();
 				
+				System.out.println(animal);
+				
 				panel = (matrizPaneles[i][j] = new JPanel());
 				panel.setBackground(Vista.FONDO_ANIMALES);
 				panel.setBorder(bordeLinea);

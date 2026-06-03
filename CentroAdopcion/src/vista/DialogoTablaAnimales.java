@@ -106,7 +106,6 @@ public class DialogoTablaAnimales extends JDialog implements ActionListener{
 			
 		}
 		
-		
 		String[][] animales = new String[cont][10];
 		
 		cont = 0;

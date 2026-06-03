@@ -60,7 +60,7 @@ public class Animal implements Comparable<Animal>, Serializable {
 		this.extension = extensionImagen;
 		
 		this.rutaImagen = (extensionImagen == null)? null : "./imgs/Animal" + idAnimal + "." + extensionImagen;
-		System.out.println(this.rutaImagen);
+		//System.out.println(this.rutaImagen);
 	}
 
 	public void esAdoptado(int codPersona) {
@@ -167,5 +167,11 @@ public class Animal implements Comparable<Animal>, Serializable {
 
 	public void setIdCentro(int idCentro) {
 		this.idCentro = idCentro;
+	}
+
+	public void setIdAnimal(int idAnimal) {
+		
+		this.idAnimal = idAnimal;
+		this.rutaImagen = "./imgs/Animal" + this.idAnimal + this.extension;
 	}
 }
