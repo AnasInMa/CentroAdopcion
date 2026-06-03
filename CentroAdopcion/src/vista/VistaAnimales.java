@@ -9,6 +9,7 @@ import javax.swing.border.LineBorder;
 import modelo.Animal;
 import modelo.CentroAdopcion;
 import modelo.DAOAnimales;
+import utilidades.UtilidadesVariables;
 
 public class VistaAnimales extends JPanel {
 	
@@ -35,7 +36,7 @@ public class VistaAnimales extends JPanel {
 	public VistaAnimales(CentroAdopcion centro) {
 		
 		this.setLayout(cartas = new CardLayout());
-		this.setBackground(Vista.FONDO_PRINCIPAL);
+		this.setBackground(UtilidadesVariables.FONDO_PRINCIPAL);
 		
 		centroAdopcion = centro;
 		
@@ -93,7 +94,7 @@ public class VistaAnimales extends JPanel {
 			
 			rboton.setFocusable(false);
 			rboton.setAlignmentX(JRadioButton.LEFT_ALIGNMENT);
-			rboton.setBackground(Vista.FONDO_ANIMALES);
+			rboton.setBackground(UtilidadesVariables.FONDO_ANIMALES);
 			grupoRB.add(rboton);
 		}
 	}
@@ -112,7 +113,7 @@ public class VistaAnimales extends JPanel {
 		JPanel panel, panelNombre;
 		Animal animal;
 		
-		LineBorder bordeLinea = new LineBorder(Vista.TEXTO_OSCURO, 4);
+		LineBorder bordeLinea = new LineBorder(UtilidadesVariables.TEXTO_OSCURO, 4);
 		
 		Iterator<Animal> iterador = centroAdopcion.getAnimalesAlojados().iterator();
 		
@@ -135,7 +136,7 @@ public class VistaAnimales extends JPanel {
 				System.out.println(animal);
 				
 				panel = (matrizPaneles[i][j] = new JPanel());
-				panel.setBackground(Vista.FONDO_ANIMALES);
+				panel.setBackground(UtilidadesVariables.FONDO_ANIMALES);
 				panel.setBorder(bordeLinea);
 				panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 				
@@ -149,7 +150,7 @@ public class VistaAnimales extends JPanel {
 				lId = new JLabel(animal.getIDAnimal() + "");
 				
 				panelNombre = new JPanel();
-				panelNombre.setBackground(Vista.FONDO_ANIMALES);
+				panelNombre.setBackground(UtilidadesVariables.FONDO_ANIMALES);
 				panelNombre.setAlignmentX(JPanel.LEFT_ALIGNMENT);
 				panelNombre.setLayout(new BoxLayout(panelNombre, BoxLayout.X_AXIS));
 				panelNombre.add(lNombre);
@@ -177,7 +178,7 @@ public class VistaAnimales extends JPanel {
 				
 				JPanel panelImagen = new JPanel(new FlowLayout(FlowLayout.CENTER));
 				panelImagen.setAlignmentX(JPanel.LEFT_ALIGNMENT);
-				panelImagen.setBackground(Vista.FONDO_ANIMALES);
+				panelImagen.setBackground(UtilidadesVariables.FONDO_ANIMALES);
 				panelImagen.add(imagenEscalada);
 				
 				panel.add(panelNombre);
@@ -189,7 +190,7 @@ public class VistaAnimales extends JPanel {
 				taDescripcion = new JTextArea(animal.toStringDescripcion());
 				taDescripcion.setEditable(false);
 				taDescripcion.setFocusable(false);
-				taDescripcion.setBackground(Vista.FONDO_ANIMALES);
+				taDescripcion.setBackground(UtilidadesVariables.FONDO_ANIMALES);
 				taDescripcion.setAlignmentX(JTextArea.LEFT_ALIGNMENT);
 				
 				taDescripcion.setLineWrap(true);		// salto de linea automatico
@@ -203,7 +204,7 @@ public class VistaAnimales extends JPanel {
 				panel.add(spDescripcion);
 				
 				arrayPaneles[i].add(panel);
-				arrayPaneles[i].setBackground(Vista.FONDO_PRINCIPAL);
+				arrayPaneles[i].setBackground(UtilidadesVariables.FONDO_PRINCIPAL);
 			}
 			
 			

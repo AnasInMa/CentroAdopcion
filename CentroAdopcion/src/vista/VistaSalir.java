@@ -6,6 +6,7 @@ import java.awt.Font;
 import javax.swing.*;
 
 import controlador.ControladorSalir;
+import utilidades.UtilidadesVariables;
 
 public class VistaSalir extends JPanel{
 
@@ -37,16 +38,16 @@ public class VistaSalir extends JPanel{
 	private void iniciaComponentes() {
 		
 		bConfirmarSalida = new JButton("Confirmar");
-		bConfirmarSalida.setFont(Vista.FUENTE_BOTONES);
+		bConfirmarSalida.setFont(UtilidadesVariables.FUENTE_BOTONES);
 		
 		bCancelarSalida = new JButton("Cancelar");
-		bCancelarSalida.setFont(Vista.FUENTE_BOTONES);
+		bCancelarSalida.setFont(UtilidadesVariables.FUENTE_BOTONES);
 	}
 	
 	private JPanel panelTexto() {
 		
 		panelT = new JPanel();
-		panelT.setBackground(Vista.FONDO_PRINCIPAL);
+		panelT.setBackground(UtilidadesVariables.FONDO_PRINCIPAL);
 		
 		JLabel texto = new JLabel("¿Esta seguro que desea salir?");
 		texto.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
@@ -69,16 +70,16 @@ public class VistaSalir extends JPanel{
 	
 	public void actualizarColores() {
 		
-	    this.setBackground(Vista.FONDO_PRINCIPAL);
+	    this.setBackground(UtilidadesVariables.FONDO_PRINCIPAL);
 	    
-	    bConfirmarSalida.setBackground(Vista.FONDO_BOTON);
-	    bConfirmarSalida.setForeground(Vista.TEXTO_CLARO);
+	    bConfirmarSalida.setBackground(UtilidadesVariables.FONDO_BOTON);
+	    bConfirmarSalida.setForeground(UtilidadesVariables.TEXTO_CLARO);
 	    
-	    bCancelarSalida.setBackground(Vista.FONDO_BOTON);
-	    bCancelarSalida.setForeground(Vista.TEXTO_CLARO);
+	    bCancelarSalida.setBackground(UtilidadesVariables.FONDO_BOTON);
+	    bCancelarSalida.setForeground(UtilidadesVariables.TEXTO_CLARO);
 	    
-	    panelT.setBackground(Vista.FONDO_PRINCIPAL);
-	    panelB.setBackground(Vista.FONDO_PRINCIPAL);
+	    panelT.setBackground(UtilidadesVariables.FONDO_PRINCIPAL);
+	    panelB.setBackground(UtilidadesVariables.FONDO_PRINCIPAL);
 	}
 
 	public JButton getbConfirmarSalida() {

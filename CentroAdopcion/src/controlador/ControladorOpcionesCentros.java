@@ -26,23 +26,10 @@ public class ControladorOpcionesCentros implements MouseListener, ActionListener
 
 		if (e.getSource() == vOpcionesCentros.getbEntrarCentro1()) {
 
-			// System.out.println("centro1");
-			/*if(cont == 0) {
-				
-				centroAdopcion1 = FicheroConCentros.buscaCentro(vOpcionesCentros.getNombreCentro1());
-				cont1++;
-				
-			}
-			
-			vista.añadeVistaCentroAdopcion(centroAdopcion1);
-			vista.muestraPanelCentro();
-			*/
-			
 			if(centroAdopcion1 == null) {
 				
 				centroAdopcion1 = new CentroAdopcion(FicheroConCentros.buscaCentro(vOpcionesCentros.getNombreCentro1().getText()));
 				
-				//System.out.println("centro " + centroAdopcion1.getNombre() + " creado");
 			}
 			
 			vista.añadeVistaCentroAdopcion(centroAdopcion1);
@@ -75,31 +62,15 @@ public class ControladorOpcionesCentros implements MouseListener, ActionListener
 			vista.añadeVistaCentroAdopcion(centroAdopcion4);
 		}
 		
-		//vista.getvCentroAdopcion().setCentroAdopcion(centroAdopcion);
-		//vista.añadeVistaCentroAdopcion(centroAdopcion);
-
 		vista.muestraPanelCentro();
 		new ControladorCentroAdopcion(vista);
 	}
-	
-	/*private void creaYAñadeCentro(CentroAdopcion centro, String nombre) {
-		
-		if(centro == null) {
-			
-			centro = new CentroAdopcion(FicheroConCentros.buscaCentro(nombre));
-			
-			System.out.println("centro " + centro.getNombre() + " creado");
-		}
-		
-		vista.añadeVistaCentroAdopcion(centro);
-	}*/
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 
 		if(e.getSource() == vOpcionesCentros.getMenu()) {
 			
-			//System.out.println("menu");
 			vista.muestraAnteriorPanel();
 		}
 	}

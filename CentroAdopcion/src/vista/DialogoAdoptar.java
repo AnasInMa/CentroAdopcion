@@ -13,6 +13,8 @@ import modelo.Animal;
 import modelo.DAOAnimales;
 import modelo.DAOPersonas;
 import modelo.Persona;
+import utilidades.UtilidadesAnimales;
+import utilidades.UtilidadesVariables;
 
 public class DialogoAdoptar extends JDialog implements ActionListener{
 
@@ -43,8 +45,8 @@ public class DialogoAdoptar extends JDialog implements ActionListener{
 		panelPrincipal.setLayout(new BoxLayout(panelPrincipal, BoxLayout.Y_AXIS));
 		
 		JPanel panelAnimalPersona = new JPanel(new GridLayout(1, 2, 10, 10));
-		panelAnimalPersona.setBorder(VistaCentroAdopcion.BORDEVACIO);
-		panelAnimalPersona.setBackground(Vista.FONDO_PRINCIPAL);
+		panelAnimalPersona.setBorder(UtilidadesVariables.BORDEVACIO);
+		panelAnimalPersona.setBackground(UtilidadesVariables.FONDO_PRINCIPAL);
 		panelAnimalPersona.add(this.panelAnimal = panelAnimal);
 		panelAnimalPersona.add(panelPersona());
 		
@@ -65,43 +67,7 @@ public class DialogoAdoptar extends JDialog implements ActionListener{
 		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		this.setVisible(true);
 	}
-	
-	private int buscaIdAnimal(JPanel panelAnimal) {
-		
-		JPanel panelNombre = new JPanel();
-		int idAnimal = 0;
-		
-		panelNombre = (JPanel) panelAnimal.getComponents()[0];
-		
-		Component[] componentes = panelNombre.getComponents();
-		JLabel l;
-		boolean encontrado = false;
-		
-		for (int i = 0; i < componentes.length && !encontrado; i++) {
 
-			if (componentes[i] instanceof JLabel) {
-
-				l = (JLabel) componentes[i];
-
-				//System.out.println(l.getText());
-				
-				try {
-					
-					//System.out.println(Integer.parseInt(l.getText()));
-					idAnimal = Integer.parseInt(l.getText());
-					
-					encontrado = true;
-					
-				} catch(NumberFormatException e) {
-					
-					//e.printStackTrace();
-				}
-			}
-		}
-		
-		return idAnimal;
-	}
-	
 	private void control () {
 		
 		this.bConfirmar.addActionListener(this);
@@ -110,70 +76,35 @@ public class DialogoAdoptar extends JDialog implements ActionListener{
 	}
 	
 	private JPanel panelPersona() {
-		/*
-		JPanel panelNombre = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-		panelNombre.setBackground(Vista.FONDO_PRINCIPAL);
-		panelNombre.add(new JLabel("Nombre: "));
-		panelNombre.add(tfNombre = new JTextField(10));
-		
-		JPanel panelDni = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-		panelDni.setBackground(Vista.FONDO_PRINCIPAL);
-		panelDni.add(new JLabel("DNI: "));
-		panelDni.add(tfDni = new JTextField(10));
-		
-		JPanel panelApellido1 = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-		panelApellido1.setBackground(Vista.FONDO_PRINCIPAL);
-		panelApellido1.add(new JLabel("Primer Apellido: "));
-		panelApellido1.add(tfApellido1 = new JTextField(10));
-		
-		JPanel panelApellido2 = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-		panelApellido2.setBackground(Vista.FONDO_PRINCIPAL);
-		panelApellido2.add(new JLabel("Segundo Apellido: "));
-		panelApellido2.add(tfApellido2 = new JTextField(10));
-		
-		JPanel panelEdad = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-		panelEdad.setBackground(Vista.FONDO_PRINCIPAL);
-		panelEdad.add(new JLabel("Edad: "));
-		panelEdad.add(tfEdad = new JTextField(10));
-		
-		modificaPaneles(new JPanel[] {panelNombre, panelDni, panelApellido1, panelApellido2, panelEdad});;
-		 */
 
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-		panel.setBorder(VistaCentroAdopcion.BordeLinea);
-		panel.setBackground(Vista.FONDO_ANIMALES);
+		panel.setBorder(UtilidadesVariables.BordeLinea);
+		panel.setBackground(UtilidadesVariables.FONDO_ANIMALES);
 		
-//		panel.add(panelNombre);
-//		panel.add(panelDni);
-//		panel.add(panelApellido1);
-//		panel.add(panelApellido2);
-//		panel.add(panelEdad);
-//		panel.add(Box.createVerticalStrut(150));
-
 		tfNombre = new JTextField(10);
 		tfNombre.setBorder(new TitledBorder("Nombre"));
-		tfNombre.setBackground(Vista.FONDO_ANIMALES);
+		tfNombre.setBackground(UtilidadesVariables.FONDO_ANIMALES);
 		panel.add(tfNombre);
 		
 		tfApellido1 = new JTextField(10);
 		tfApellido1.setBorder(new TitledBorder("Primer Apellido"));
-		tfApellido1.setBackground(Vista.FONDO_ANIMALES);
+		tfApellido1.setBackground(UtilidadesVariables.FONDO_ANIMALES);
 		panel.add(tfApellido1);
 		
 		tfApellido2 = new JTextField(10);
 		tfApellido2.setBorder(new TitledBorder("Segundo Apellido"));
-		tfApellido2.setBackground(Vista.FONDO_ANIMALES);
+		tfApellido2.setBackground(UtilidadesVariables.FONDO_ANIMALES);
 		panel.add(tfApellido2);
 		
 		tfDni = new JTextField(10);
 		tfDni.setBorder(new TitledBorder("DNI"));
-		tfDni.setBackground(Vista.FONDO_ANIMALES);
+		tfDni.setBackground(UtilidadesVariables.FONDO_ANIMALES);
 		panel.add(tfDni);
 		
 		tfEdad = new JTextField(10);
 		tfEdad.setBorder(new TitledBorder("Edad"));
-		tfEdad.setBackground(Vista.FONDO_ANIMALES);
+		tfEdad.setBackground(UtilidadesVariables.FONDO_ANIMALES);
 		panel.add(tfEdad);
 
 		panel.add(Box.createVerticalStrut(120));
@@ -183,22 +114,13 @@ public class DialogoAdoptar extends JDialog implements ActionListener{
 		
 		panel.add(bElegirPersona);
 		
-//		panel.add(new JLabel(" "));
-//		panel.add(new JLabel(" "));
-//		panel.add(new JLabel(" "));
-//		panel.add(new JLabel(" "));
-//		panel.add(new JLabel(" "));
-//		panel.add(new JLabel(" "));
-//		panel.add(new JLabel(" "));
-//		panel.add(new JLabel(" "));
-
 		return panel;
 	}
 		
 	private JPanel panelBotones() {
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(Vista.FONDO_PRINCIPAL);
+		panel.setBackground(UtilidadesVariables.FONDO_PRINCIPAL);
 		
 		bConfirmar = new JButton("Confirmar");
 		bCancelar = new JButton("Cancelar");
@@ -217,8 +139,8 @@ public class DialogoAdoptar extends JDialog implements ActionListener{
 		
 		for (JButton boton : botones) {
 			
-			boton.setForeground(Vista.TEXTO_CLARO);
-			boton.setBackground(Vista.FONDO_BOTON);
+			boton.setForeground(UtilidadesVariables.TEXTO_CLARO);
+			boton.setBackground(UtilidadesVariables.FONDO_BOTON);
 		}
 	}
 	
@@ -227,11 +149,9 @@ public class DialogoAdoptar extends JDialog implements ActionListener{
 		
 		if(e.getSource() == bConfirmar) {
 			
-			//System.out.println("confirmar");
-			
 			try {
 				
-				animalAdoptado = daoAnimales.buscaAnimal(buscaIdAnimal(this.panelAnimal));
+				animalAdoptado = daoAnimales.buscaAnimal(UtilidadesAnimales.buscaIdAnimal(this.panelAnimal));
 				
 				if(!haElegidoPersona) {
 										
@@ -239,7 +159,7 @@ public class DialogoAdoptar extends JDialog implements ActionListener{
 					
 					if(daoPersonas.buscaPersonaPorDni(this.tfDni.getText()) == null) {	//no existe la persona
 						
-															// el id da igual porque va a cojer el ultimo + 1
+															// el id da igual porque va a coger el ultimo + 1
 						daoPersonas.insertaPersonaSinId(new Persona(0, new TreeSet<Animal>(Arrays.asList(new Animal[] {animalAdoptado})), this.tfNombre.getText(), this.tfDni.getText(), this.tfApellido1.getText(), this.tfApellido2.getText(), (byte) Byte.parseByte(this.tfEdad.getText())));
 						
 						persona = daoPersonas.getUltimo(); //si hago esto puedo obtener el id que se le ha asignado
@@ -250,7 +170,6 @@ public class DialogoAdoptar extends JDialog implements ActionListener{
 					} else {
 						
 						throw new Exception("La persona introducida ya existe");
-						
 					}
 					
 				} else {
@@ -266,9 +185,6 @@ public class DialogoAdoptar extends JDialog implements ActionListener{
 				}
 				
 				daoAnimales.modificaAnimal(animalAdoptado);
-				
-				//System.out.println(animalAdoptado);
-				//System.out.println(persona);
 				
 				nombrePersona = this.tfNombre.getText();
 				
@@ -294,8 +210,6 @@ public class DialogoAdoptar extends JDialog implements ActionListener{
 				
 				dialogoP = new DialogoTablaPersonas(this, daoPersonas.getAllMatriz(),
 								new String[] {"IdPersona", "Nombre", "DNI", "Primer Apellido", "Segundo Apellido", "Edad"});
-				
-				//System.out.println(daoPersonas.buscaPersona(dialogoP.getIdPersonaSeleccionada()));
 				
 				personaSeleccionada = daoPersonas.buscaPersona(dialogoP.getIdPersonaSeleccionada());
 				
@@ -375,34 +289,6 @@ public class DialogoAdoptar extends JDialog implements ActionListener{
 		
 		this.tfEdad.setEditable(false);
 		this.tfEdad.setFocusable(false);
-	}
-
-	public JTextField getTfNombre() {
-		return tfNombre;
-	}
-
-	public JTextField getTfDni() {
-		return tfDni;
-	}
-
-	public JTextField getTfApellido1() {
-		return tfApellido1;
-	}
-
-	public JTextField getTfApellido2() {
-		return tfApellido2;
-	}
-
-	public JTextField getTfEdad() {
-		return tfEdad;
-	}
-
-	public JButton getbConfirmar() {
-		return bConfirmar;
-	}
-
-	public JButton getbCancelar() {
-		return bCancelar;
 	}
 
 	public Animal getAnimalAdoptado() {

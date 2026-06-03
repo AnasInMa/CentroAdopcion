@@ -7,6 +7,7 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 
 import modelo.EnumColores;
+import utilidades.UtilidadesVariables;
 import vista.*;
 
 public class ControladorOpciones implements ActionListener {
@@ -43,19 +44,13 @@ public class ControladorOpciones implements ActionListener {
 
 				ventanaPadre.setExtendedState(JFrame.MAXIMIZED_BOTH);
 				
-				//vista.getvMenu().getbComenzar().setPreferredSize(new Dimension((int) (anchoBoton * 1.5), (int) (altoBoton * 1.5)));
-				//vista.getvMenu().getbOpciones().setPreferredSize(new Dimension((int) (anchoBoton * 1.5), (int) (altoBoton * 1.5)));
-				//vista.getvMenu().getbSalir().setPreferredSize(new Dimension((int) (anchoBoton * 1.5), (int) (altoBoton * 1.5)));
-				vista.getvOpcionesCentros().getTexto().setFont(Vista.FuenteTextoPC);
+				vista.getvOpcionesCentros().getTexto().setFont(UtilidadesVariables.FuenteTextoPC);
 				
 			} else {
 				
 				ventanaPadre.setExtendedState(JFrame.NORMAL);
 				
-				//vista.getvMenu().getbComenzar().setPreferredSize(new Dimension((int) (anchoBoton), (int) (altoBoton)));
-				//vista.getvMenu().getbOpciones().setPreferredSize(new Dimension((int) (anchoBoton), (int) (altoBoton)));
-				//vista.getvMenu().getbSalir().setPreferredSize(new Dimension((int) (anchoBoton), (int) (altoBoton)));
-				vista.getvOpcionesCentros().getTexto().setFont(Vista.FuenteTexto);
+				vista.getvOpcionesCentros().getTexto().setFont(UtilidadesVariables.FuenteTexto);
 			}
 			
 			estaSeleccionado = VistaOpciones.getCbPantallaCompleta().isSelected();
@@ -69,14 +64,14 @@ public class ControladorOpciones implements ActionListener {
 			VistaOpciones.getCbPantallaCompleta().setSelected(estaSeleccionado);
 		}
 
-		vOpciones.getCmbColores().setSelectedItem(EnumColores.buscaNombrePorColores(Vista.ColoresVisibles));
+		vOpciones.getCmbColores().setSelectedItem(EnumColores.buscaNombrePorColores(UtilidadesVariables.ColoresVisibles));
 		vista.muestraPrimerPanel();
 
 	}
 
 	private void guardarOpciones() {
 
-		try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File(Vista.FicheroOpciones), false))) {
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File(UtilidadesVariables.FicheroOpciones), false))) {
 
 			bw.write(Boolean.toString(VistaOpciones.getCbPantallaCompleta().isSelected()));
 			bw.newLine();
@@ -93,19 +88,17 @@ public class ControladorOpciones implements ActionListener {
 
 	private void actualizarColores(String nombreColor) {
 		
-		//System.out.println(Arrays.toString(Vista.ColoresVisibles));
-		Vista.ColoresVisibles = EnumColores.buscaColoresPorNombre(nombreColor);
-		//System.out.println(Arrays.toString(Vista.ColoresVisibles));
-
-		Vista.FONDO_DATOS = Vista.ColoresVisibles[0];
-		Vista.FONDO_ANIMALES = Vista.ColoresVisibles[1];
-		Vista.FONDO_PRINCIPAL = Vista.ColoresVisibles[2];
-		Vista.FONDO_BOTON = Vista.ColoresVisibles[3];
+		UtilidadesVariables.ColoresVisibles = EnumColores.buscaColoresPorNombre(nombreColor);
 		
-		Vista.TEXTO_CLARO = Vista.ColoresVisibles[4];
-		Vista.TEXTO_OSCURO = Vista.ColoresVisibles[5];
+		UtilidadesVariables.FONDO_DATOS = UtilidadesVariables.ColoresVisibles[0];
+		UtilidadesVariables.FONDO_ANIMALES = UtilidadesVariables.ColoresVisibles[1];
+		UtilidadesVariables.FONDO_PRINCIPAL = UtilidadesVariables.ColoresVisibles[2];
+		UtilidadesVariables.FONDO_BOTON = UtilidadesVariables.ColoresVisibles[3];
+		
+		UtilidadesVariables.TEXTO_CLARO = UtilidadesVariables.ColoresVisibles[4];
+		UtilidadesVariables.TEXTO_OSCURO = UtilidadesVariables.ColoresVisibles[5];
 
-		VistaCentroAdopcion.BordeLinea = new LineBorder(Vista.TEXTO_OSCURO, VistaCentroAdopcion.BordeLinea.getThickness());
+		UtilidadesVariables.BordeLinea = new LineBorder(UtilidadesVariables.TEXTO_OSCURO, UtilidadesVariables.BordeLinea.getThickness());
 		
 		vista.getvMenu().actualizarColores();
 	    vista.getvOpciones().actualizarColores();

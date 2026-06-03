@@ -3,8 +3,6 @@ package vista;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.time.LocalDate;
 
 import javax.swing.*;
@@ -16,6 +14,8 @@ import modelo.CentroAdopcion;
 import modelo.DAOAnimales;
 import modelo.DAOPersonas;
 import modelo.Persona;
+import utilidades.UtilidadesImagenes;
+import utilidades.UtilidadesVariables;
 
 public class DialogoDarEnAdopcion extends JDialog implements ActionListener {
 
@@ -47,7 +47,7 @@ public class DialogoDarEnAdopcion extends JDialog implements ActionListener {
 	public DialogoDarEnAdopcion(JFrame ventanaPadre, CentroAdopcion centro, DAOPersonas daoPersonas, DAOAnimales daoAnimales) {
 
 		super(ventanaPadre, "Dar Animal en Adopcion", true);
-		// this.setBackground(Vista.FONDO_PRINCIPAL);
+		// this.setBackground(UtilidadesVariables.FONDO_PRINCIPAL);
 
 		centroAdopcion = centro;
 		
@@ -68,14 +68,23 @@ public class DialogoDarEnAdopcion extends JDialog implements ActionListener {
 		this.setVisible(true);
 	}
 
+	private void control() {
+
+		this.bElegirFotoAnimal.addActionListener(this);
+		this.bElegirPersona.addActionListener(this);
+
+		this.bConfirmar.addActionListener(this);
+		this.bCancelar.addActionListener(this);
+	}
+	
 	private JPanel panelPrincipal() {
 
 		JPanel panelPrincipal = new JPanel(new BorderLayout());
-		panelPrincipal.setBackground(Vista.FONDO_PRINCIPAL);
+		panelPrincipal.setBackground(UtilidadesVariables.FONDO_PRINCIPAL);
 
 		JPanel panel = new JPanel(new GridLayout(1, 2, 10, 10));
-		panel.setBackground(Vista.FONDO_PRINCIPAL);
-		panel.setBorder(VistaCentroAdopcion.BORDEVACIO);
+		panel.setBackground(UtilidadesVariables.FONDO_PRINCIPAL);
+		panel.setBorder(UtilidadesVariables.BORDEVACIO);
 
 		panel.add(panelAnimal());
 		panel.add(panelPersona());
@@ -86,45 +95,36 @@ public class DialogoDarEnAdopcion extends JDialog implements ActionListener {
 		return panelPrincipal;
 	}
 
-	private void control() {
-
-		this.bElegirFotoAnimal.addActionListener(this);
-		this.bElegirPersona.addActionListener(this);
-
-		this.bConfirmar.addActionListener(this);
-		this.bCancelar.addActionListener(this);
-	}
-
 	private JPanel panelAnimal() {
 
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-		panel.setBackground(Vista.FONDO_ANIMALES);
-		panel.setBorder(VistaCentroAdopcion.BordeLinea);
+		panel.setBackground(UtilidadesVariables.FONDO_ANIMALES);
+		panel.setBorder(UtilidadesVariables.BordeLinea);
 
 		tfNombreAnimal = new JTextField(ANCHOTF);
 		tfNombreAnimal.setBorder(new TitledBorder("Nombre"));
-		tfNombreAnimal.setBackground(Vista.FONDO_ANIMALES);
+		tfNombreAnimal.setBackground(UtilidadesVariables.FONDO_ANIMALES);
 		panel.add(tfNombreAnimal);
 
 		tfTipo = new JTextField(ANCHOTF);
 		tfTipo.setBorder(new TitledBorder("Tipo"));
-		tfTipo.setBackground(Vista.FONDO_ANIMALES);
+		tfTipo.setBackground(UtilidadesVariables.FONDO_ANIMALES);
 		panel.add(tfTipo);
 
 		tfRaza = new JTextField(ANCHOTF);
 		tfRaza.setBorder(new TitledBorder("Raza"));
-		tfRaza.setBackground(Vista.FONDO_ANIMALES);
+		tfRaza.setBackground(UtilidadesVariables.FONDO_ANIMALES);
 		panel.add(tfRaza);
 
 		tfDescripcion = new JTextField(ANCHOTF);
 		tfDescripcion.setBorder(new TitledBorder("Descripción"));
-		tfDescripcion.setBackground(Vista.FONDO_ANIMALES);
+		tfDescripcion.setBackground(UtilidadesVariables.FONDO_ANIMALES);
 		panel.add(tfDescripcion);
 
 		tfEdadAnimal = new JTextField(ANCHOTF);
 		tfEdadAnimal.setBorder(new TitledBorder("Edad"));
-		tfEdadAnimal.setBackground(Vista.FONDO_ANIMALES);
+		tfEdadAnimal.setBackground(UtilidadesVariables.FONDO_ANIMALES);
 		panel.add(tfEdadAnimal);
 
 		panel.add(Box.createVerticalStrut(20));
@@ -133,15 +133,15 @@ public class DialogoDarEnAdopcion extends JDialog implements ActionListener {
 		imagenEscalada = imagenSinEscalar.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
 
 		imagenAnimal = new JLabel(new ImageIcon(imagenEscalada));
-		imagenAnimal.setBorder(VistaCentroAdopcion.BordeLinea);
+		imagenAnimal.setBorder(UtilidadesVariables.BordeLinea);
 		imagenAnimal.setAlignmentX(JLabel.CENTER_ALIGNMENT);
 		panel.add(imagenAnimal);
 
 		panel.add(new JLabel(" "));
 
 		this.bElegirFotoAnimal = new JButton("Elegir Imagen");
-		bElegirFotoAnimal.setForeground(Vista.TEXTO_CLARO);
-		bElegirFotoAnimal.setBackground(Vista.FONDO_BOTON);
+		bElegirFotoAnimal.setForeground(UtilidadesVariables.TEXTO_CLARO);
+		bElegirFotoAnimal.setBackground(UtilidadesVariables.FONDO_BOTON);
 		bElegirFotoAnimal.setAlignmentX(JButton.CENTER_ALIGNMENT);
 		panel.add(bElegirFotoAnimal);
 
@@ -152,39 +152,39 @@ public class DialogoDarEnAdopcion extends JDialog implements ActionListener {
 
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-		panel.setBackground(Vista.FONDO_ANIMALES);
-		panel.setBorder(VistaCentroAdopcion.BordeLinea);
+		panel.setBackground(UtilidadesVariables.FONDO_ANIMALES);
+		panel.setBorder(UtilidadesVariables.BordeLinea);
 
 		tfNombrePersona = new JTextField(ANCHOTF);
 		tfNombrePersona.setBorder(new TitledBorder("Nombre"));
-		tfNombrePersona.setBackground(Vista.FONDO_ANIMALES);
+		tfNombrePersona.setBackground(UtilidadesVariables.FONDO_ANIMALES);
 		panel.add(tfNombrePersona);
 
 		tfApellido1 = new JTextField(ANCHOTF);
 		tfApellido1.setBorder(new TitledBorder("Primer Apellido"));
-		tfApellido1.setBackground(Vista.FONDO_ANIMALES);
+		tfApellido1.setBackground(UtilidadesVariables.FONDO_ANIMALES);
 		panel.add(tfApellido1);
 
 		tfApellido2 = new JTextField(ANCHOTF);
 		tfApellido2.setBorder(new TitledBorder("Segundo Apellido"));
-		tfApellido2.setBackground(Vista.FONDO_ANIMALES);
+		tfApellido2.setBackground(UtilidadesVariables.FONDO_ANIMALES);
 		panel.add(tfApellido2);
 
 		tfDni = new JTextField(ANCHOTF);
 		tfDni.setBorder(new TitledBorder("DNI"));
-		tfDni.setBackground(Vista.FONDO_ANIMALES);
+		tfDni.setBackground(UtilidadesVariables.FONDO_ANIMALES);
 		panel.add(tfDni);
 
 		tfEdadPersona = new JTextField(ANCHOTF);
 		tfEdadPersona.setBorder(new TitledBorder("Edad"));
-		tfEdadPersona.setBackground(Vista.FONDO_ANIMALES);
+		tfEdadPersona.setBackground(UtilidadesVariables.FONDO_ANIMALES);
 		panel.add(tfEdadPersona);
 
 		panel.add(Box.createVerticalStrut(144));
 
 		bElegirPersona = new JButton("Elegir Persona");
-		bElegirPersona.setForeground(Vista.TEXTO_CLARO);
-		bElegirPersona.setBackground(Vista.FONDO_BOTON);
+		bElegirPersona.setForeground(UtilidadesVariables.TEXTO_CLARO);
+		bElegirPersona.setBackground(UtilidadesVariables.FONDO_BOTON);
 		bElegirPersona.setAlignmentX(JButton.CENTER_ALIGNMENT);
 
 		panel.add(bElegirPersona);
@@ -195,16 +195,16 @@ public class DialogoDarEnAdopcion extends JDialog implements ActionListener {
 	private JPanel panelBotones() {
 
 		JPanel panel = new JPanel();
-		panel.setBackground(Vista.FONDO_PRINCIPAL);
+		panel.setBackground(UtilidadesVariables.FONDO_PRINCIPAL);
 
 		this.bConfirmar = new JButton("Confirmar");
-		this.bConfirmar.setForeground(Vista.TEXTO_CLARO);
-		this.bConfirmar.setBackground(Vista.FONDO_BOTON);
+		this.bConfirmar.setForeground(UtilidadesVariables.TEXTO_CLARO);
+		this.bConfirmar.setBackground(UtilidadesVariables.FONDO_BOTON);
 		this.bConfirmar.setFocusable(false);
 
 		this.bCancelar = new JButton("Cancelar");
-		this.bCancelar.setForeground(Vista.TEXTO_CLARO);
-		this.bCancelar.setBackground(Vista.FONDO_BOTON);
+		this.bCancelar.setForeground(UtilidadesVariables.TEXTO_CLARO);
+		this.bCancelar.setBackground(UtilidadesVariables.FONDO_BOTON);
 		this.bCancelar.setFocusable(false);
 
 		panel.add(bConfirmar);
@@ -213,51 +213,13 @@ public class DialogoDarEnAdopcion extends JDialog implements ActionListener {
 		return panel;
 	}
 
-	public File elegirImagen() {
-
-		JFileChooser fc = new JFileChooser();
-
-		int opcion = fc.showOpenDialog(this);
-
-		if (opcion == JFileChooser.APPROVE_OPTION) {
-
-			imagenElegida = fc.getSelectedFile();
-
-			return imagenElegida;
-		}
-
-		return null;
-	}
-	
-	private void guardarImagen(Animal animal, File imagenElegida) {
-	    
-		try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(new File("./imgs/Animal" + animal.getIDAnimal() + ".png")))) {
-			
-			byte[] bytesImagen = Files.readAllBytes(Paths.get(imagenElegida.getAbsolutePath()));
-			
-			for (int i = 0; i < bytesImagen.length; i++) {
-				
-				bos.write(bytesImagen[i]);
-			}
-			
-		} catch (Exception e) {
-			
-			//JOptionPane.showMessageDialog(this, "No se ha seleccionado ninguna imagen o la imagen no es compatible (.png)", "ERROR", JOptionPane.ERROR_MESSAGE);
-			e.printStackTrace();
-		}
-	}
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
 		if (e.getSource() == bElegirFotoAnimal) {
 
-			File f = this.elegirImagen();
+			File f = UtilidadesImagenes.elegirImagen(this);
 			
-			//this.extensionImagen = f.getName().split(".")[1];
-			
-			//System.out.println(f.getName());
-
 			if (f != null) {
 				
 				this.extensionImagen = f.getName().split("\\.")[1]; //primero obtengo el nombre del fichero (algo como animal.png) y despues lo divido por un punto, para asi obtener el tipo de extension (y las dos barras \\ es para escapar el punto)
@@ -272,10 +234,6 @@ public class DialogoDarEnAdopcion extends JDialog implements ActionListener {
 					JOptionPane.showMessageDialog(this, "La imagen no es compatible (.png, .jpg, .jpeg)", "ERROR", JOptionPane.ERROR_MESSAGE);
 				}
 				
-
-				//System.out.println(f.getName());
-				
-				
 			} else {
 				
 				JOptionPane.showMessageDialog(this, "No se ha seleccionado ninguna imagen", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -287,8 +245,6 @@ public class DialogoDarEnAdopcion extends JDialog implements ActionListener {
 
 				dialogoP = new DialogoTablaPersonasConAnimales(this, daoPersonas.getAllMatriz(),
 						new String[] { "IdPersona", "Nombre", "DNI", "Primer Apellido", "Segundo Apellido", "Edad" }, daoPersonas);
-
-				// System.out.println(daoPersonas.buscaPersona(dialogoP.getIdPersonaSeleccionada()));
 
 				try {
 
@@ -324,9 +280,7 @@ public class DialogoDarEnAdopcion extends JDialog implements ActionListener {
 			}
 
 		} else if (e.getSource() == bConfirmar) {
-
-			// System.out.println("confirmar");
-
+			
 			try {
 				
 				if(haElegidoPersona) {
@@ -337,26 +291,15 @@ public class DialogoDarEnAdopcion extends JDialog implements ActionListener {
 						this.añadeAnimalACampos();
 						this.daoAnimales.insertaAnimal(animal);
 						
-						guardarImagen(new Animal(daoAnimales.getUltimo(), this.extensionImagen), this.imagenElegida);
+					} else {		//ha elegido una persona pero no ha elegido ningun animal
 						
-					} else {
-						
-						//this.centroAdopcion.alojaAnimal(animal);
 						verificaAnimal();
 						
-						//Animal anim;
+						this.daoAnimales.insertaAnimalSinId(new Animal(0, this.tfNombreAnimal.getText(), this.tfTipo.getText(), this.tfRaza.getText(), this.tfDescripcion.getText(), Byte.parseByte(this.tfEdadAnimal.getText()), LibFechas8.getFechaShort(LocalDate.now()), this.centroAdopcion.getIDCentro()));
 						
-						//System.out.println(centroAdopcion);
-						
-						this.daoAnimales.insertaAnimalSinId(/*anim = */new Animal(0, this.tfNombreAnimal.getText(), this.tfTipo.getText(), this.tfRaza.getText(), this.tfDescripcion.getText(), Byte.parseByte(this.tfEdadAnimal.getText()), LibFechas8.getFechaShort(LocalDate.now()), this.centroAdopcion.getIDCentro()));
-						
-						guardarImagen(new Animal(daoAnimales.getUltimo(), this.extensionImagen), this.imagenElegida);
-						
-						//System.out.println(anim);
-						//System.out.println(centroAdopcion);
 					}
 					
-				} else {
+				} else {		//no ha elegido a ninguna persona
 					
 					verificaPersona();
 					
@@ -364,13 +307,10 @@ public class DialogoDarEnAdopcion extends JDialog implements ActionListener {
 					
 					daoAnimales.insertaAnimalSinId(this.animal = new Animal(0, this.tfNombreAnimal.getText(), this.tfTipo.getText(), this.tfRaza.getText(), this.tfDescripcion.getText(), Byte.parseByte(this.tfEdadAnimal.getText()), LibFechas8.getFechaShort(LocalDate.now()), this.centroAdopcion.getIDCentro()));
 
-					guardarImagen(new Animal(daoAnimales.getUltimo(), this.extensionImagen), this.imagenElegida);
-					
 					daoPersonas.insertaPersonaSinId(new Persona(0, this.tfNombrePersona.getText(), this.tfDni.getText(), this.tfApellido1.getText(), this.tfApellido2.getText(), (byte) Byte.parseByte(this.tfEdadPersona.getText())));
-					
 				}
 				
-//				this.guardarImagen();
+				UtilidadesImagenes.guardarImagen(new Animal(daoAnimales.getUltimo(), this.extensionImagen), this.imagenElegida);
 				
 				this.haPulsadoBotonConfirmar = true;
 				
@@ -384,12 +324,10 @@ public class DialogoDarEnAdopcion extends JDialog implements ActionListener {
 				
 				JOptionPane.showMessageDialog(this, error.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
 				
-				//e1.printStackTrace();
 			}
 			
-		} else {
+		} else {		//cancelar
 
-			// System.out.println("cancelar");
 			haElegidoPersona = false;
 			haPulsadoBotonConfirmar = false;	//los tengo que poner aqui tambien en caso de que se haya pulsado el boton confirmar y se haya producido un error, lo que haria que ese boton estuviera todavia a true
 			

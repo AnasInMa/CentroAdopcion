@@ -22,13 +22,9 @@ public class ControladorMenu implements ActionListener{
 		
 		if(e.getSource() == vMenu.getbComenzar()) {
 			
-			//System.out.println("comenzar");
-			
 			vista.muestraSiguientePanel();
 			
 		} else if(e.getSource() == vMenu.getbOpciones()) {
-			
-			//System.out.println("opciones");
 			
 			vista.muestraPanelOpciones();
 			
@@ -36,14 +32,6 @@ public class ControladorMenu implements ActionListener{
 			
 			vista.muestraPanelSalir();
 			
-			/*
-			int opcion = JOptionPane.showConfirmDialog(vMenu, "¿Esta seguro que desea salir?", "Confirmacion", JOptionPane.YES_NO_OPTION);
-			
-			if(opcion == JOptionPane.YES_OPTION) {
-				
-				System.exit(0);				
-			}
-			*/
 		}
 		
 	}

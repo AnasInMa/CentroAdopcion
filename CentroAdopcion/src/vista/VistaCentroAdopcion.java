@@ -2,10 +2,10 @@ package vista;
 
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.border.*;
 
 import controlador.ControladorCentroAdopcion;
 import modelo.CentroAdopcion;
+import utilidades.UtilidadesVariables;
 
 public class VistaCentroAdopcion extends JPanel {
 
@@ -16,16 +16,12 @@ public class VistaCentroAdopcion extends JPanel {
 	private JButton bPrimero, bAnterior, bSiguiente, bUltimo,
 					bDarEnAdopcion, /*bPedirCita,*/ bAdoptar;
 	
-	public static LineBorder BordeLinea;
-	public final static EmptyBorder BORDEVACIO;
-	
 	private JPanel panelAnimales;
 	private VistaAnimales vAnimales;
 
 	static {
 
-		BordeLinea = new LineBorder(Vista.TEXTO_OSCURO, 4);
-		BORDEVACIO = new EmptyBorder(10, 10, 10, 10);
+		
 	}
 
 	public VistaCentroAdopcion(CentroAdopcion centro) {
@@ -53,10 +49,10 @@ public class VistaCentroAdopcion extends JPanel {
 
 	private void modificaPanelPrincipal() {
 
-		this.setPreferredSize(new Dimension(Vista.ANCHO_PANEL, Vista.ALTO_PANEL));
+		this.setPreferredSize(new Dimension(UtilidadesVariables.ANCHO_PANEL, UtilidadesVariables.ALTO_PANEL));
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		this.setBorder(BORDEVACIO);
-		this.setBackground(Vista.FONDO_PRINCIPAL);
+		this.setBorder(UtilidadesVariables.BORDEVACIO);
+		this.setBackground(UtilidadesVariables.FONDO_PRINCIPAL);
 
 		iniciaComponentes();
 		modificaComponentes();
@@ -112,8 +108,8 @@ public class VistaCentroAdopcion extends JPanel {
 
 			componente.setFocusable(false);
 
-			componente.setForeground(Vista.TEXTO_CLARO);
-			componente.setBackground(Vista.FONDO_BOTON);
+			componente.setForeground(UtilidadesVariables.TEXTO_CLARO);
+			componente.setBackground(UtilidadesVariables.FONDO_BOTON);
 		}
 	}
 
@@ -121,17 +117,17 @@ public class VistaCentroAdopcion extends JPanel {
 
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-		panel.setBackground(Vista.FONDO_DATOS);
-		panel.setBorder(BordeLinea);
+		panel.setBackground(UtilidadesVariables.FONDO_DATOS);
+		panel.setBorder(UtilidadesVariables.BordeLinea);
 
 		JPanel panelTitulo = new JPanel(new BorderLayout());
 		//panelTitulo.setLayout(new BoxLayout(panelTitulo, BoxLayout.X_AXIS));
-		panelTitulo.setBackground(Vista.FONDO_DATOS);
+		panelTitulo.setBackground(UtilidadesVariables.FONDO_DATOS);
 		
 		panelTitulo.add(atras, BorderLayout.WEST);
 		//panelTitulo.add(Box.createHorizontalGlue());
 		panelTitulo.add(nombreCentro, BorderLayout.CENTER);
-		panelTitulo.setMaximumSize(new Dimension(Vista.ANCHO_PANEL * 2, Vista.ALTO_COMPONENTE));
+		panelTitulo.setMaximumSize(new Dimension(UtilidadesVariables.ANCHO_PANEL * 2, UtilidadesVariables.ALTO_COMPONENTE));
 		
 		panel.add(panelTitulo);
 		panel.add(datosCentro);
@@ -142,14 +138,14 @@ public class VistaCentroAdopcion extends JPanel {
 	private JPanel panelAnimales() {
 
 		panelAnimales = new JPanel();
-		panelAnimales.setBorder(BordeLinea);
-		panelAnimales.setBackground(Vista.FONDO_PRINCIPAL);
+		panelAnimales.setBorder(UtilidadesVariables.BordeLinea);
+		panelAnimales.setBackground(UtilidadesVariables.FONDO_PRINCIPAL);
 		
 		panelAnimales.add(this.vAnimales = new VistaAnimales(this.centroAdopcion, this));
 
 //		JPanel panelSecundario = new JPanel();
 //		panelSecundario.setBorder(bordeVacio);
-//		panelSecundario.setBackground(Vista.MARRON_CLARO4);
+//		panelSecundario.setBackground(UtilidadesVariables.MARRON_CLARO4);
 		//panelSecundario.add(panelesAnimalesCuatro(/*panelSecundario*/));
 
 		//panelPrincipal.add(panelSecundario);
@@ -191,8 +187,8 @@ public class VistaCentroAdopcion extends JPanel {
 
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
-		panel.setBackground(Vista.FONDO_PRINCIPAL);
-		panel.setBorder(BordeLinea);
+		panel.setBackground(UtilidadesVariables.FONDO_PRINCIPAL);
+		panel.setBorder(UtilidadesVariables.BordeLinea);
 
 		panel.add(bPrimero);
 		panel.add(Box.createRigidArea(espacio));

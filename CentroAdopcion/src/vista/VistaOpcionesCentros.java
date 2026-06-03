@@ -6,6 +6,7 @@ import javax.swing.*;
 import javax.swing.border.*;
 
 import controlador.ControladorOpcionesCentros;
+import utilidades.UtilidadesVariables;
 
 public class VistaOpcionesCentros extends JPanel{
 
@@ -19,13 +20,13 @@ public class VistaOpcionesCentros extends JPanel{
 	
 	public VistaOpcionesCentros() {
 		
-		//this.setPreferredSize(new Dimension(Vista.ANCHO_PANEL, Vista.ALTO_PANEL));
+		//this.setPreferredSize(new Dimension(UtilidadesVariables.ANCHO_PANEL, UtilidadesVariables.ALTO_PANEL));
 		this.setLayout(new BorderLayout());
-		this.setBackground(Vista.FONDO_PRINCIPAL);
+		this.setBackground(UtilidadesVariables.FONDO_PRINCIPAL);
 		
 		texto = new JLabel("⬇️ELIJA UNO DE ESTOS CENTROS PARA VER LOS ANIMALES DISPONIBLES⬇️");
-		texto.setFont(Vista.FuenteTexto);
-		texto.setForeground(Vista.TEXTO_OSCURO);
+		texto.setFont(UtilidadesVariables.FuenteTexto);
+		texto.setForeground(UtilidadesVariables.TEXTO_OSCURO);
 		texto.setHorizontalAlignment(JLabel.CENTER);
 		texto.setBorder(new EmptyBorder(50, 0, 50, 0));
 		
@@ -33,7 +34,7 @@ public class VistaOpcionesCentros extends JPanel{
 		
 		panelPrincipal = new JPanel(new GridLayout(1, 4));
 		panelPrincipal.setBorder(new EmptyBorder(0, 0, 200, 0));
-		panelPrincipal.setBackground(Vista.FONDO_PRINCIPAL);
+		panelPrincipal.setBackground(UtilidadesVariables.FONDO_PRINCIPAL);
 		
 		panelPrincipal.add(panelCentro1 = añadePanelesCentros(nombreCentro1 = new JLabel("ARCA DEL TORCAL"), bEntrarCentro1, new ImageIcon("./imgs/arcaDelTorcal.jpg"), imgCentro1 = new JLabel()));
 		panelPrincipal.add(panelCentro2 = añadePanelesCentros(nombreCentro2 = new JLabel("S.P.A.P.M."), bEntrarCentro2, new ImageIcon("./imgs/SPAPM.png"), imgCentro2 = new JLabel()));
@@ -43,7 +44,7 @@ public class VistaOpcionesCentros extends JPanel{
 		menu = new JLabel(" ≡");
 		menu.setFocusable(true);
 		menu.setFont(new Font(Font.SERIF, Font.BOLD, 40));
-		menu.setBackground(Vista.FONDO_PRINCIPAL);
+		menu.setBackground(UtilidadesVariables.FONDO_PRINCIPAL);
 		
 		this.add(menu, BorderLayout.NORTH);
 		this.add(texto, BorderLayout.CENTER);
@@ -79,8 +80,8 @@ public class VistaOpcionesCentros extends JPanel{
 			boton.setFocusable(false);
 			boton.setAlignmentX(JButton.CENTER_ALIGNMENT);
 			
-			boton.setForeground(Vista.TEXTO_CLARO);
-			boton.setBackground(Vista.FONDO_BOTON);
+			boton.setForeground(UtilidadesVariables.TEXTO_CLARO);
+			boton.setBackground(UtilidadesVariables.FONDO_BOTON);
 		}
 	}
 	
@@ -88,16 +89,16 @@ public class VistaOpcionesCentros extends JPanel{
 		
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-		panel.setBackground(Vista.FONDO_PRINCIPAL);
+		panel.setBackground(UtilidadesVariables.FONDO_PRINCIPAL);
 		
-		nombreCentro.setForeground(Vista.TEXTO_OSCURO);
+		nombreCentro.setForeground(UtilidadesVariables.TEXTO_OSCURO);
 		nombreCentro.setBorder(new EmptyBorder(0, 0, 10, 0));
 		nombreCentro.setAlignmentX(JLabel.CENTER_ALIGNMENT);
 		
 		Image imagenNueva = imagen.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
 		
 		img.setIcon(new ImageIcon(imagenNueva));
-		img.setBorder(VistaCentroAdopcion.BordeLinea);
+		img.setBorder(UtilidadesVariables.BordeLinea);
 		img.setAlignmentX(JLabel.CENTER_ALIGNMENT);
 		
 		JLabel espacio = new JLabel();
@@ -113,38 +114,38 @@ public class VistaOpcionesCentros extends JPanel{
 	
 	public void actualizarColores() {
 
-		this.setBackground(Vista.FONDO_PRINCIPAL);
+		this.setBackground(UtilidadesVariables.FONDO_PRINCIPAL);
 
-		texto.setForeground(Vista.TEXTO_OSCURO);
+		texto.setForeground(UtilidadesVariables.TEXTO_OSCURO);
 
-		bEntrarCentro1.setBackground(Vista.FONDO_BOTON);
-		bEntrarCentro1.setForeground(Vista.TEXTO_CLARO);
+		bEntrarCentro1.setBackground(UtilidadesVariables.FONDO_BOTON);
+		bEntrarCentro1.setForeground(UtilidadesVariables.TEXTO_CLARO);
 
-		bEntrarCentro2.setBackground(Vista.FONDO_BOTON);
-		bEntrarCentro2.setForeground(Vista.TEXTO_CLARO);
+		bEntrarCentro2.setBackground(UtilidadesVariables.FONDO_BOTON);
+		bEntrarCentro2.setForeground(UtilidadesVariables.TEXTO_CLARO);
 
-		bEntrarCentro3.setBackground(Vista.FONDO_BOTON);
-		bEntrarCentro3.setForeground(Vista.TEXTO_CLARO);
+		bEntrarCentro3.setBackground(UtilidadesVariables.FONDO_BOTON);
+		bEntrarCentro3.setForeground(UtilidadesVariables.TEXTO_CLARO);
 
-		bEntrarCentro4.setBackground(Vista.FONDO_BOTON);
-		bEntrarCentro4.setForeground(Vista.TEXTO_CLARO);
+		bEntrarCentro4.setBackground(UtilidadesVariables.FONDO_BOTON);
+		bEntrarCentro4.setForeground(UtilidadesVariables.TEXTO_CLARO);
 
-		panelPrincipal.setBackground(Vista.FONDO_PRINCIPAL);
+		panelPrincipal.setBackground(UtilidadesVariables.FONDO_PRINCIPAL);
 
-		nombreCentro1.setForeground(Vista.TEXTO_OSCURO);
-		nombreCentro2.setForeground(Vista.TEXTO_OSCURO);
-		nombreCentro3.setForeground(Vista.TEXTO_OSCURO);
-		nombreCentro4.setForeground(Vista.TEXTO_OSCURO);
+		nombreCentro1.setForeground(UtilidadesVariables.TEXTO_OSCURO);
+		nombreCentro2.setForeground(UtilidadesVariables.TEXTO_OSCURO);
+		nombreCentro3.setForeground(UtilidadesVariables.TEXTO_OSCURO);
+		nombreCentro4.setForeground(UtilidadesVariables.TEXTO_OSCURO);
 		
-		imgCentro1.setBorder(VistaCentroAdopcion.BordeLinea);
-		imgCentro2.setBorder(VistaCentroAdopcion.BordeLinea);
-		imgCentro3.setBorder(VistaCentroAdopcion.BordeLinea);
-		imgCentro4.setBorder(VistaCentroAdopcion.BordeLinea);
+		imgCentro1.setBorder(UtilidadesVariables.BordeLinea);
+		imgCentro2.setBorder(UtilidadesVariables.BordeLinea);
+		imgCentro3.setBorder(UtilidadesVariables.BordeLinea);
+		imgCentro4.setBorder(UtilidadesVariables.BordeLinea);
 
-		panelCentro1.setBackground(Vista.FONDO_PRINCIPAL);
-		panelCentro2.setBackground(Vista.FONDO_PRINCIPAL);
-		panelCentro3.setBackground(Vista.FONDO_PRINCIPAL);
-		panelCentro4.setBackground(Vista.FONDO_PRINCIPAL);
+		panelCentro1.setBackground(UtilidadesVariables.FONDO_PRINCIPAL);
+		panelCentro2.setBackground(UtilidadesVariables.FONDO_PRINCIPAL);
+		panelCentro3.setBackground(UtilidadesVariables.FONDO_PRINCIPAL);
+		panelCentro4.setBackground(UtilidadesVariables.FONDO_PRINCIPAL);
 	}
 
 	public JLabel getTexto() {

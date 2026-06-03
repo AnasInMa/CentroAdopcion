@@ -3,17 +3,17 @@ package modelo;
 import java.awt.Color;
 import java.util.Arrays;
 
-import vista.Vista;
+import utilidades.UtilidadesVariables;
 
 public enum EnumColores {
 
-	MARRON(Vista.ColoresMarron, "Marron"),
-	VERDE(Vista.ColoresVerde, "Verde"),
-	GRIS(Vista.ColoresGris, "Gris"),
-	AZUL(Vista.ColoresAzul, "Azul"),
-	MORADO(Vista.ColoresMorado, "Morado"),
-	ROJO(Vista.ColoresRojo, "Rojo"),
-	TURQUESA(Vista.ColoresTurquesa, "Turquesa");
+	MARRON(UtilidadesVariables.ColoresMarron, "Marron"),
+	VERDE(UtilidadesVariables.ColoresVerde, "Verde"),
+	GRIS(UtilidadesVariables.ColoresGris, "Gris"),
+	AZUL(UtilidadesVariables.ColoresAzul, "Azul"),
+	MORADO(UtilidadesVariables.ColoresMorado, "Morado"),
+	ROJO(UtilidadesVariables.ColoresRojo, "Rojo"),
+	TURQUESA(UtilidadesVariables.ColoresTurquesa, "Turquesa");
 	
 	private Color[] colores;
 	private String nombreColor;
@@ -32,7 +32,7 @@ public enum EnumColores {
 	
 	public static Color[] buscaColoresPorNombre(String nombreColor) {
 		
-		Color[] coloresAux = new Color[Vista.ColoresVisibles.length];
+		Color[] coloresAux = new Color[UtilidadesVariables.ColoresVisibles.length];
 		boolean encontrado = false;
 		
 		for (int i = 0; i < enumColores.length && !encontrado; i++) {

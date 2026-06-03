@@ -6,6 +6,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import controlador.ControladorMenu;
+import utilidades.UtilidadesVariables;
 
 public class VistaMenu extends JPanel{
 
@@ -17,19 +18,19 @@ public class VistaMenu extends JPanel{
 	public VistaMenu() {
 		
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		this.setPreferredSize(new Dimension(Vista.ANCHO_PANEL, Vista.ALTO_PANEL));
+		this.setPreferredSize(new Dimension(UtilidadesVariables.ANCHO_PANEL, UtilidadesVariables.ALTO_PANEL));
 		this.setBorder(new EmptyBorder(60,10,10,10));
-		this.setBackground(Vista.FONDO_PRINCIPAL);
+		this.setBackground(UtilidadesVariables.FONDO_PRINCIPAL);
 		
 		titulo = new JLabel("CEADOP");
 		titulo.setFont(new Font(Font.SERIF, Font.BOLD, 60));
-		titulo.setForeground(Vista.TEXTO_OSCURO);
+		titulo.setForeground(UtilidadesVariables.TEXTO_OSCURO);
 		titulo.setAlignmentX(CENTER_ALIGNMENT);
 		
 		iniciaBotones();
 		
 		this.add(titulo);
-		this.add(Box.createVerticalStrut((int) Vista.multiplicadorPanel));
+		this.add(Box.createVerticalStrut((int) UtilidadesVariables.multiplicadorPanel));
 		this.decorarYAñadirBotones();
 	}
 	
@@ -51,7 +52,7 @@ public class VistaMenu extends JPanel{
 		
 		JButton[] botones = {bComenzar, bOpciones, bSalir};
 		
-		Dimension dimensionBoton = new Dimension(Vista.ANCHO_COMPONENTE, Vista.ALTO_COMPONENTE);
+		Dimension dimensionBoton = new Dimension(UtilidadesVariables.ANCHO_COMPONENTE, UtilidadesVariables.ALTO_COMPONENTE);
 		
 		for(JButton boton : botones) {
 			
@@ -60,33 +61,33 @@ public class VistaMenu extends JPanel{
 			boton.setMaximumSize(dimensionBoton);
 			
 			boton.setAlignmentX(CENTER_ALIGNMENT);
-			boton.setFont(Vista.FUENTE_BOTONES);
+			boton.setFont(UtilidadesVariables.FUENTE_BOTONES);
 			boton.setFocusable(false);
 			
-			boton.setForeground(Vista.TEXTO_CLARO);
-			boton.setBackground(Vista.FONDO_BOTON);
+			boton.setForeground(UtilidadesVariables.TEXTO_CLARO);
+			boton.setBackground(UtilidadesVariables.FONDO_BOTON);
 			
 			this.add(boton);
-			//this.add(Box.createRigidArea(new Dimension(0, Vista.ALTO_COMPONENTE)));
-			this.add(Box.createVerticalStrut(Vista.ALTO_COMPONENTE));
+			//this.add(Box.createRigidArea(new Dimension(0, UtilidadesVariables.ALTO_COMPONENTE)));
+			this.add(Box.createVerticalStrut(UtilidadesVariables.ALTO_COMPONENTE));
 			
 		}
 	}
 	
 	public void actualizarColores() {
 		
-		this.setBackground(Vista.FONDO_PRINCIPAL);
+		this.setBackground(UtilidadesVariables.FONDO_PRINCIPAL);
 		
-		titulo.setForeground(Vista.TEXTO_OSCURO);
+		titulo.setForeground(UtilidadesVariables.TEXTO_OSCURO);
 		
-		bComenzar.setBackground(Vista.FONDO_BOTON);
-		bComenzar.setForeground(Vista.TEXTO_CLARO);
+		bComenzar.setBackground(UtilidadesVariables.FONDO_BOTON);
+		bComenzar.setForeground(UtilidadesVariables.TEXTO_CLARO);
 		
-		bOpciones.setBackground(Vista.FONDO_BOTON);
-		bOpciones.setForeground(Vista.TEXTO_CLARO);
+		bOpciones.setBackground(UtilidadesVariables.FONDO_BOTON);
+		bOpciones.setForeground(UtilidadesVariables.TEXTO_CLARO);
 		
-		bSalir.setBackground(Vista.FONDO_BOTON);
-		bSalir.setForeground(Vista.TEXTO_CLARO);
+		bSalir.setBackground(UtilidadesVariables.FONDO_BOTON);
+		bSalir.setForeground(UtilidadesVariables.TEXTO_CLARO);
 	}
 
 	public JButton getbComenzar() {

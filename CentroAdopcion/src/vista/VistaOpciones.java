@@ -7,6 +7,7 @@ import javax.swing.*;
 
 import controlador.ControladorOpciones;
 import modelo.EnumColores;
+import utilidades.UtilidadesVariables;
 
 public class VistaOpciones extends JPanel{
 
@@ -23,7 +24,7 @@ public class VistaOpciones extends JPanel{
 	static {
 		
 		cbPantallaCompleta = new JCheckBox("  Pantalla Completa");
-		cbPantallaCompleta.setSelected(Vista.EsPantallaCompleta);
+		cbPantallaCompleta.setSelected(UtilidadesVariables.EsPantallaCompleta);
 		
 		IMG_EQUIS = new ImageIcon("./imgs/equis.png");
 		IMG_SINMARCAR = new ImageIcon("./imgs/sinMarcar.png");
@@ -32,7 +33,7 @@ public class VistaOpciones extends JPanel{
 	public VistaOpciones() {
 		
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		this.setBackground(Vista.FONDO_PRINCIPAL);
+		this.setBackground(UtilidadesVariables.FONDO_PRINCIPAL);
 		
 		iniciaYModificaComponentes();
 		
@@ -60,8 +61,8 @@ public class VistaOpciones extends JPanel{
 		this.lColores = new JLabel("Color de la Vista: ");
 		
 		this.cmbColores = new JComboBox<String>(EnumColores.getNombreColores());
-		this.cmbColores.setSelectedItem(EnumColores.buscaNombrePorColores(Vista.ColoresVisibles));
-		this.cmbColores.setFont(Vista.FUENTE_BOTONES);
+		this.cmbColores.setSelectedItem(EnumColores.buscaNombrePorColores(UtilidadesVariables.ColoresVisibles));
+		this.cmbColores.setFont(UtilidadesVariables.FUENTE_BOTONES);
 		
 		this.bGuardarCambios = new JButton("Guardar");
 		this.bCancelarCambios = new JButton("Cancelar");
@@ -72,38 +73,38 @@ public class VistaOpciones extends JPanel{
 
 			if (componente instanceof JButton) {
 
-				componente.setForeground(Vista.TEXTO_CLARO);
-				componente.setBackground(Vista.FONDO_BOTON);
-				componente.setFont(Vista.FUENTE_BOTONES);
+				componente.setForeground(UtilidadesVariables.TEXTO_CLARO);
+				componente.setBackground(UtilidadesVariables.FONDO_BOTON);
+				componente.setFont(UtilidadesVariables.FUENTE_BOTONES);
 
 			} else if(componente instanceof JLabel || componente instanceof JCheckBox) {
 
 				componente.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
-				//componente.setForeground(Vista.TEXTO_OSCURO);
-				componente.setBackground(Vista.FONDO_PRINCIPAL);
+				//componente.setForeground(UtilidadesVariables.TEXTO_OSCURO);
+				componente.setBackground(UtilidadesVariables.FONDO_PRINCIPAL);
 				componente.setAlignmentX(CENTER_ALIGNMENT);
 				
 			} else {
 				
-				//cmbColores.setForeground(Vista.TEXTO_OSCURO);
-				componente.setBackground(Vista.FONDO_ANIMALES);
+				//cmbColores.setForeground(UtilidadesVariables.TEXTO_OSCURO);
+				componente.setBackground(UtilidadesVariables.FONDO_ANIMALES);
 			}
 			
 			componente.setFocusable(false);
 		}
 		
-		//cmbColores.setForeground(Vista.TEXTO_OSCURO);
-		//cmbColores.setBackground(Vista.FONDO_ANIMALES);
+		//cmbColores.setForeground(UtilidadesVariables.TEXTO_OSCURO);
+		//cmbColores.setBackground(UtilidadesVariables.FONDO_ANIMALES);
 	}
 	
 	private JPanel panelPantallaCompleta() {
 		
 		panelPrincipal = new JPanel();
 		panelPrincipal.setLayout(new BoxLayout(panelPrincipal, BoxLayout.Y_AXIS));
-		panelPrincipal.setBackground(Vista.FONDO_PRINCIPAL);
+		panelPrincipal.setBackground(UtilidadesVariables.FONDO_PRINCIPAL);
 		
 		panelColores = new JPanel();
-		panelColores.setBackground(Vista.FONDO_PRINCIPAL);
+		panelColores.setBackground(UtilidadesVariables.FONDO_PRINCIPAL);
 		panelColores.add(lColores); 
 		panelColores.add(cmbColores);
 		
@@ -117,7 +118,7 @@ public class VistaOpciones extends JPanel{
 	public JPanel panelElegirColor() {
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(Vista.FONDO_PRINCIPAL);
+		panel.setBackground(UtilidadesVariables.FONDO_PRINCIPAL);
 		
 		panel.add(lColores);
 		panel.add(cmbColores);
@@ -128,7 +129,7 @@ public class VistaOpciones extends JPanel{
 	private JPanel panelBotones() {
 		
 		panelBotones = new JPanel();
-		panelBotones.setBackground(Vista.FONDO_PRINCIPAL);
+		panelBotones.setBackground(UtilidadesVariables.FONDO_PRINCIPAL);
 		
 		panelBotones.add(bGuardarCambios);
 		panelBotones.add(Box.createRigidArea(new Dimension(100,0)));
@@ -139,22 +140,22 @@ public class VistaOpciones extends JPanel{
 	
 	public void actualizarColores() {
 		
-	    this.setBackground(Vista.FONDO_PRINCIPAL);
-	    bGuardarCambios.setBackground(Vista.FONDO_BOTON);
-	    bGuardarCambios.setForeground(Vista.TEXTO_CLARO);
+	    this.setBackground(UtilidadesVariables.FONDO_PRINCIPAL);
+	    bGuardarCambios.setBackground(UtilidadesVariables.FONDO_BOTON);
+	    bGuardarCambios.setForeground(UtilidadesVariables.TEXTO_CLARO);
 	    
-	    bCancelarCambios.setBackground(Vista.FONDO_BOTON);
-	    bCancelarCambios.setForeground(Vista.TEXTO_CLARO);
+	    bCancelarCambios.setBackground(UtilidadesVariables.FONDO_BOTON);
+	    bCancelarCambios.setForeground(UtilidadesVariables.TEXTO_CLARO);
 	    
-	    //lColores.setForeground(Vista.TEXTO_OSCURO);
-	    //cmbColores.setForeground(Vista.TEXTO_OSCURO);
-	    cmbColores.setBackground(Vista.FONDO_ANIMALES);
+	    //lColores.setForeground(UtilidadesVariables.TEXTO_OSCURO);
+	    //cmbColores.setForeground(UtilidadesVariables.TEXTO_OSCURO);
+	    cmbColores.setBackground(UtilidadesVariables.FONDO_ANIMALES);
 	    
-	    cbPantallaCompleta.setBackground(Vista.FONDO_PRINCIPAL);
+	    cbPantallaCompleta.setBackground(UtilidadesVariables.FONDO_PRINCIPAL);
 	    
-	    panelPrincipal.setBackground(Vista.FONDO_PRINCIPAL);
-	    panelColores.setBackground(Vista.FONDO_PRINCIPAL);
-	    panelBotones.setBackground(Vista.FONDO_PRINCIPAL);
+	    panelPrincipal.setBackground(UtilidadesVariables.FONDO_PRINCIPAL);
+	    panelColores.setBackground(UtilidadesVariables.FONDO_PRINCIPAL);
+	    panelBotones.setBackground(UtilidadesVariables.FONDO_PRINCIPAL);
 	}
 	
 	public static JCheckBox getCbPantallaCompleta() {

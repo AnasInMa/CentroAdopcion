@@ -7,6 +7,7 @@ import javax.swing.*;
 
 import modelo.Animal;
 import modelo.DAOPersonas;
+import utilidades.UtilidadesVariables;
 
 public class DialogoTablaPersonasConAnimales extends JDialog implements ActionListener, MouseListener{
 
@@ -26,13 +27,12 @@ public class DialogoTablaPersonasConAnimales extends JDialog implements ActionLi
 
 	public DialogoTablaPersonasConAnimales(JDialog dialogoPadre, String[][] filas, String[] columnas, DAOPersonas daoP) {
 
-		super(dialogoPadre, "Elejir Persona", true);
+		super(dialogoPadre, "Elegir Persona", true);
 
 		tablaPersonas = new JTable(filas, columnas);
-		tablaPersonas.setForeground(Vista.TEXTO_OSCURO);
-		tablaPersonas.setBackground(Vista.FONDO_ANIMALES);
+		tablaPersonas.setForeground(UtilidadesVariables.TEXTO_OSCURO);
+		tablaPersonas.setBackground(UtilidadesVariables.FONDO_ANIMALES);
 		
-		//celdasNoEditables(filas);
 		daoPersonas = daoP;
 		
 		haSeleccionadoAnimal = false;
@@ -58,44 +58,32 @@ public class DialogoTablaPersonasConAnimales extends JDialog implements ActionLi
 		this.bElegirAnimal.addActionListener(this);
 		this.bCancelar.addActionListener(this);
 	}
-	
-	/*private void celdasNoEditables(String[][] filas) {
-		
-		for (int fila = 0; fila < filas.length; fila++) {
-			
-			for (int columna = 0; columna < filas[fila].length; columna++) {
-				
-				tablaPersonas.isCellEditable(fila, columna);
-			}
-		}
-		
-	}*/
 
 	private JPanel panelPrincipal() {
 
 		JPanel panelPrincipal = new JPanel(new BorderLayout());
 		
 		bConfirmar = new JButton("Confirmar");
-		bConfirmar.setForeground(Vista.TEXTO_CLARO);
-		bConfirmar.setBackground(Vista.FONDO_BOTON);
+		bConfirmar.setForeground(UtilidadesVariables.TEXTO_CLARO);
+		bConfirmar.setBackground(UtilidadesVariables.FONDO_BOTON);
 		
 		bElegirAnimal = new JButton("Elegir Animal");
 		bElegirAnimal.setEnabled(false);
-		bElegirAnimal.setForeground(Vista.TEXTO_CLARO);
-		bElegirAnimal.setBackground(Vista.FONDO_BOTON);
+		bElegirAnimal.setForeground(UtilidadesVariables.TEXTO_CLARO);
+		bElegirAnimal.setBackground(UtilidadesVariables.FONDO_BOTON);
 		
 		bCancelar = new JButton("Cancelar");
-		bCancelar.setForeground(Vista.TEXTO_CLARO);
-		bCancelar.setBackground(Vista.FONDO_BOTON);
+		bCancelar.setForeground(UtilidadesVariables.TEXTO_CLARO);
+		bCancelar.setBackground(UtilidadesVariables.FONDO_BOTON);
 				
 		JPanel panelBotones = new JPanel();
-		panelBotones.setBackground(Vista.FONDO_PRINCIPAL);
+		panelBotones.setBackground(UtilidadesVariables.FONDO_PRINCIPAL);
 		panelBotones.add(bConfirmar);
 		panelBotones.add(bElegirAnimal);
 		panelBotones.add(bCancelar);
 
 		JScrollPane sp = new JScrollPane(tablaPersonas);
-		sp.setBackground(Vista.FONDO_PRINCIPAL);
+		sp.setBackground(UtilidadesVariables.FONDO_PRINCIPAL);
 		
 		panelPrincipal.add(sp, BorderLayout.CENTER);
 		panelPrincipal.add(panelBotones, BorderLayout.SOUTH);
@@ -118,8 +106,6 @@ public class DialogoTablaPersonasConAnimales extends JDialog implements ActionLi
 				
 			} else {
 				
-				//System.out.println(this.tablaPersonas.getColumnName(0));
-				//System.out.println(this.tablaPersonas.getValueAt(this.tablaPersonas.getSelectedRow(), 0).toString());
 				idPersonaSeleccionada = Integer.parseInt(this.tablaPersonas.getValueAt(this.tablaPersonas.getSelectedRow(), 0).toString());
 				
 				if (haSeleccionadoAnimal) {
@@ -130,16 +116,10 @@ public class DialogoTablaPersonasConAnimales extends JDialog implements ActionLi
 				haPulsadoBotonConfirmar = true;
 			}
 
-			//System.out.println("confirmar");
-			//System.out.println(this.tablaPersonas.getSelectedRow());
-			//System.out.println(Arrays.toString(this.tablaPersonas.getSelectedRows()));
-			//System.out.println();
-			
 			this.dispose();
 			
 		} else if(e.getSource() == this.bElegirAnimal) {
 			
-			//System.out.println("elegir animal");
 			try {
 				
 				//nunca va a poder darse el caso porque ya esta controlado en el mouseListener de la tabla
@@ -154,14 +134,11 @@ public class DialogoTablaPersonasConAnimales extends JDialog implements ActionLi
 					
 				} else {
 					
-					//System.out.println(this.tablaPersonas.getColumnName(0));
-					//System.out.println(this.tablaPersonas.getValueAt(this.tablaPersonas.getSelectedRow(), 0).toString());
 					idPersonaSeleccionada = Integer.parseInt(this.tablaPersonas.getValueAt(this.tablaPersonas.getSelectedRow(), 0).toString());
 					
 					d = new DialogoTablaAnimales(this, daoPersonas.buscaPersona(this.idPersonaSeleccionada),
 													new String[] {"idAnimal", "idCentro", "idPersona", "Nombre", "Tipo", "Raza", "Descripcion", "Edad", "Fecha Alojamiento", "Fecha Adopcion"});
-				
-					//Animal animal = daoAnimales.buscaAnimal(d.getIdAnimalSeleccionado());
+
 					animalSeleccionado = d.getAnimal();
 					
 					this.haSeleccionadoAnimal = (animalSeleccionado == null)? false : true;
@@ -195,16 +172,12 @@ public class DialogoTablaPersonasConAnimales extends JDialog implements ActionLi
 		
 		if(e.getSource() == this.tablaPersonas) {
 			
-			//System.out.println("tabla");
-			
 			if(this.tablaPersonas.getSelectedRowCount() == 1) {
 				
-				//System.out.println("sisisi");
 				this.bElegirAnimal.setEnabled(true);
 				
 			} else {
 				
-				//System.out.println("nonoono");
 				this.bElegirAnimal.setEnabled(false);
 			}
 		}

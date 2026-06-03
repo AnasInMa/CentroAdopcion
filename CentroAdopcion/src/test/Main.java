@@ -3,6 +3,7 @@ package test;
 import javax.swing.*;
 
 import controlador.Controlador;
+import utilidades.UtilidadesVariables;
 import vista.Vista;
 
 public class Main {
@@ -23,7 +24,7 @@ public class Main {
 		f.pack();
 		f.setLocationRelativeTo(null);
 		f.setResizable(false);
-		f.setExtendedState(Vista.EsPantallaCompleta? JFrame.MAXIMIZED_BOTH : JFrame.NORMAL);
+		f.setExtendedState(UtilidadesVariables.EsPantallaCompleta? JFrame.MAXIMIZED_BOTH : JFrame.NORMAL);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setVisible(true);
 		

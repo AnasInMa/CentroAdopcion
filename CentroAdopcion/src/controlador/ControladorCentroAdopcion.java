@@ -1,15 +1,14 @@
 package controlador;
 
 import java.awt.event.*;
-import java.io.*;
 import java.sql.SQLException;
-import java.util.LinkedList;
 
 import javax.swing.*;
 
-import modelo.Animal;
 import modelo.DAOAnimales;
 import modelo.DAOPersonas;
+import utilidades.UtilidadesFicherosLista;
+import utilidades.UtilidadesVariables;
 import vista.*;
 
 public class ControladorCentroAdopcion implements MouseListener, ActionListener {
@@ -35,7 +34,9 @@ public class ControladorCentroAdopcion implements MouseListener, ActionListener 
 		daoAnimales = vAnimales.getDao();
 		
 		try {
+			
 			daoPersonas = new DAOPersonas();
+			
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -48,20 +49,14 @@ public class ControladorCentroAdopcion implements MouseListener, ActionListener 
 	public void actionPerformed(ActionEvent e) {
 
 		if (e.getSource() == vCentroAdopcion.getbAdoptar()) {
-
-			//System.out.println("adoptar");
 			
 			try {
 				
-				//System.out.println("adoptar");
 				DialogoAdoptar d = new DialogoAdoptar(ventanaPadre, vAnimales.panelAnimalSeleccionado(), daoAnimales, daoPersonas);
-				//new ControladorDialogoAdoptar(d);
 				
 				if(d.getAnimalAdoptado() != null) {
 					
-					//Animal animal = daoAnimales.adoptaAnimal(d.getAnimalAdoptado().getIDAnimal());
-					//guardaAnimalEnFichero(daoAnimales.adoptaAnimal(d.getAnimalAdoptado().getIDAnimal(), d.getIdPersona()));
-					guardaAnimalEnFichero(daoAnimales.adoptaAnimal(d.getAnimalAdoptado().getIDAnimal(), d.getIdPersona()));
+					UtilidadesFicherosLista.guardarAnimalEnFichero(daoAnimales.adoptaAnimal(d.getAnimalAdoptado().getIDAnimal(), d.getIdPersona()), UtilidadesVariables.archivoAnimalesAdoptados);
 					
 					this.vCentroAdopcion.getCentroAdopcion().setAnimalesAlojados(daoAnimales.getAnimalesCentro(this.vCentroAdopcion.getCentroAdopcion()));
 					
@@ -103,115 +98,28 @@ public class ControladorCentroAdopcion implements MouseListener, ActionListener 
 			
 		} else if (e.getSource() == vCentroAdopcion.getbPrimero()) {
 
-			//System.out.println("primero");
-			
-			/*try {
-
-				dao.getCuatroPrimeros();
-
-			} catch (Exception e1) {
-
-				e1.printStackTrace();
-			}*/
-			
 			vAnimales.primeraFila();
 
 		} else if (e.getSource() == vCentroAdopcion.getbAnterior()) {
 
-			/*try {
-
-				dao.getCuatroAnteriores();
-
-			} catch (Exception e1) {
-
-				e1.printStackTrace();
-			}*/
-			
 			vAnimales.anteriorFila();
 
 		} else if (e.getSource() == vCentroAdopcion.getbSiguiente()) {
 
-			/*try {
-
-				dao.getCuatroSiguientes();
-
-			} catch (Exception e1) {
-
-				e1.printStackTrace();
-			}*/
 			
 			vAnimales.siguienteFila();
 
 		} else {
 
-			// System.out.println("boton ultimo");
-			/*try {
-
-				dao.getCuatroUltimos();
-
-			} catch (Exception e1) {
-
-				e1.printStackTrace();
-			}*/
-			
 			vAnimales.ultimaFila();
 		}
 		
-	}
-	
-	/**
-	 * Metodo que guardara el animal recien adoptado (y eliminado de la base de datos)
-	 * en una lista, junto con los animales que ya hay en esa lista (lista que se lee del fichero),
-	 * para despues poder ver todos los animales que ha adoptado una persona
-	 * 
-	 * @param animal
-	 * @throws IOException 
-	 * @throws FileNotFoundException 
-	 * @throws ClassNotFoundException 
-	 */
-	private void guardaAnimalEnFichero(Animal animal) throws FileNotFoundException, IOException, ClassNotFoundException {
-		
-		LinkedList<Animal> listaAnimales = new LinkedList<>();
-		
-		try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(Vista.archivoAnimalesAdoptados))) {
-			
-			listaAnimales = (LinkedList<Animal>) ois.readObject();
-		}
-		
-		listaAnimales.add(animal);
-		
-		try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(Vista.archivoAnimalesAdoptados))) {
-			
-			oos.writeObject(listaAnimales);
-		}
-	}
-	
-	/**
-	 * Metodo que guardara el animal recien adoptado (y eliminado de la base de datos)
-	 * en un fichero, para despues poder ver todos los animales que ha adoptado una persona
-	 * 
-	 * @param animal
-	 * @throws FileNotFoundException
-	 * @throws IOException
-	 */
-	private void guardaAnimalEnFicheroObjetos(Animal animal) throws FileNotFoundException, IOException {
-		
-		//System.out.println(Vista.archivoAnimalesAdoptados.getPath());
-		
-		try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(Vista.archivoAnimalesAdoptados, true))) {
-			
-			//System.out.println("controlador" + animal);
-			
-			oos.writeObject(animal);
-		}
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 
 		if (e.getSource() == vCentroAdopcion.getAtras()) {
-
-			// System.out.println("atras");
 
 			vista.muestraPanelOpcionesCentros();
 			vAnimales.primeraFila();	//si no pusiese esto el contador no se resetearia, y entonces al salir del centro y el contador es 3 por ejemplo, al volver al entrar otra vez al mismo centro se muestra el primer panel de los animales, pero el contador sigue siendo 3, entonces si quisieras navegar por los botones de abajo no iria como se espera que fuese
