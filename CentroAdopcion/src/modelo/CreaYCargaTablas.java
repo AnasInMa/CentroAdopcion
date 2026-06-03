@@ -264,7 +264,7 @@ public class CreaYCargaTablas {
 					ps.executeUpdate();
 				}
 			}
-			
+
 		} catch(EOFException e) {
 			
 			System.out.println("datos de los animales cargados correctamente");

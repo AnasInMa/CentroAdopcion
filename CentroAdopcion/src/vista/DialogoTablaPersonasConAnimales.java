@@ -19,7 +19,7 @@ public class DialogoTablaPersonasConAnimales extends JDialog implements ActionLi
 	
 	private Animal animalSeleccionado;
 	
-	private boolean haSeleccionadoAnimal;
+	private boolean haSeleccionadoAnimal, haPulsadoBotonConfirmar;
 	private int idPersonaSeleccionada;
 	
 	private DialogoTablaAnimales d;
@@ -126,6 +126,8 @@ public class DialogoTablaPersonasConAnimales extends JDialog implements ActionLi
 
 					this.animalSeleccionado = d.getAnimal();
 				}
+				
+				haPulsadoBotonConfirmar = true;
 			}
 
 			//System.out.println("confirmar");
@@ -140,11 +142,13 @@ public class DialogoTablaPersonasConAnimales extends JDialog implements ActionLi
 			//System.out.println("elegir animal");
 			try {
 				
-				if(this.tablaPersonas.getSelectedRowCount() <= 0) {
+				//nunca va a poder darse el caso porque ya esta controlado en el mouseListener de la tabla
+				/*if(this.tablaPersonas.getSelectedRowCount() <= 0) {
 					
 					JOptionPane.showMessageDialog(this, "No se ha seleccionado a ninguna persona", "ERROR", JOptionPane.ERROR_MESSAGE);
 					
-				} else if(this.tablaPersonas.getSelectedRowCount() > 1) {
+				} else*/
+				if(this.tablaPersonas.getSelectedRowCount() > 1) {
 					
 					JOptionPane.showMessageDialog(this, "Solo se puede seleccionar a una persona", "ERROR", JOptionPane.ERROR_MESSAGE);
 					
@@ -155,12 +159,12 @@ public class DialogoTablaPersonasConAnimales extends JDialog implements ActionLi
 					idPersonaSeleccionada = Integer.parseInt(this.tablaPersonas.getValueAt(this.tablaPersonas.getSelectedRow(), 0).toString());
 					
 					d = new DialogoTablaAnimales(this, daoPersonas.buscaPersona(this.idPersonaSeleccionada),
-													new String[] {"idAnimal", "idCentro", "idPersona", "Nombre", "Tipo", "Raza", "Edad", "Fecha Alojamiento", "Fecha Adopcion"});
+													new String[] {"idAnimal", "idCentro", "idPersona", "Nombre", "Tipo", "Raza", "Descripcion", "Edad", "Fecha Alojamiento", "Fecha Adopcion"});
 				
 					//Animal animal = daoAnimales.buscaAnimal(d.getIdAnimalSeleccionado());
 					animalSeleccionado = d.getAnimal();
 					
-					this.haSeleccionadoAnimal = true;
+					this.haSeleccionadoAnimal = (animalSeleccionado == null)? false : true;
 				}
 				
 			} catch (Exception e1) {
@@ -233,5 +237,9 @@ public class DialogoTablaPersonasConAnimales extends JDialog implements ActionLi
 
 	public boolean isHaSeleccionadoAnimal() {
 		return haSeleccionadoAnimal;
+	}
+
+	public boolean isHaPulsadoBotonConfirmar() {
+		return haPulsadoBotonConfirmar;
 	}
 }

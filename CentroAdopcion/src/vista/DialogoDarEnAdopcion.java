@@ -37,9 +37,10 @@ public class DialogoDarEnAdopcion extends JDialog implements ActionListener {
 	private JLabel imagenAnimal;
 	private JButton bConfirmar, bCancelar, bElegirFotoAnimal, bElegirPersona;
 	
-	private boolean haElegidoPersona;
+	private boolean haElegidoPersona, haPulsadoBotonConfirmar;
 	
 	private File imagenElegida;
+	private String extensionImagen;
 	
 	private DialogoTablaPersonasConAnimales dialogoP;
 	
@@ -54,6 +55,7 @@ public class DialogoDarEnAdopcion extends JDialog implements ActionListener {
 		this.daoAnimales = daoAnimales;
 		
 		haElegidoPersona = false;
+		haPulsadoBotonConfirmar = false;
 
 		this.add(panelPrincipal());
 
@@ -251,25 +253,32 @@ public class DialogoDarEnAdopcion extends JDialog implements ActionListener {
 		if (e.getSource() == bElegirFotoAnimal) {
 
 			File f = this.elegirImagen();
+			
+			//this.extensionImagen = f.getName().split(".")[1];
+			
+			//System.out.println(f.getName());
 
 			if (f != null) {
 				
-				this.imagenAnimal.setIcon(new ImageIcon(new ImageIcon(f.getAbsolutePath()).getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
+				this.extensionImagen = f.getName().split("\\.")[1]; //primero obtengo el nombre del fichero (algo como animal.png) y despues lo divido por un punto, para asi obtener el tipo de extension (y las dos barras \\ es para escapar el punto)
 
-				//elegirImagen();
-				
-				/*
-				 *	 
-				try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(new File("")))) {
-
-				} catch (FileNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				if(this.extensionImagen.equalsIgnoreCase("png") || this.extensionImagen.equalsIgnoreCase("jpg") || this.extensionImagen.equalsIgnoreCase("jpeg")) {
+					
+					this.imagenElegida = f;
+					this.imagenAnimal.setIcon(new ImageIcon(new ImageIcon(f.getAbsolutePath()).getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
+					
+				} else {
+					
+					JOptionPane.showMessageDialog(this, "La imagen no es compatible (.png, .jpg, .jpeg)", "ERROR", JOptionPane.ERROR_MESSAGE);
 				}
-*/
+				
+
+				//System.out.println(f.getName());
+				
+				
+			} else {
+				
+				JOptionPane.showMessageDialog(this, "No se ha seleccionado ninguna imagen", "ERROR", JOptionPane.ERROR_MESSAGE);
 			}
 
 		} else if (e.getSource() == bElegirPersona) {
@@ -281,9 +290,12 @@ public class DialogoDarEnAdopcion extends JDialog implements ActionListener {
 
 				// System.out.println(daoPersonas.buscaPersona(dialogoP.getIdPersonaSeleccionada()));
 
-				personaSeleccionada = daoPersonas.buscaPersona(dialogoP.getIdPersonaSeleccionada());
-
 				try {
+
+					//asi no solo no se crea la persona sino que ademas no se añaden los campos
+					if(!dialogoP.isHaPulsadoBotonConfirmar()) throw new NullPointerException();
+				
+					personaSeleccionada = daoPersonas.buscaPersona(dialogoP.getIdPersonaSeleccionada());
 
 					añadePersonaACampos();
 
@@ -299,6 +311,8 @@ public class DialogoDarEnAdopcion extends JDialog implements ActionListener {
 					}
 
 				} catch (NullPointerException error) {
+					
+					haElegidoPersona = false;
 
 					JOptionPane.showMessageDialog(this, "No se ha seleccionado a ninguna persona");
 				}
@@ -322,6 +336,8 @@ public class DialogoDarEnAdopcion extends JDialog implements ActionListener {
 						this.añadeAnimalACampos();
 						this.daoAnimales.insertaAnimal(animal);
 						
+						guardarImagen(new Animal(daoAnimales.getUltimo(), this.extensionImagen), this.imagenElegida);
+						
 					} else {
 						
 						//this.centroAdopcion.alojaAnimal(animal);
@@ -332,6 +348,8 @@ public class DialogoDarEnAdopcion extends JDialog implements ActionListener {
 						//System.out.println(centroAdopcion);
 						
 						this.daoAnimales.insertaAnimalSinId(/*anim = */new Animal(0, this.tfNombreAnimal.getText(), this.tfTipo.getText(), this.tfRaza.getText(), this.tfDescripcion.getText(), Byte.parseByte(this.tfEdadAnimal.getText()), LibFechas8.getFechaShort(LocalDate.now()), this.centroAdopcion.getIDCentro()));
+						
+						guardarImagen(new Animal(daoAnimales.getUltimo(), this.extensionImagen), this.imagenElegida);
 						
 						//System.out.println(anim);
 						//System.out.println(centroAdopcion);
@@ -345,7 +363,7 @@ public class DialogoDarEnAdopcion extends JDialog implements ActionListener {
 					
 					daoAnimales.insertaAnimalSinId(this.animal = new Animal(0, this.tfNombreAnimal.getText(), this.tfTipo.getText(), this.tfRaza.getText(), this.tfDescripcion.getText(), Byte.parseByte(this.tfEdadAnimal.getText()), LibFechas8.getFechaShort(LocalDate.now()), this.centroAdopcion.getIDCentro()));
 
-					guardarImagen(daoAnimales.getUltimo(), this.imagenElegida);
+					guardarImagen(new Animal(daoAnimales.getUltimo(), this.extensionImagen), this.imagenElegida);
 					
 					daoPersonas.insertaPersonaSinId(new Persona(0, this.tfNombrePersona.getText(), this.tfDni.getText(), this.tfApellido1.getText(), this.tfApellido2.getText(), (byte) Byte.parseByte(this.tfEdadPersona.getText())));
 					
@@ -353,11 +371,17 @@ public class DialogoDarEnAdopcion extends JDialog implements ActionListener {
 				
 //				this.guardarImagen();
 				
+				this.haPulsadoBotonConfirmar = true;
+				
 				this.dispose();
 				
-			} catch (Exception e1) {
+			} catch(NumberFormatException error) {
 				
-				JOptionPane.showMessageDialog(this, e1.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, "Edad no valida", "ERROR", JOptionPane.ERROR_MESSAGE);
+				
+			} catch (Exception error) {
+				
+				JOptionPane.showMessageDialog(this, error.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
 				
 				//e1.printStackTrace();
 			}
@@ -366,12 +390,13 @@ public class DialogoDarEnAdopcion extends JDialog implements ActionListener {
 
 			// System.out.println("cancelar");
 			haElegidoPersona = false;
+			haPulsadoBotonConfirmar = false;	//los tengo que poner aqui tambien en caso de que se haya pulsado el boton confirmar y se haya producido un error, lo que haria que ese boton estuviera todavia a true
 			
 			this.dispose();
 		}
 
 	}
-	
+
 	private void verificaPersona() throws Exception {
 		
 		if(this.tfNombrePersona.getText().isBlank()) {
@@ -483,4 +508,8 @@ public class DialogoDarEnAdopcion extends JDialog implements ActionListener {
 		this.tfEdadAnimal.setFocusable(false);
 	}
 
+	public boolean isHaPulsadoBotonConfirmar() {
+		return haPulsadoBotonConfirmar;
+	}
+	
 }

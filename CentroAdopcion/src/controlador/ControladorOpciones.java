@@ -29,7 +29,6 @@ public class ControladorOpciones implements ActionListener {
 		ventanaPadre = (JFrame) SwingUtilities.getWindowAncestor(vista);
 		estaSeleccionado = VistaOpciones.getCbPantallaCompleta().isSelected();
 		
-
 		anchoBoton = vista.getvMenu().getbComenzar().getPreferredSize().getWidth();
 		altoBoton = vista.getvMenu().getbComenzar().getPreferredSize().getHeight();
 

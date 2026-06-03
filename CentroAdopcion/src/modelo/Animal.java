@@ -6,7 +6,7 @@ import java.util.Objects;
 
 import fechas.LibFechas8;
 
-public class Animal implements Comparable<Animal>, Serializable{
+public class Animal implements Comparable<Animal>, Serializable {
 
 	private static final long serialVersionUID = -6601920334084112132L;
 	
@@ -17,7 +17,7 @@ public class Animal implements Comparable<Animal>, Serializable{
 	private boolean estaAdoptado;
 	private LocalDate fechaAlojamiento, fechaAdopcion;
 	
-	private String rutaImagen;
+	private String rutaImagen, extension; //la extension es jpg, png, etc
 
 	public Animal(int cod, String nombre, String tipo, String raza, String descripcion, byte edad, String fechaAlojamiento) throws Exception {
 		
@@ -36,7 +36,7 @@ public class Animal implements Comparable<Animal>, Serializable{
 			
 		} else throw new Exception("Fecha incorrecta");
 		
-		this.rutaImagen = "./imgs/Animal" + idAnimal + ".png";
+		if(this.extension == null) this.rutaImagen = "./imgs/Animal" + idAnimal + ".png"; //por defecto sera png
 	}
 	
 	public Animal(int cod, String nombre, String tipo, String raza, String descripcion, byte edad, String fechaAlojamiento, int codCentro) throws Exception {
@@ -52,15 +52,16 @@ public class Animal implements Comparable<Animal>, Serializable{
 		
 		this.idPersona = codPersona;
 	}
-	
-	/*
-	public Animal(Animal animal, String rutaFicheroImagen) throws Exception {
+
+	public Animal(Animal animal, String extensionImagen) throws Exception {
 		
-		this(animal.idAnimal, animal.nombre, animal.tipo, animal.raza, animal.descripcion, animal.edad, LibFechas8.getFechaFull(animal.fechaAlojamiento), animal.idCentro, animal.idPersona);
+		this(animal.idAnimal, animal.nombre, animal.tipo, animal.raza, animal.descripcion, animal.edad, LibFechas8.getFechaShort(animal.fechaAlojamiento), animal.idCentro, animal.idPersona);
 		
-		this.imagen = new ImageIcon(rutaFicheroImagen);
+		this.extension = extensionImagen;
 		
-	}*/
+		this.rutaImagen = (extensionImagen == null)? null : "./imgs/Animal" + idAnimal + "." + extensionImagen;
+		System.out.println(this.rutaImagen);
+	}
 
 	public void esAdoptado(int codPersona) {
 		

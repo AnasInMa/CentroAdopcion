@@ -60,6 +60,7 @@ public class ControladorCentroAdopcion implements MouseListener, ActionListener 
 				if(d.getAnimalAdoptado() != null) {
 					
 					//Animal animal = daoAnimales.adoptaAnimal(d.getAnimalAdoptado().getIDAnimal());
+					//guardaAnimalEnFichero(daoAnimales.adoptaAnimal(d.getAnimalAdoptado().getIDAnimal(), d.getIdPersona()));
 					guardaAnimalEnFichero(daoAnimales.adoptaAnimal(d.getAnimalAdoptado().getIDAnimal(), d.getIdPersona()));
 					
 					this.vCentroAdopcion.getCentroAdopcion().setAnimalesAlojados(daoAnimales.getAnimalesCentro(this.vCentroAdopcion.getCentroAdopcion()));
@@ -87,9 +88,18 @@ public class ControladorCentroAdopcion implements MouseListener, ActionListener 
 
 		} else if (e.getSource() == vCentroAdopcion.getbDarEnAdopcion()) {
 			
-			new DialogoDarEnAdopcion(ventanaPadre, vCentroAdopcion.getCentroAdopcion(), daoPersonas, daoAnimales);
-
-			this.vista.muestraPanelOpcionesCentros();
+			DialogoDarEnAdopcion d = null;
+			
+			if(this.vCentroAdopcion.getCentroAdopcion().puedeAlojar()) {
+				
+				d = new DialogoDarEnAdopcion(ventanaPadre, vCentroAdopcion.getCentroAdopcion(), daoPersonas, daoAnimales);
+				
+			} else {
+				
+				JOptionPane.showMessageDialog(vCentroAdopcion, "Lo siento. No es posible alojar mas animales en " + this.vCentroAdopcion.getCentroAdopcion().getNombre() , "ERROR", JOptionPane.ERROR_MESSAGE);
+			}
+			
+			if(d != null && d.isHaPulsadoBotonConfirmar()) this.vista.muestraPanelOpcionesCentros();
 			
 		} else if (e.getSource() == vCentroAdopcion.getbPrimero()) {
 
@@ -151,7 +161,8 @@ public class ControladorCentroAdopcion implements MouseListener, ActionListener 
 	
 	/**
 	 * Metodo que guardara el animal recien adoptado (y eliminado de la base de datos)
-	 * en un fichero, para despues poder ver todos los animales que ha adoptado una persona
+	 * en una lista, junto con los animales que ya hay en esa lista (lista que se lee del fichero),
+	 * para despues poder ver todos los animales que ha adoptado una persona
 	 * 
 	 * @param animal
 	 * @throws IOException 
@@ -162,25 +173,36 @@ public class ControladorCentroAdopcion implements MouseListener, ActionListener 
 		
 		LinkedList<Animal> listaAnimales = new LinkedList<>();
 		
-		//Por si el fichero no esta creado
-		if(!(new File("./files/AnimalesAdoptados.dat").exists())) {
-			
-			try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(new File("./files/AnimalesAdoptados.dat")))) {
-				
-				oos.writeObject(listaAnimales);
-			}			
-		}
-		
-		try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File("./files/AnimalesAdoptados.dat")))) {
+		try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(Vista.archivoAnimalesAdoptados))) {
 			
 			listaAnimales = (LinkedList<Animal>) ois.readObject();
 		}
 		
 		listaAnimales.add(animal);
 		
-		try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(new File("./files/AnimalesAdoptados.dat")))) {
+		try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(Vista.archivoAnimalesAdoptados))) {
 			
 			oos.writeObject(listaAnimales);
+		}
+	}
+	
+	/**
+	 * Metodo que guardara el animal recien adoptado (y eliminado de la base de datos)
+	 * en un fichero, para despues poder ver todos los animales que ha adoptado una persona
+	 * 
+	 * @param animal
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
+	private void guardaAnimalEnFicheroObjetos(Animal animal) throws FileNotFoundException, IOException {
+		
+		//System.out.println(Vista.archivoAnimalesAdoptados.getPath());
+		
+		try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(Vista.archivoAnimalesAdoptados, true))) {
+			
+			//System.out.println("controlador" + animal);
+			
+			oos.writeObject(animal);
 		}
 	}
 

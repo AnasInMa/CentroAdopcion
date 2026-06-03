@@ -46,6 +46,8 @@ public class Vista extends JPanel{
 	public static final String FicheroOpciones;
 	public static boolean EsPantallaCompleta;
 	
+	public static final File archivoAnimalesAdoptados = new File("./files/AnimalesAdoptados.dat");
+	
 	static {
 		
 		//Dimensiones de la ventana y los componentes
@@ -167,8 +169,8 @@ public class Vista extends JPanel{
 		ColoresTurquesa = new Color[] {FONDO_DATOS_TURQUESA, FONDO_ANIMALES_TURQUESA, FONDO_PRINCIPAL_TURQUESA, FONDO_BOTON_TURQUESA,
 		                        TEXTO_CLARO_TURQUESA, TEXTO_OSCURO_TURQUESA};
 		
-		//Colores
 		FicheroOpciones = "./files/opciones.txt";
+		//Colores
 		ColoresVisibles = new Color[6];
 		ColoresVisibles = cargaColorFichero();
 		
@@ -184,6 +186,20 @@ public class Vista extends JPanel{
 		FuenteTexto = new Font(Font.SERIF, Font.BOLD, 25);
 		FuenteTextoPC = new Font(Font.SERIF, Font.BOLD, 35);
 		FUENTE_BOTONES = new Font(Font.SANS_SERIF, Font.BOLD, 25);
+		
+		//Crear archivo para guardar los animales adoptados si no estaba creado de antes
+		/*
+		if(!archivoAnimalesAdoptados.exists()) {
+			
+			try {
+				
+				Files.createFile(Paths.get(archivoAnimalesAdoptados.getPath()));
+				
+			} catch (IOException e) {
+				
+				e.printStackTrace();
+			}
+		}*/
 	}
 	
 	private static Color[] cargaColorFichero() {

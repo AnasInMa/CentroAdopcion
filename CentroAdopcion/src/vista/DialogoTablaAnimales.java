@@ -1,10 +1,9 @@
 package vista;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
-import java.util.LinkedList;
+import java.util.*;
 
 import javax.swing.*;
 
@@ -51,7 +50,7 @@ public class DialogoTablaAnimales extends JDialog implements ActionListener{
 			this.setVisible(true);
 			
 		} catch (Exception e) {
-
+			
 			JOptionPane.showMessageDialog(this, e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
 		}
 	}
@@ -60,7 +59,7 @@ public class DialogoTablaAnimales extends JDialog implements ActionListener{
 		
 		LinkedList<Animal> listaAnimales = null;
 		
-		try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File("./files/AnimalesAdoptados.dat")))) {
+		try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(Vista.archivoAnimalesAdoptados))) {
 			
 			//Animal animal;
 			
@@ -159,9 +158,109 @@ public class DialogoTablaAnimales extends JDialog implements ActionListener{
 			}
 		}
 
-	    try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(new File("./files/AnimalesAdoptados.dat")))) {
+	    try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(Vista.archivoAnimalesAdoptados))) {
 	    	
 	        oos.writeObject(listaAnimales);
+	        
+	    } catch (IOException e) {
+	        
+	        e.printStackTrace();
+	    }
+	    
+	    //System.out.println(listaAnimales);
+	}
+	
+	private String[][] leeFicheroObjetos() throws Exception {
+		
+		LinkedList<Animal> listaAnimales = new LinkedList<Animal>();
+		
+		try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(Vista.archivoAnimalesAdoptados))) {
+			
+			while(true) {
+				
+				listaAnimales.add((Animal) ois.readObject());
+			}
+			
+		} catch (IOException e) {
+			
+			//e.printStackTrace();
+			//System.out.println("Fin del archivo");
+			
+			//System.out.println(listaAnimales);
+			
+			if(listaAnimales.size() == 0) throw new Exception(this.persona.getNombre() + " no tiene ningun animal adoptado disponible");
+			
+			String[][] matrizAnimales = new String[listaAnimales.size()][10];
+			
+			Animal animal;
+			Iterator<Animal> iterator = listaAnimales.iterator();
+			
+			//"idAnimal", "idCentro", "idPersona", "Nombre", "Tipo", "Raza", "Edad",
+			//"Fecha Alojamiento", "Fecha Adopcion"
+			
+			for (int i = 0; i < matrizAnimales.length; i++) {
+				
+				animal = (Animal) iterator.next();
+				
+				matrizAnimales[i][0] = animal.getIDAnimal() + "";
+				matrizAnimales[i][1] = animal.getIDCentro() + "";
+				matrizAnimales[i][2] = animal.getIDPersona() + "";
+				matrizAnimales[i][3] = animal.getNombre();
+				matrizAnimales[i][4] = animal.getTipo();
+				matrizAnimales[i][5] = animal.getRaza();
+				matrizAnimales[i][6] = animal.getDescripcion();
+				matrizAnimales[i][7] = animal.getEdad() + "";
+				matrizAnimales[i][8] = LibFechas8.getFechaShort(animal.getFechaAlojamiento());
+				matrizAnimales[i][9] = LibFechas8.getFechaShort(animal.getFechaAdopcion());
+				
+			}
+			
+			return matrizAnimales;
+		}
+		
+		//return new String[0][0];
+	}
+	
+	private void quitarAnimalDelFicheroObjetos(Animal animal) {
+		
+		LinkedList<Animal> listaAnimales = new LinkedList<>();
+		//System.out.println(listaAnimales);
+		
+		//se añaden todos los animales menos el que se pasa como parametro a la listaAnimales
+		try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(Vista.archivoAnimalesAdoptados))) {
+
+			Animal anim;
+			
+			while(true) {
+				
+				anim = (Animal) ois.readObject();
+				
+				if(!anim.equals(animal)) {
+										
+					listaAnimales.add(anim);
+				}
+				
+			}
+			
+		} catch (EOFException e) {
+			
+			//e.printStackTrace();
+			JOptionPane.showMessageDialog(this, "Has elegido a " + animal.getNombre(), "", JOptionPane.INFORMATION_MESSAGE);
+			
+		} catch (ClassNotFoundException | IOException e) {
+
+			// e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+		
+		//listaAnimales.remove(animal);
+		
+	    try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(Vista.archivoAnimalesAdoptados))) {
+	    	
+	        for (Animal animal2 : listaAnimales) {
+				
+	        	oos.writeObject(animal2);
+			}
 	        
 	    } catch (IOException e) {
 	        
@@ -226,6 +325,9 @@ public class DialogoTablaAnimales extends JDialog implements ActionListener{
 				
 				try {
 					
+					//int cod, String nombre, String tipo, String raza, String descripcion,
+					//byte edad, String fechaAlojamiento, int codCentro, int codPersona
+		
 					this.animal = new Animal(
 							Integer.parseInt(this.tablaAnimales.getValueAt(this.tablaAnimales.getSelectedRow(), 0).toString()),
 							this.tablaAnimales.getValueAt(this.tablaAnimales.getSelectedRow(), 3).toString(),
@@ -237,12 +339,14 @@ public class DialogoTablaAnimales extends JDialog implements ActionListener{
 							Integer.parseInt(this.tablaAnimales.getValueAt(this.tablaAnimales.getSelectedRow(), 1).toString()), 
 							Integer.parseInt(this.tablaAnimales.getValueAt(this.tablaAnimales.getSelectedRow(), 2).toString()));
 					
+					//System.out.println(animal);
+					
 					this.quitarAnimalDelFichero(animal);
 					
 					//System.out.println(animal);
 					
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
+					
 					e1.printStackTrace();
 				} 
 			}

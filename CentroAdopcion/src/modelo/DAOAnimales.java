@@ -393,8 +393,8 @@ public class DAOAnimales {
 			animales[fila][5] = animal.getRaza();
 			animales[fila][6] = animal.getDescripcion();
 			animales[fila][7] = animal.getEdad() + "";
-			animales[fila][8] = LibFechas8.getFechaFull(animal.getFechaAdopcion());
-			animales[fila][9] = LibFechas8.getFechaFull(animal.getFechaAlojamiento());
+			animales[fila][8] = LibFechas8.getFechaShort(animal.getFechaAdopcion());
+			animales[fila][9] = LibFechas8.getFechaShort(animal.getFechaAlojamiento());
 
 			rsNavegar.next();
 		}

@@ -33,9 +33,9 @@ public class CentroAdopcion implements Serializable{
 		this(centro.getIDCentro(), centro.getNombre(), centro.getDireccion(), centro.getCodigoCentro(), centro.getCodigoPostal(), centro.capacidadMaxima, (TreeSet<Animal>) centro.animalesAlojados);
 	}
 	
-	public CentroAdopcion() {
+	public boolean puedeAlojar() {
 		
-		this(0, "", "", 0, 0, (short) 0);
+		return (this.capacidadMaxima > this.animalesAlojados.size());
 	}
 	
 	/**
@@ -49,7 +49,7 @@ public class CentroAdopcion implements Serializable{
 	public boolean alojaAnimal(Animal animal) {
 		
 		return (animal == null)? false	//comprueba que el animal que se pasa exista, si no existe devuelve un nulo
-				: (this.animalesAlojados.size() < capacidadMaxima? this.animalesAlojados.add(animal) : false);	//si existe comprueba que se puede alojar el animal y lo aloja
+				: (puedeAlojar()? this.animalesAlojados.add(animal) : false);	//si existe comprueba que se puede alojar el animal y lo aloja
 	}
 	
 	public void alojaAnimales(SortedSet<Animal> animales) {

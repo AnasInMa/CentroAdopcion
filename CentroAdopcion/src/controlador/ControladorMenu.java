@@ -9,11 +9,11 @@ public class ControladorMenu implements ActionListener{
 	private Vista vista;
 	private VistaMenu vMenu;
 	
-	public ControladorMenu(Vista v1) {
+	public ControladorMenu(Vista v) {
 		
-		vista = v1;
+		vista = v;
 		
-		vMenu = v1.getvMenu();
+		vMenu = v.getvMenu();
 		vMenu.control(this);
 	}
 	
