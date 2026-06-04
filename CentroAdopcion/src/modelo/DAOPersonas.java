@@ -52,8 +52,9 @@ public class DAOPersonas {
 	}
 	
 	public void cierraConexion() throws SQLException {
+		
 		conexion.close();
-		System.out.println("Conexión cerrada");
+		//System.out.println("Conexión cerrada");
 	}
 	
 	public void cierraStatement() throws SQLException {

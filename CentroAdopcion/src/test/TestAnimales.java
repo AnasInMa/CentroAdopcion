@@ -8,6 +8,7 @@ public class TestAnimales {
 	public static void main(String[] args) {
 
 		Animal animal1;
+		
 		try {
 			animal1 = new Animal(0, "Wilson", "Gato", "Dorado Sombreado",
 					"es un gato que duerme mucho, come mucho y caga mucho", (byte) 2, "12/02/2026");

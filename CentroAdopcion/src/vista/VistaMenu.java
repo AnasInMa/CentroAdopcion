@@ -68,7 +68,6 @@ public class VistaMenu extends JPanel{
 			boton.setBackground(UtilidadesVariables.FONDO_BOTON);
 			
 			this.add(boton);
-			//this.add(Box.createRigidArea(new Dimension(0, UtilidadesVariables.ALTO_COMPONENTE)));
 			this.add(Box.createVerticalStrut(UtilidadesVariables.ALTO_COMPONENTE));
 			
 		}

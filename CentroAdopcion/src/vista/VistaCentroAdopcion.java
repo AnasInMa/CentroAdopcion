@@ -19,17 +19,10 @@ public class VistaCentroAdopcion extends JPanel {
 	private JPanel panelAnimales;
 	private VistaAnimales vAnimales;
 
-	static {
-
-		
-	}
-
 	public VistaCentroAdopcion(CentroAdopcion centro) {
 
 		centroAdopcion = centro;
 
-		//numAnimalesMaximos = centroAdopcion.getCapacidadMaxima();
-		
 		modificaPanelPrincipal();
 	}
 	
@@ -66,8 +59,6 @@ public class VistaCentroAdopcion extends JPanel {
 
 	private void iniciaComponentes() {
 
-		// int cod, String nombre, String direccion, int codigoCentro, int codPostal,
-		// short capacidadMaxima, TreeSet<Animal> animalesAlojados
 		atras = new JLabel(" ↩️");
 		nombreCentro = new JLabel(centroAdopcion.getNombre());
 		datosCentro = new JLabel(" " + centroAdopcion.toStringSinNombre() + " ");
@@ -94,7 +85,6 @@ public class VistaCentroAdopcion extends JPanel {
 
 		atras.setFont(new Font(Font.SERIF, Font.PLAIN, 25));
 		
-		//nombreCentro.setAlignmentX(JLabel.CENTER_ALIGNMENT);
 		nombreCentro.setHorizontalAlignment(JLabel.CENTER);
 		nombreCentro.setFont(new Font(Font.SERIF, Font.BOLD, 40));
 
@@ -121,11 +111,9 @@ public class VistaCentroAdopcion extends JPanel {
 		panel.setBorder(UtilidadesVariables.BordeLinea);
 
 		JPanel panelTitulo = new JPanel(new BorderLayout());
-		//panelTitulo.setLayout(new BoxLayout(panelTitulo, BoxLayout.X_AXIS));
 		panelTitulo.setBackground(UtilidadesVariables.FONDO_DATOS);
 		
 		panelTitulo.add(atras, BorderLayout.WEST);
-		//panelTitulo.add(Box.createHorizontalGlue());
 		panelTitulo.add(nombreCentro, BorderLayout.CENTER);
 		panelTitulo.setMaximumSize(new Dimension(UtilidadesVariables.ANCHO_PANEL * 2, UtilidadesVariables.ALTO_COMPONENTE));
 		
@@ -143,43 +131,9 @@ public class VistaCentroAdopcion extends JPanel {
 		
 		panelAnimales.add(this.vAnimales = new VistaAnimales(this.centroAdopcion, this));
 
-//		JPanel panelSecundario = new JPanel();
-//		panelSecundario.setBorder(bordeVacio);
-//		panelSecundario.setBackground(UtilidadesVariables.MARRON_CLARO4);
-		//panelSecundario.add(panelesAnimalesCuatro(/*panelSecundario*/));
-
-		//panelPrincipal.add(panelSecundario);
-
 		return panelAnimales;
 	}
 	
-	/**
-	 * Metodo que crea una matriz de 4 columnas, y las filas dependeran de los
-	 * animales que estan alojados en el centro de adopcion.
-	 * 
-	 * Se le pasara un array de paneles, que seran los 4 paneles que estan visibles
-	 * al inicio, y siempre estaran visbles, lo que cambiara sera su contenido
-	 * 
-	 * @return
-	 */
-	/*private JPanel[][] panelesAnimalesCuatro(JPanel[] panelesVisibles) {
-
-		byte filas = (byte) Math.ceil(centroAdopcion.getAnimalesAlojados().size() / 4); // si tiene 6 animales habran 2 filas, si
-																				// hay 13 animales habran 4 filas, si
-																				// hay 3 animales solo habra 1 fila
-		JPanel[][] panelesAnimales = new JPanel[filas][4];
-		
-		for(int fil = 0; fil < filas; fil++) {
-			
-			for(int col = 0; col < 4; col++) {
-				
-				
-			}
-		}
-
-		return null;
-
-	}*/
 
 	private JPanel panelBotones() {
 		
@@ -256,9 +210,4 @@ public class VistaCentroAdopcion extends JPanel {
 		return panelAnimales;
 	}
 	
-	/*
-	public void setCentroAdopcion(CentroAdopcion centroAdopcion) {
-		this.centroAdopcion = centroAdopcion;
-	}
-	*/
 }

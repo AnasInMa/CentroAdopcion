@@ -3,12 +3,8 @@ package utilidades;
 import java.io.*;
 import java.util.*;
 
-import javax.swing.*;
-
-import fechas.LibFechas8;
 import modelo.Animal;
 import modelo.Persona;
-import vista.Vista;
 
 public class UtilidadesFicherosLista {
 	
@@ -39,6 +35,12 @@ public class UtilidadesFicherosLista {
 		}
 	}
 	
+	/**
+	 * Metodo que elimina un Animal del archivo designado
+	 * 
+	 * @param animal
+	 * @param archivoDestino
+	 */
 	public static void quitarAnimalDelFichero(Animal animal, File archivoDestino) {
 		
 		LinkedList<Animal> listaAnimales = new LinkedList<>();

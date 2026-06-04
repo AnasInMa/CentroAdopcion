@@ -31,8 +31,6 @@ public class DialogoTablaAnimales extends JDialog implements ActionListener{
 			tablaAnimales.setForeground(UtilidadesVariables.TEXTO_OSCURO);
 			tablaAnimales.setBackground(UtilidadesVariables.FONDO_ANIMALES);
 
-			// celdasNoEditables(filas);
-
 			tablaAnimales.setPreferredScrollableViewportSize(new Dimension(520, 100));
 
 			this.add(panelPrincipal());

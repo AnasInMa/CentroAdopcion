@@ -13,6 +13,8 @@ public class ControladorOpcionesCentros implements MouseListener, ActionListener
 	
 	private CentroAdopcion centroAdopcion1, centroAdopcion2, centroAdopcion3, centroAdopcion4;
 	
+	private ControladorCentroAdopcion cCentroAdopcion;
+	
 	public ControladorOpcionesCentros(Vista v) {
 		
 		vista = v;
@@ -63,7 +65,7 @@ public class ControladorOpcionesCentros implements MouseListener, ActionListener
 		}
 		
 		vista.muestraPanelCentro();
-		new ControladorCentroAdopcion(vista);
+		this.cCentroAdopcion = new ControladorCentroAdopcion(vista);
 	}
 
 	@Override
@@ -73,6 +75,10 @@ public class ControladorOpcionesCentros implements MouseListener, ActionListener
 			
 			vista.muestraAnteriorPanel();
 		}
+	}
+
+	public ControladorCentroAdopcion getcCentroAdopcion() {
+		return cCentroAdopcion;
 	}
 
 	@Override

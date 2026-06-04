@@ -28,6 +28,14 @@ public class Persona implements Serializable{
 		this(cod, new TreeSet<Animal>(), nombre, nif, apellido1, apellido2, edad);
 	}
 	
+	/**
+	 * Metodo que 'valida' un dni, no es del todo una validacion
+	 * porque solo me aseguro de que el formato este bien,
+	 * pero no hago todos los calculos que se deberian de hacer
+	 * 
+	 * @param dni
+	 * @throws Exception
+	 */
 	public static void validaDni(String dni) throws Exception {
 		
 		Exception ex = new Exception("Dni no valido");
@@ -44,8 +52,6 @@ public class Persona implements Serializable{
 			numeros += dni.charAt(i);
 		}
 		
-		//System.out.println("1: " +numeros);
-		
 		try {
 			
 			Integer.parseInt(numeros);
@@ -54,9 +60,6 @@ public class Persona implements Serializable{
 			
 			throw ex;
 		}
-		
-		//System.out.println("2: " + dni);
-		//System.out.println("3: " + dni.charAt(8));
 		
 		if(!Character.isLetter(dni.charAt(8))) throw ex;
 	}

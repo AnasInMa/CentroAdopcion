@@ -6,6 +6,14 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+/**
+ * Esto era una experimentacion para entender mejor como
+ * funcionaba la escabilidad de los componentes,
+ * al final no lo utilize, porque quedaba un poco raro
+ * como se veía el boton en relacion a la ventana,
+ * y me decanté por simplemente cambiar el tamaño cada
+ * vez que el usuario cambie la opcion de la pantalla completa
+ */
 public class TestBotonAjustable extends JPanel implements ActionListener{
 
 	private static final long serialVersionUID = 3387197714874902604L;

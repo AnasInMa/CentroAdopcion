@@ -11,8 +11,10 @@ public class Controlador {
 		vista = v;
 		
 		new ControladorMenu(vista);
-		new ControladorOpcionesCentros(vista);
+		ControladorOpcionesCentros cOpcionesCentros = new ControladorOpcionesCentros(vista);
 		new ControladorOpciones(vista);
-		new ControladorSalir(vista);
+		new ControladorSalir(cOpcionesCentros, vista);
 	}
+	
+	
 }

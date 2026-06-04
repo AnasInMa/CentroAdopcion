@@ -4,6 +4,11 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
+/**
+ * Iba a utilizar esta clase que hice como ejemplo
+ * para mostrar los paneles de los animales, pero
+ * al final lo hize un pelin distinto
+ */
 public class TestCarrusel implements ActionListener {
 
 	private JFrame f;
@@ -15,8 +20,6 @@ public class TestCarrusel implements ActionListener {
 	public static void main(String[] args) {
 
 		TestCarrusel tc = new TestCarrusel();
-		
-		//int total = 10;
 		
 		tc.f = new JFrame();
 		tc.panelVisible = new JPanel();

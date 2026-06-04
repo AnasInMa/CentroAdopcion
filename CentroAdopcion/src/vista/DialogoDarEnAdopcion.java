@@ -8,13 +8,14 @@ import java.time.LocalDate;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
-import fechas.LibFechas8;
 import modelo.Animal;
 import modelo.CentroAdopcion;
 import modelo.DAOAnimales;
 import modelo.DAOPersonas;
 import modelo.Persona;
+import utilidades.LibFechas8;
 import utilidades.UtilidadesImagenes;
+import utilidades.UtilidadesPaneles;
 import utilidades.UtilidadesVariables;
 
 public class DialogoDarEnAdopcion extends JDialog implements ActionListener {
@@ -47,7 +48,8 @@ public class DialogoDarEnAdopcion extends JDialog implements ActionListener {
 	public DialogoDarEnAdopcion(JFrame ventanaPadre, CentroAdopcion centro, DAOPersonas daoPersonas, DAOAnimales daoAnimales) {
 
 		super(ventanaPadre, "Dar Animal en Adopcion", true);
-		// this.setBackground(UtilidadesVariables.FONDO_PRINCIPAL);
+		
+		iniciaComponentes();
 
 		centroAdopcion = centro;
 		
@@ -87,7 +89,7 @@ public class DialogoDarEnAdopcion extends JDialog implements ActionListener {
 		panel.setBorder(UtilidadesVariables.BORDEVACIO);
 
 		panel.add(panelAnimal());
-		panel.add(panelPersona());
+		panel.add(UtilidadesPaneles.panelPersona(tfNombrePersona, tfApellido1, tfApellido2, tfDni, tfEdadPersona, bElegirPersona));
 
 		panelPrincipal.add(panel, BorderLayout.CENTER);
 		panelPrincipal.add(panelBotones(), BorderLayout.SOUTH);
@@ -102,27 +104,22 @@ public class DialogoDarEnAdopcion extends JDialog implements ActionListener {
 		panel.setBackground(UtilidadesVariables.FONDO_ANIMALES);
 		panel.setBorder(UtilidadesVariables.BordeLinea);
 
-		tfNombreAnimal = new JTextField(ANCHOTF);
 		tfNombreAnimal.setBorder(new TitledBorder("Nombre"));
 		tfNombreAnimal.setBackground(UtilidadesVariables.FONDO_ANIMALES);
 		panel.add(tfNombreAnimal);
 
-		tfTipo = new JTextField(ANCHOTF);
 		tfTipo.setBorder(new TitledBorder("Tipo"));
 		tfTipo.setBackground(UtilidadesVariables.FONDO_ANIMALES);
 		panel.add(tfTipo);
 
-		tfRaza = new JTextField(ANCHOTF);
 		tfRaza.setBorder(new TitledBorder("Raza"));
 		tfRaza.setBackground(UtilidadesVariables.FONDO_ANIMALES);
 		panel.add(tfRaza);
-
-		tfDescripcion = new JTextField(ANCHOTF);
+		
 		tfDescripcion.setBorder(new TitledBorder("Descripción"));
 		tfDescripcion.setBackground(UtilidadesVariables.FONDO_ANIMALES);
 		panel.add(tfDescripcion);
 
-		tfEdadAnimal = new JTextField(ANCHOTF);
 		tfEdadAnimal.setBorder(new TitledBorder("Edad"));
 		tfEdadAnimal.setBackground(UtilidadesVariables.FONDO_ANIMALES);
 		panel.add(tfEdadAnimal);
@@ -139,7 +136,6 @@ public class DialogoDarEnAdopcion extends JDialog implements ActionListener {
 
 		panel.add(new JLabel(" "));
 
-		this.bElegirFotoAnimal = new JButton("Elegir Imagen");
 		bElegirFotoAnimal.setForeground(UtilidadesVariables.TEXTO_CLARO);
 		bElegirFotoAnimal.setBackground(UtilidadesVariables.FONDO_BOTON);
 		bElegirFotoAnimal.setAlignmentX(JButton.CENTER_ALIGNMENT);
@@ -148,61 +144,38 @@ public class DialogoDarEnAdopcion extends JDialog implements ActionListener {
 		return panel;
 	}
 
-	private JPanel panelPersona() {
-
-		JPanel panel = new JPanel();
-		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-		panel.setBackground(UtilidadesVariables.FONDO_ANIMALES);
-		panel.setBorder(UtilidadesVariables.BordeLinea);
-
-		tfNombrePersona = new JTextField(ANCHOTF);
-		tfNombrePersona.setBorder(new TitledBorder("Nombre"));
-		tfNombrePersona.setBackground(UtilidadesVariables.FONDO_ANIMALES);
-		panel.add(tfNombrePersona);
-
-		tfApellido1 = new JTextField(ANCHOTF);
-		tfApellido1.setBorder(new TitledBorder("Primer Apellido"));
-		tfApellido1.setBackground(UtilidadesVariables.FONDO_ANIMALES);
-		panel.add(tfApellido1);
-
-		tfApellido2 = new JTextField(ANCHOTF);
-		tfApellido2.setBorder(new TitledBorder("Segundo Apellido"));
-		tfApellido2.setBackground(UtilidadesVariables.FONDO_ANIMALES);
-		panel.add(tfApellido2);
-
-		tfDni = new JTextField(ANCHOTF);
-		tfDni.setBorder(new TitledBorder("DNI"));
-		tfDni.setBackground(UtilidadesVariables.FONDO_ANIMALES);
-		panel.add(tfDni);
-
-		tfEdadPersona = new JTextField(ANCHOTF);
-		tfEdadPersona.setBorder(new TitledBorder("Edad"));
-		tfEdadPersona.setBackground(UtilidadesVariables.FONDO_ANIMALES);
-		panel.add(tfEdadPersona);
-
-		panel.add(Box.createVerticalStrut(144));
-
-		bElegirPersona = new JButton("Elegir Persona");
-		bElegirPersona.setForeground(UtilidadesVariables.TEXTO_CLARO);
-		bElegirPersona.setBackground(UtilidadesVariables.FONDO_BOTON);
-		bElegirPersona.setAlignmentX(JButton.CENTER_ALIGNMENT);
-
-		panel.add(bElegirPersona);
-
-		return panel;
+	private void iniciaComponentes() {
+		
+		this.tfNombrePersona = new JTextField(10);
+		this.tfApellido1 = new JTextField(10);
+		this.tfApellido2 = new JTextField(10);
+		this.tfDni = new JTextField(10);
+		this.tfEdadPersona = new JTextField(10);
+		
+		this.bElegirPersona = new JButton("Elegir Persona");
+		
+		this.tfNombreAnimal = new JTextField(ANCHOTF);
+		this.tfTipo = new JTextField(ANCHOTF);
+		this.tfRaza = new JTextField(ANCHOTF);
+		this.tfDescripcion = new JTextField(ANCHOTF);
+		this.tfEdadAnimal = new JTextField(ANCHOTF);
+		
+		this.bElegirFotoAnimal = new JButton("Elegir Imagen");
+		
+		this.bConfirmar = new JButton("Confirmar");
+		this.bCancelar = new JButton("Cancelar");
+		
 	}
-
+	
 	private JPanel panelBotones() {
 
 		JPanel panel = new JPanel();
 		panel.setBackground(UtilidadesVariables.FONDO_PRINCIPAL);
 
-		this.bConfirmar = new JButton("Confirmar");
 		this.bConfirmar.setForeground(UtilidadesVariables.TEXTO_CLARO);
 		this.bConfirmar.setBackground(UtilidadesVariables.FONDO_BOTON);
 		this.bConfirmar.setFocusable(false);
 
-		this.bCancelar = new JButton("Cancelar");
 		this.bCancelar.setForeground(UtilidadesVariables.TEXTO_CLARO);
 		this.bCancelar.setBackground(UtilidadesVariables.FONDO_BOTON);
 		this.bCancelar.setFocusable(false);

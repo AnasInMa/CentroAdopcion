@@ -23,12 +23,9 @@ public class UtilidadesAnimales {
 			if (componentes[i] instanceof JLabel) {
 
 				l = (JLabel) componentes[i];
-
-				//System.out.println(l.getText());
 				
 				try {
-					
-					//System.out.println(Integer.parseInt(l.getText()));
+
 					idAnimal = Integer.parseInt(l.getText());
 					
 					encontrado = true;

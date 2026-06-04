@@ -20,12 +20,11 @@ public class VistaOpcionesCentros extends JPanel{
 	
 	public VistaOpcionesCentros() {
 		
-		//this.setPreferredSize(new Dimension(UtilidadesVariables.ANCHO_PANEL, UtilidadesVariables.ALTO_PANEL));
 		this.setLayout(new BorderLayout());
 		this.setBackground(UtilidadesVariables.FONDO_PRINCIPAL);
 		
 		texto = new JLabel("⬇️ELIJA UNO DE ESTOS CENTROS PARA VER LOS ANIMALES DISPONIBLES⬇️");
-		texto.setFont(UtilidadesVariables.FuenteTexto);
+		texto.setFont(UtilidadesVariables.EsPantallaCompleta? UtilidadesVariables.FuenteTextoPC : UtilidadesVariables.FuenteTexto);
 		texto.setForeground(UtilidadesVariables.TEXTO_OSCURO);
 		texto.setHorizontalAlignment(JLabel.CENTER);
 		texto.setBorder(new EmptyBorder(50, 0, 50, 0));
@@ -101,12 +100,9 @@ public class VistaOpcionesCentros extends JPanel{
 		img.setBorder(UtilidadesVariables.BordeLinea);
 		img.setAlignmentX(JLabel.CENTER_ALIGNMENT);
 		
-		JLabel espacio = new JLabel();
-		espacio.setBorder(new EmptyBorder(10,0,0,0));
-		
 		panel.add(nombreCentro);
 		panel.add(img);
-		panel.add(espacio);		//Preguntar si es una mala practica o esta bien
+		panel.add(Box.createVerticalStrut(10));
 		panel.add(boton);
 		
 		return panel;

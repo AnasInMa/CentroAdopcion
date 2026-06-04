@@ -39,7 +39,6 @@ public class VistaOpciones extends JPanel{
 		
 		this.add(Box.createVerticalGlue());
 		this.add(panelPantallaCompleta());
-		//this.add(panelElegirColor());
 		this.add(panelBotones());
 		this.add(Box.createVerticalGlue());
 		
@@ -48,7 +47,6 @@ public class VistaOpciones extends JPanel{
 	
 	public void control(ControladorOpciones c) {
 		
-		//this.cbPantallaCompleta.addActionListener(c);
 		this.bGuardarCambios.addActionListener(c);
 		this.bCancelarCambios.addActionListener(c);
 	}
@@ -80,13 +78,13 @@ public class VistaOpciones extends JPanel{
 			} else if(componente instanceof JLabel || componente instanceof JCheckBox) {
 
 				componente.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
-				//componente.setForeground(UtilidadesVariables.TEXTO_OSCURO);
+				componente.setForeground(UtilidadesVariables.TEXTO_OSCURO);
 				componente.setBackground(UtilidadesVariables.FONDO_PRINCIPAL);
 				componente.setAlignmentX(CENTER_ALIGNMENT);
 				
 			} else {
 				
-				//cmbColores.setForeground(UtilidadesVariables.TEXTO_OSCURO);
+				componente.setForeground(UtilidadesVariables.TEXTO_OSCURO);
 				componente.setBackground(UtilidadesVariables.FONDO_ANIMALES);
 			}
 			
@@ -147,10 +145,11 @@ public class VistaOpciones extends JPanel{
 	    bCancelarCambios.setBackground(UtilidadesVariables.FONDO_BOTON);
 	    bCancelarCambios.setForeground(UtilidadesVariables.TEXTO_CLARO);
 	    
-	    //lColores.setForeground(UtilidadesVariables.TEXTO_OSCURO);
-	    //cmbColores.setForeground(UtilidadesVariables.TEXTO_OSCURO);
+	    lColores.setForeground(UtilidadesVariables.TEXTO_OSCURO);
+	    cmbColores.setForeground(UtilidadesVariables.TEXTO_OSCURO);
 	    cmbColores.setBackground(UtilidadesVariables.FONDO_ANIMALES);
 	    
+	    cbPantallaCompleta.setForeground(UtilidadesVariables.TEXTO_OSCURO);
 	    cbPantallaCompleta.setBackground(UtilidadesVariables.FONDO_PRINCIPAL);
 	    
 	    panelPrincipal.setBackground(UtilidadesVariables.FONDO_PRINCIPAL);

@@ -4,14 +4,13 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-import fechas.LibFechas8;
+import utilidades.LibFechas8;
 
 public class Animal implements Comparable<Animal>, Serializable {
 
 	private static final long serialVersionUID = -6601920334084112132L;
 	
-	private int idAnimal,	//el codigo es el id de la tabla
-				idPersona, idCentro;
+	private int idAnimal, idPersona, idCentro;
 	private String nombre, tipo, raza, descripcion;
 	private byte edad;
 	private boolean estaAdoptado;
@@ -32,7 +31,7 @@ public class Animal implements Comparable<Animal>, Serializable {
 		
 		if(LibFechas8.isFechaCorrecta(fechaAlojamiento)) {
 			
-			this.fechaAlojamiento = fechas.LibFechas8.convierteStringToLocalDate(fechaAlojamiento);
+			this.fechaAlojamiento = utilidades.LibFechas8.convierteStringToLocalDate(fechaAlojamiento);
 			
 		} else throw new Exception("Fecha incorrecta");
 		
@@ -60,7 +59,6 @@ public class Animal implements Comparable<Animal>, Serializable {
 		this.extension = extensionImagen;
 		
 		this.rutaImagen = (extensionImagen == null)? null : "./imgs/Animal" + idAnimal + "." + extensionImagen;
-		//System.out.println(this.rutaImagen);
 	}
 
 	public void esAdoptado(int codPersona) {
@@ -95,7 +93,7 @@ public class Animal implements Comparable<Animal>, Serializable {
 	@Override
 	public int compareTo(Animal animal) {
 		
-		return this.idAnimal - animal.idAnimal;	//orden 
+		return this.idAnimal - animal.idAnimal;	//orden ascendente
 	}
 
 	@Override

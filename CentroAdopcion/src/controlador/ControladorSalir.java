@@ -1,6 +1,7 @@
 package controlador;
 
 import java.awt.event.*;
+import java.sql.SQLException;
 
 import vista.*;
 
@@ -9,9 +10,12 @@ public class ControladorSalir implements ActionListener{
 	private Vista vista;
 	private VistaSalir vSalir;
 	
-	public ControladorSalir(Vista v) {
+	private ControladorOpcionesCentros controlador;
+	
+	public ControladorSalir(ControladorOpcionesCentros c, Vista v) {
 		
 		vista = v;
+		controlador = c;
 		
 		vSalir = vista.getvSalir();
 		vSalir.control(this);
@@ -26,9 +30,21 @@ public class ControladorSalir implements ActionListener{
 			
 		} else {
 			
+			try {
+				
+				controlador.getcCentroAdopcion().getDaoAnimales().cierraStatement();
+				controlador.getcCentroAdopcion().getDaoAnimales().cierraConexion();
+				
+				controlador.getcCentroAdopcion().getDaoPersonas().cierraStatement();
+				controlador.getcCentroAdopcion().getDaoPersonas().cierraConexion();
+				
+			} catch (SQLException e1) {
+				
+				e1.printStackTrace();
+			}
+			
 			System.exit(0);
 		}
-		
 	}
 
 }

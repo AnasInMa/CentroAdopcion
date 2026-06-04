@@ -38,7 +38,7 @@ public class ControladorCentroAdopcion implements MouseListener, ActionListener 
 			daoPersonas = new DAOPersonas();
 			
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
@@ -71,13 +71,13 @@ public class ControladorCentroAdopcion implements MouseListener, ActionListener 
 				JOptionPane.showMessageDialog(vCentroAdopcion, "Debe de seleccionar un animal para poder adoptarlo" , "ERROR", JOptionPane.ERROR_MESSAGE);
 				
 			} catch (ClassNotFoundException e1) {
-				// TODO Auto-generated catch block
+				
 				e1.printStackTrace();
 			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
+				
 				e1.printStackTrace();
 			} catch (Exception e1) {
-				// TODO Auto-generated catch block
+				
 				e1.printStackTrace();
 			}
 
@@ -149,5 +149,13 @@ public class ControladorCentroAdopcion implements MouseListener, ActionListener 
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
 
+	}
+
+	public DAOAnimales getDaoAnimales() {
+		return daoAnimales;
+	}
+
+	public DAOPersonas getDaoPersonas() {
+		return daoPersonas;
 	}
 }

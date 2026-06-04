@@ -5,7 +5,6 @@ import java.util.*;
 
 import javax.swing.*;
 
-import fechas.LibFechas8;
 import modelo.Animal;
 import modelo.Persona;
 
@@ -97,9 +96,6 @@ public class UtilidadesFicherosObjetos {
 		} catch (IOException e) {
 			
 			//e.printStackTrace();
-			//System.out.println("Fin del archivo");
-			
-			//System.out.println(listaAnimales);
 			
 			if(listaAnimales.size() == 0) throw new Exception(persona.getNombre() + " no tiene ningun animal adoptado disponible");
 			
@@ -107,9 +103,6 @@ public class UtilidadesFicherosObjetos {
 			
 			Animal animal;
 			Iterator<Animal> iterator = listaAnimales.iterator();
-			
-			//"idAnimal", "idCentro", "idPersona", "Nombre", "Tipo", "Raza", "Edad",
-			//"Fecha Alojamiento", "Fecha Adopcion"
 			
 			for (int i = 0; i < matrizAnimales.length; i++) {
 				
@@ -125,13 +118,10 @@ public class UtilidadesFicherosObjetos {
 				matrizAnimales[i][7] = animal.getEdad() + "";
 				matrizAnimales[i][8] = LibFechas8.getFechaShort(animal.getFechaAlojamiento());
 				matrizAnimales[i][9] = LibFechas8.getFechaShort(animal.getFechaAdopcion());
-				
 			}
 			
 			return matrizAnimales;
 		}
-		
-		//return new String[0][0];
 	}
 	
 }

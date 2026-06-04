@@ -4,7 +4,7 @@ import java.sql.*;
 import java.sql.Date;
 import java.util.*;
 
-import fechas.LibFechas8;
+import utilidades.LibFechas8;
 
 public class DAOAnimales {
 
@@ -23,7 +23,6 @@ public class DAOAnimales {
 	public void estableceConexion() throws ClassNotFoundException, SQLException {
 		
 		this.conexion = BDConnection.getConnection();
-		//System.out.println("Conexión establecida");
 	}	
 	
 
@@ -39,11 +38,12 @@ public class DAOAnimales {
 	}
 	
 	public void cierraConexion() throws SQLException {
+		
 		conexion.close();
-		System.out.println("Conexión cerrada");
 	}
 	
 	public void cierraStatement() throws SQLException {
+		
 		statement.close();
 	}
 	

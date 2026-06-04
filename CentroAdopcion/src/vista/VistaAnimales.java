@@ -15,23 +15,21 @@ public class VistaAnimales extends JPanel {
 	
 	private static final long serialVersionUID = 3726098725460425172L;
 	
-	private DAOAnimales dao;
-	
 	private CentroAdopcion centroAdopcion;
+	private DAOAnimales dao;	
+
+	private CardLayout cartas;
 	private JPanel[][] matrizPaneles;
 	private JPanel[] arrayPaneles; 	//array de paneles en los que en cada uno habran metidos los 4 paneles con los animales
+
 	private int contFilas;
-	private static final float COLUMNAS;
-	private CardLayout cartas;
 	private int filas;
+	private static final float COLUMNAS = 4;
+	
 	private ButtonGroup grupoRB;
 	private JRadioButton rbAnimal1, rbAnimal2, rbAnimal3, rbAnimal4;	//el jradioButton que este presionado sera el animal que va a ser adoptado
 	private Dimension tamañoPanelAnimal;
 	
-	static {
-		
-		COLUMNAS = 4;
-	}
 
 	public VistaAnimales(CentroAdopcion centro) {
 		
@@ -39,8 +37,6 @@ public class VistaAnimales extends JPanel {
 		this.setBackground(UtilidadesVariables.FONDO_PRINCIPAL);
 		
 		centroAdopcion = centro;
-		
-		//centroAdopcion.alojaAnimales(null);
 		
 		try {
 			
@@ -133,8 +129,6 @@ public class VistaAnimales extends JPanel {
 				
 				animal = iterador.next();
 				
-				System.out.println(animal);
-				
 				panel = (matrizPaneles[i][j] = new JPanel());
 				panel.setBackground(UtilidadesVariables.FONDO_ANIMALES);
 				panel.setBorder(bordeLinea);
@@ -160,8 +154,6 @@ public class VistaAnimales extends JPanel {
 				lDatos = new JLabel(animal.toStringSinCodigo());
 				lDatos.setAlignmentX(JLabel.LEFT_ALIGNMENT);
 				
-				//System.out.println(animal);
-				
 				//Imagen
 				imagenSinEscalar = new ImageIcon(animal.getRutaFicheroImagen());
 				
@@ -169,8 +161,6 @@ public class VistaAnimales extends JPanel {
 					
 					imagenSinEscalar = new ImageIcon("./imgs/sinImagen.png");
 				}
-				
-				//System.out.println(imagenSinEscalar.getDescription());
 				
 				imagen = imagenSinEscalar.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
 				imagenEscalada = new JLabel(new ImageIcon(imagen));
@@ -216,8 +206,6 @@ public class VistaAnimales extends JPanel {
 
 	public JPanel panelAnimalSeleccionado() {
 
-		//int columna = -1;
-
 		if (this.rbAnimal1.isSelected()) {
 			
 			return this.matrizPaneles[contFilas][0];
@@ -235,9 +223,8 @@ public class VistaAnimales extends JPanel {
 			return this.matrizPaneles[contFilas][3];
 			
 		} else
+			
 			return null;
-
-		//return (columna == -1) ? null : this.matrizPaneles[contFilas][columna];
 	}
 	
 	public void primeraFila() {
@@ -265,8 +252,6 @@ public class VistaAnimales extends JPanel {
 	}
 	
 	private void muestraFilaPanelesAnimales() {
-		
-		//System.out.println(contFilas);
 		
 		mueveRBotonesAlSiguientePanel(contFilas);
 		

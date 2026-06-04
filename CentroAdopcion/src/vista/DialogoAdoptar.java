@@ -7,13 +7,13 @@ import java.util.Arrays;
 import java.util.TreeSet;
 
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
 
 import modelo.Animal;
 import modelo.DAOAnimales;
 import modelo.DAOPersonas;
 import modelo.Persona;
 import utilidades.UtilidadesAnimales;
+import utilidades.UtilidadesPaneles;
 import utilidades.UtilidadesVariables;
 
 public class DialogoAdoptar extends JDialog implements ActionListener{
@@ -40,6 +40,8 @@ public class DialogoAdoptar extends JDialog implements ActionListener{
 	public DialogoAdoptar(JFrame ventanaPadre, JPanel panelAnimal, DAOAnimales daoA, DAOPersonas daoP) throws ClassNotFoundException, SQLException {
 		
 		super(ventanaPadre, "Adoptar Animal", true);		//el true es para que no se pueda cambiar de ventana hasta que se cierre
+
+		iniciaComponentes();
 		
 		JPanel panelPrincipal = new JPanel();
 		panelPrincipal.setLayout(new BoxLayout(panelPrincipal, BoxLayout.Y_AXIS));
@@ -48,7 +50,7 @@ public class DialogoAdoptar extends JDialog implements ActionListener{
 		panelAnimalPersona.setBorder(UtilidadesVariables.BORDEVACIO);
 		panelAnimalPersona.setBackground(UtilidadesVariables.FONDO_PRINCIPAL);
 		panelAnimalPersona.add(this.panelAnimal = panelAnimal);
-		panelAnimalPersona.add(panelPersona());
+		panelAnimalPersona.add(UtilidadesPaneles.panelPersona(tfNombre, tfApellido1, tfApellido2, tfDni, tfEdad, bElegirPersona));
 		
 		panelPrincipal.add(panelAnimalPersona);
 		panelPrincipal.add(panelBotones());
@@ -75,55 +77,25 @@ public class DialogoAdoptar extends JDialog implements ActionListener{
 		this.bElegirPersona.addActionListener(this);
 	}
 	
-	private JPanel panelPersona() {
-
-		JPanel panel = new JPanel();
-		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-		panel.setBorder(UtilidadesVariables.BordeLinea);
-		panel.setBackground(UtilidadesVariables.FONDO_ANIMALES);
+	private void iniciaComponentes() {
 		
-		tfNombre = new JTextField(10);
-		tfNombre.setBorder(new TitledBorder("Nombre"));
-		tfNombre.setBackground(UtilidadesVariables.FONDO_ANIMALES);
-		panel.add(tfNombre);
+		this.tfNombre = new JTextField(10);
+		this.tfApellido1 = new JTextField(10);
+		this.tfApellido2 = new JTextField(10);
+		this.tfDni = new JTextField(10);
+		this.tfEdad = new JTextField(10);
 		
-		tfApellido1 = new JTextField(10);
-		tfApellido1.setBorder(new TitledBorder("Primer Apellido"));
-		tfApellido1.setBackground(UtilidadesVariables.FONDO_ANIMALES);
-		panel.add(tfApellido1);
+		this.bElegirPersona = new JButton("Elegir Persona");
 		
-		tfApellido2 = new JTextField(10);
-		tfApellido2.setBorder(new TitledBorder("Segundo Apellido"));
-		tfApellido2.setBackground(UtilidadesVariables.FONDO_ANIMALES);
-		panel.add(tfApellido2);
+		this.bConfirmar = new JButton("Confirmar");
+		this.bCancelar = new JButton("Cancelar");
 		
-		tfDni = new JTextField(10);
-		tfDni.setBorder(new TitledBorder("DNI"));
-		tfDni.setBackground(UtilidadesVariables.FONDO_ANIMALES);
-		panel.add(tfDni);
-		
-		tfEdad = new JTextField(10);
-		tfEdad.setBorder(new TitledBorder("Edad"));
-		tfEdad.setBackground(UtilidadesVariables.FONDO_ANIMALES);
-		panel.add(tfEdad);
-
-		panel.add(Box.createVerticalStrut(120));
-		
-		bElegirPersona = new JButton("Elegir Persona");
-		bElegirPersona.setAlignmentX(JButton.CENTER_ALIGNMENT);
-		
-		panel.add(bElegirPersona);
-		
-		return panel;
 	}
 		
 	private JPanel panelBotones() {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(UtilidadesVariables.FONDO_PRINCIPAL);
-		
-		bConfirmar = new JButton("Confirmar");
-		bCancelar = new JButton("Cancelar");
 		
 		modificaBotones();
 		
@@ -135,7 +107,7 @@ public class DialogoAdoptar extends JDialog implements ActionListener{
 	
 	private void modificaBotones() {
 		
-		JButton[] botones = {this.bConfirmar, this.bCancelar, this.bElegirPersona};
+		JButton[] botones = {this.bConfirmar, this.bCancelar};
 		
 		for (JButton boton : botones) {
 			
